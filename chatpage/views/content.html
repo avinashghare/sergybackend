@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-4">
+        <section class="panel">
+            <header class="panel-heading">
+                Users
+            </header>
+
+            <div class="list-group">
+                <a class="list-group-item {{user.active}}" ng-click="userchange(user)" ng-repeat="user in users">{{user.email}}</a>
+
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="panel">
+            <header class="panel-heading">
+                Chat with {{currentuser.email}} {{comment}}
+                <span class="tools pull-right">
+                                <a class="fa fa-chevron-down" href="javascript:;"></a>
+                                <a class="fa fa-times" href="javascript:;"></a>
+                            </span>
+            </header>
+            <div class="panel-body profile-activity">
+
+                <div class="activity {{comment.name|chatcolor}} terques" ng-repeat="comment in comments">
+                    <span>
+                                      <i class="fa fa-shopping-cart"></i>
+                                  </span>
+                    <div class="activity-desk">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="{{comment.name|chatclass}} "></div>
+                                <i class=" fa fa-clock-o"></i>
+                                <h4>{{comment.timestamp|converttime}}</h4>
+                                <p>{{comment.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" ng-model="message.text">
+                    </div>
+                    <div class="col-md-2">
+                        <button ng-click="sendmessage()" class="btn btn-default">SEND</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+
+</div>

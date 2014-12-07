@@ -1,0 +1,15 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/xampp/htdocs/sergy1/chatpage/js/app.js",
+        "selectionChange.js",
+        "C:/xampp/htdocs/sergy1/chatpage/lib/js/bootstrap.min.js",
+        "C:/xampp/htdocs/sergy1/chatpage/lib/js/angular.min.js",
+        "C:/xampp/htdocs/sergy1/chatpage/lib/js/angular-route.min.js",
+        "C:/xampp/htdocs/sergy1/chatpage/lib/js/angular-resource.min.js",
+        "C:/xampp/htdocs/sergy1/assets/upload/js/main.js",
+        "C:/xampp/htdocs/sergy1/assets/upload/js/app.js",
+        "C:/xampp/htdocs/sergy1/assets/js1/TableTools.min.js",
+        "C:/xampp/htdocs/sergy1/assets/js1/sparkline-chart.js",
+        "C:/xampp/htdocs/sergy1/assets/js1/sliders.js"
+    ]
+}
