@@ -59,6 +59,11 @@ var firebaseservices = angular.module('firebaseservices', [])
         getcurrentuser: function () {
             return currentuser;
         },
+        addchat: function (text) {
+//            var chat = {
+//                ''
+//            };
+        },
         sendmessage: function (text) {
             timestamp=new Date();
             ref.child(currentuser.uid).set({
