@@ -1,3 +1,4 @@
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -25,7 +26,7 @@ var firebaseservices = angular.module('firebaseservices', [])
             });
         },
         getcurrentusers: function (callback) {
-
+            
             ref.on("value", function (data) {
                 data = data.val();
                 users = [];
@@ -66,6 +67,10 @@ var firebaseservices = angular.module('firebaseservices', [])
         },
         sendmessage: function (text) {
             timestamp=new Date();
+            
+            // To database
+//            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
+            
             ref.child(currentuser.uid).set({
                 email: currentuser.email,
                 name: "Sergy",

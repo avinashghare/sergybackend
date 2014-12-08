@@ -419,7 +419,7 @@ INNER JOIN  `accesslevel` ON  `user`.`accesslevel` =  `accesslevel`.`id` WHERE `
 
             $this->session->set_userdata($newdata);
             //print_r($newdata);
-            return $user;
+            return $this->session->userdata('id');
         }
         else
         return false;
@@ -427,13 +427,11 @@ INNER JOIN  `accesslevel` ON  `user`.`accesslevel` =  `accesslevel`.`id` WHERE `
 
     }
     function authenticate() {
-        $is_logged_in = $this->session->userdata( 'logged_in' );
-        //print_r($is_logged_in);
-        if ( $is_logged_in !== 'true' || !isset( $is_logged_in ) ) {
+        $is_logged_in = $this->session->userdata('logged_in');
+        if($is_logged_in=='false' || !isset($is_logged_in) ) {
             return false;
-        } //$is_logged_in !== 'true' || !isset( $is_logged_in )
-        else {
-            $userid = $this->session->userdata( 'id' );
+        }else{
+            $userid = $this->session->userdata('id');
          return $userid;
         }
     }

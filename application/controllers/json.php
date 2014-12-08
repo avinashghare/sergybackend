@@ -5,12 +5,26 @@ class Json extends CI_Controller
     
     //rest api for sergy
     
-	public function authenticate() 
+	public function login() 
 	{
 		$email=$this->input->get_post("email");
 		$password=$this->input->get_post("password");
-		$password=md5($password);
-		$data['message']=$this->user_model->frontendauthenticate($email,$password);
+		$data['message']=$this->user_model->login($email,$password);
+		$this->load->view('json',$data);
+	}
+    
+//	public function authenticate() 
+//	{
+//		$email=$this->input->get_post("email");
+//		$password=$this->input->get_post("password");
+//		$password=md5($password);
+//		$data['message']=$this->user_model->frontendauthenticate($email,$password);
+//		$this->load->view('json',$data);
+//	}
+    
+    public function authenticate() 
+	{
+		$data['message']=$this->user_model->authenticate();
 		$this->load->view('json',$data);
 	}
     
