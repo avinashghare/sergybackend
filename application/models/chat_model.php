@@ -13,7 +13,7 @@ class Chat_model extends CI_Model
 		
 		return  1;
 	}
-	public function createchatmessage($user,$chat,$url,$imageurl,$status,$type)
+	public function createchatmessage($user,$chat,$url,$imageurl,$status,$type,$json)
 	{
 		$data  = array(
 			'user' => $user,
@@ -21,6 +21,7 @@ class Chat_model extends CI_Model
 			'url' => $url,
 			'imageurl' => $imageurl,
 			'status' => $status,
+			'json' => $json,
 			'type' => $type
 		);
 		$query=$this->db->insert( 'chatmessages', $data );
@@ -39,7 +40,7 @@ class Chat_model extends CI_Model
 	}
     function viewchatmessage($id)
 	{
-        $query=$this->db->query("SELECT `chatmessages`.`id`, `chatmessages`.`chat`, `chatmessages`.`user`, `chatmessages`.`timestamp`, `chatmessages`.`type`, `chatmessages`.`url`, `chatmessages`.`imageurl`, `chatmessages`.`status` ,`user`.`name` AS `username`
+        $query=$this->db->query("SELECT `chatmessages`.`id`, `chatmessages`.`chat`, `chatmessages`.`user`, `chatmessages`.`timestamp`, `chatmessages`.`type`, `chatmessages`.`url`, `chatmessages`.`imageurl`, `chatmessages`.`status`, `chatmessages`.`json` ,`user`.`name` AS `username`
         FROM `chatmessages`
         LEFT OUTER JOIN `user` ON `chatmessages`.`user`=`user`.`id`
         WHERE `chatmessages`.`chat`='$id'")->result();
@@ -79,7 +80,7 @@ class Chat_model extends CI_Model
 		
 		return 1;
 	}
-	public function editchatmessage($id,$user,$chat,$url,$imageurl,$status,$type)
+	public function editchatmessage($id,$user,$chat,$url,$imageurl,$status,$type,$json)
 	{
 		$data = array(
 			'user' => $user,
@@ -87,6 +88,7 @@ class Chat_model extends CI_Model
 			'url' => $url,
 			'imageurl' => $imageurl,
 			'status' => $status,
+			'json' => $json,
 			'type' => $type
 		);
 		$this->db->where( 'id', $id );
@@ -129,6 +131,7 @@ class Chat_model extends CI_Model
 			'url' => $url,
 			'imageurl' => $imageurl,
 			'status' => $status,
+			'json' => $json,
 			'type' => $type
 		);
 		$query=$this->db->insert( 'chatmessages', $data );

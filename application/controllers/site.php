@@ -1277,6 +1277,7 @@ class Site extends CI_Controller
 		$this->form_validation->set_rules('imageurl','imageurl','trim');
 		$this->form_validation->set_rules('status','status','trim');
 		$this->form_validation->set_rules('type','type','trim');
+		$this->form_validation->set_rules('json','json','trim');
 		if($this->form_validation->run() == FALSE)	
 		{
 			$data['alerterror'] = validation_errors();
@@ -1294,7 +1295,8 @@ class Site extends CI_Controller
 			$imageurl=$this->input->post('imageurl');
 			$status=$this->input->post('status');
 			$type=$this->input->post('type');
-			if($this->chat_model->createchatmessage($user,$chat,$url,$imageurl,$status,$type)==0)
+			$json=$this->input->post('json');
+			if($this->chat_model->createchatmessage($user,$chat,$url,$imageurl,$status,$type,$json)==0)
 			$data['alerterror']="New chat could not be created.";
 			else
 			$data['alertsuccess']="chat  created Successfully.";
@@ -1327,6 +1329,7 @@ class Site extends CI_Controller
 		$this->form_validation->set_rules('imageurl','imageurl','trim');
 		$this->form_validation->set_rules('status','status','trim');
 		$this->form_validation->set_rules('type','type','trim');
+		$this->form_validation->set_rules('json','json','trim');
 		if($this->form_validation->run() == FALSE)	
 		{
 			$data['alerterror'] = validation_errors();
@@ -1347,7 +1350,8 @@ class Site extends CI_Controller
 			$imageurl=$this->input->post('imageurl');
 			$status=$this->input->post('status');
 			$type=$this->input->post('type');
-			if($this->chat_model->editchatmessage($chatmessageid,$user,$chat,$url,$imageurl,$status,$type)==0)
+			$json=$this->input->post('json');
+			if($this->chat_model->editchatmessage($chatmessageid,$user,$chat,$url,$imageurl,$status,$type,$json)==0)
 			$data['alerterror']="chatmessage Editing was unsuccesful";
 			else
 			$data['alertsuccess']="chatmessage edited Successfully.";

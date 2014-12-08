@@ -240,6 +240,12 @@ class Json extends CI_Controller
         $elements[9]->header="Username";
         $elements[9]->alias="username";
        
+        $elements[10]=new stdClass();
+        $elements[10]->field="`chatmessages`.`json`";
+        $elements[10]->sort="1";
+        $elements[10]->header="json";
+        $elements[10]->alias="json";
+        
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");

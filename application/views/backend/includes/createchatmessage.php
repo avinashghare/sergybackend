@@ -47,6 +47,14 @@
 				  </div>
 				</div>
 				
+                <div class=" form-group">
+                    <label class="col-sm-2 control-label" for="normal-field ">json</label>
+                    <div class="col-sm-4">
+                        <textarea name="json" id="" cols="20" rows="10" class="form-control tinymce">
+                            <?php echo set_value( 'json');?>
+                        </textarea>
+                    </div>
+                </div>
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

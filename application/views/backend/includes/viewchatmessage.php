@@ -19,6 +19,7 @@
 					<td>Type</td>
 					<td>URL</td>
 					<td>Image URL</td>
+					<td>json</td>
 					<td>Timestamp</td>
 					<th> Actions </th>
 				</tr>
@@ -31,6 +32,7 @@
 						<td><?php echo $row->type;?></td>
 						<td><?php echo $row->url;?></td>
 						<td><?php echo $row->imageurl;?></td>
+						<td><?php echo $row->json;?></td>
 						<td><?php echo $row->timestamp;?></td>
 						<td>
 							<a href="<?php echo site_url('site/editchatmessage?id=').$row->chat.'&chatmessageid='.$row->id;?>" class="btn btn-primary btn-xs">
