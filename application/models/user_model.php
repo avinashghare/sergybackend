@@ -419,7 +419,7 @@ INNER JOIN  `accesslevel` ON  `user`.`accesslevel` =  `accesslevel`.`id` WHERE `
 
             $this->session->set_userdata($newdata);
             //print_r($newdata);
-            return $this->session->userdata('id');
+            return intval($this->session->userdata('id'));
         }
         else
         return false;

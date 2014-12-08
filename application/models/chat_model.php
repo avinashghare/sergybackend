@@ -125,8 +125,9 @@ class Chat_model extends CI_Model
 	}
 	public function addchat($json,$user,$type,$url,$imageurl,$status)
     {
+        
         $data  = array(
-			'user' => $user,
+			'user' => $this->session->userdata('id'),
 			'chat' => $json,
 			'url' => $url,
 			'imageurl' => $imageurl,
