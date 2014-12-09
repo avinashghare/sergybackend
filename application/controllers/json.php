@@ -187,12 +187,13 @@ class Json extends CI_Controller
     
 	public function addchat() 
 	{
-        $json=$this->input->get_post('json');
-		$user=$this->input->get_post("user");
-		$type=$this->input->get_post("type");
-		$url=$this->input->get_post("url");
-		$imageurl=$this->input->get_post("imageurl");
-		$status=$this->input->get_post("status");
+        $data = json_decode(file_get_contents('php://input'), true);
+        $json=$data['json'];
+		$user=$data['user'];
+		$type=$data['type'];
+		$url=$data['url'];
+		$imageurl=$data['imageurl'];
+		$status=$data['status'];
 		$data['message']=$this->chat_model->addchat($json,$user,$type,$url,$imageurl,$status);
 		$this->load->view('json',$data);
 	}
@@ -291,7 +292,7 @@ class Json extends CI_Controller
     
      function getchatbyuser()
 	{
-        $userid=$this->input->get_post('userid');
+        $useremailid=$this->input->get_post('email');
          
         $elements=array();
         $elements[0]=new stdClass();
@@ -377,7 +378,7 @@ class Json extends CI_Controller
             $orderorder="ASC";
         }
        
-        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `chatmessages` LEFT OUTER JOIN `chatmessagetypes` ON `chatmessagetypes`.`id`=`chatmessages`.`type` LEFT OUTER JOIN `user` ON `user`.`id`=`chatmessages`.`user`","WHERE `chatmessages`.`user`='$userid'");
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `chatmessages` LEFT OUTER JOIN `chatmessagetypes` ON `chatmessagetypes`.`id`=`chatmessages`.`type` LEFT OUTER JOIN `user` ON `user`.`id`=`chatmessages`.`user`","WHERE `user`.`email`='$useremailid'");
         
 		$this->load->view("json",$data);
 	} 
