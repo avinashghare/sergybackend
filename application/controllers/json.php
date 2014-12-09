@@ -41,6 +41,13 @@ class Json extends CI_Controller
 		$this->load->view('json',$data);
 	}
     
+	public function userfromemail() 
+	{
+		$email=$this->input->get_post("email");
+		$data['message']=$this->chat_model->userfromemail($email);
+		$this->load->view('json',$data);
+	}
+    
     function getallcategories()
 	{
         

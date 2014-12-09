@@ -7,6 +7,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices) {
     $scope.message = {}
 
     $scope.currentuser = {};
+    $scope.userid = 0;
 
     function ongettingusers(data) {
         $scope.users = data;
@@ -24,8 +25,14 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices) {
         }
     }
 
+    var useremailsuccess = function (data, status) {
+        console.log(data);
+        $scope.userid=data;
+    };
+    
     $scope.userchange = function (user) {
-
+        console.log(user);
+        FireBaseServices.userfromemail(user.email).success(useremailsuccess);
         for (var i = 0; i < $scope.users.length; i++) {
             $scope.users[i].active = "";
         }
@@ -37,7 +44,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices) {
     }
 
     $scope.sendmessage = function () {
-        FireBaseServices.sendmessage($scope.message.text);
+        FireBaseServices.sendmessage($scope.message.text,$scope.userid);
         $scope.message.text="";
     };
 

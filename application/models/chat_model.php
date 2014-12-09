@@ -13,6 +13,19 @@ class Chat_model extends CI_Model
 		
 		return  1;
 	}
+	public function userfromemail($email)
+	{
+		$query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email'");
+        if ($query->num_rows() > 0)
+        {
+        	$query=$query->row();
+        	return intval($query->id);
+        }
+        else 
+        {
+        	return false;
+        }
+	}
 	public function createchatmessage($user,$chat,$url,$imageurl,$status,$type,$json)
 	{
 		$data  = array(
@@ -126,7 +139,7 @@ class Chat_model extends CI_Model
 	public function addchat($json,$user,$type,$url,$imageurl,$status)
     {
         $data  = array(
-			'user' => $this->session->userdata('id'),
+			'user' => $user,
 			'chat' => $json,
 			'url' => $url,
 			'imageurl' => $imageurl,

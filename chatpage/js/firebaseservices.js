@@ -1,4 +1,4 @@
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -63,12 +63,10 @@ var firebaseservices = angular.module('firebaseservices', [])
         getcurrentuser: function () {
             return currentuser;
         },
-        addchat: function (text) {
-//            var chat = {
-//                ''
-//            };
+        userfromemail: function (email) {
+            return $http.get(adminurl + "userfromemail?email="+email,{});
         },
-        sendmessage: function (text) {
+        sendmessage: function (text,uid) {
             timestamp=new Date();
             
             // To database
@@ -88,7 +86,7 @@ var firebaseservices = angular.module('firebaseservices', [])
                 timestamp: timestamp.getTime()
             };
             json1=JSON.stringify(json1);
-            $http.get(adminurl + "addchat?json="+json1+"&user=0&type=1&url=&imageurl=&status=1",{});
+            $http.get(adminurl + "addchat?json="+json1+"&user="+uid+"&type=1&url=&imageurl=&status=1",{});
         }
 
     }
