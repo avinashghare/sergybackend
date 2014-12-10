@@ -7,8 +7,9 @@ class Json extends CI_Controller
     
 	public function login() 
 	{
-		$email=$this->input->get_post("email");
-		$password=$this->input->get_post("password");
+        $data = json_decode(file_get_contents('php://input'), true);
+		$email=$data['email'];
+		$password=$data['password'];
 		$data['message']=$this->user_model->login($email,$password);
 		$this->load->view('json',$data);
 	}
@@ -30,12 +31,14 @@ class Json extends CI_Controller
     
 	public function register() 
 	{
-        $name=$this->input->get_post('name');
-		$email=$this->input->get_post("email");
-		$password=$this->input->get_post("password");
-		$socialid=$this->input->get_post("socialid");
-		$logintype=$this->input->get_post("logintype");
-		$json=$this->input->get_post("json");
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        $name=$data['name'];
+		$email=$data['email'];
+		$password=$data['password'];
+		$socialid=$data['socialid'];
+		$logintype=$data['logintype'];
+		$json=$data['json'];
 		$password=md5($password);
 		$data['message']=$this->user_model->frontendregister($name,$email,$password,$socialid,$logintype,$json);
 		$this->load->view('json',$data);
@@ -43,7 +46,8 @@ class Json extends CI_Controller
     
 	public function userfromemail() 
 	{
-		$email=$this->input->get_post("email");
+        $data = json_decode(file_get_contents('php://input'), true);
+        $email=$data['email'];
 		$data['message']=$this->chat_model->userfromemail($email);
 		$this->load->view('json',$data);
 	}
@@ -292,7 +296,8 @@ class Json extends CI_Controller
     
      function getchatbyuser()
 	{
-        $useremailid=$this->input->get_post('email');
+        $data = json_decode(file_get_contents('php://input'), true);
+        $useremailid=$data['email'];
          
         $elements=array();
         $elements[0]=new stdClass();
@@ -797,8 +802,9 @@ class Json extends CI_Controller
     
     function getordersbyuser()
 	{
-        $userid=$this->input->get_post('userid');
-        
+//        $data = json_decode(file_get_contents('php://input'), true);
+//        $email=$data['email'];
+        $email=$this->input->get_post('email');
         $elements=array();
         $elements[0]=new stdClass();
         $elements[0]->field="`order`.`id`";
@@ -944,7 +950,7 @@ class Json extends CI_Controller
         }
        
         $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `order`
-        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id`","WHERE `order`.`user`='$userid'");
+        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id`","WHERE `user`.`email`='$email'");
         
 		$this->load->view("json",$data);
 	} 

@@ -17,6 +17,11 @@ width: 5px !important;
 border-radius: 0;
 }
 
+.trans{
+    width: 100%;
+margin-top: 3%;
+}
+
 body {
     color: #797979;
     background: #f1f2f7;

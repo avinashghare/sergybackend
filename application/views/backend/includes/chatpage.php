@@ -14,6 +14,7 @@
 <script src="<?php echo base_url('chatpage'); ?>/js/app.js"></script>
 <script src="<?php echo base_url('chatpage'); ?>/js/controllers.js"></script>
 <script src="<?php echo base_url('chatpage'); ?>/js/firebaseservices.js"></script>
+<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
 <div ng-app="firstapp">
 
     <div class="repeated-item" ng-view></div>

@@ -1,4 +1,4 @@
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -30,7 +30,7 @@ var firebaseservices = angular.module('firebaseservices', [])
             ref.on("value", function (data) {
                 data = data.val();
                 users = [];
-                for (uid in data) {
+                for(uid in data) {
                     users.push({
                         uid: uid,
                         email: data[uid].email,
@@ -47,10 +47,22 @@ var firebaseservices = angular.module('firebaseservices', [])
         getusersonly: function () {
             return users;
         },
-        connecttouser: function (uid, email, callback, callbackforgettingdata) {
-            console.log(uid);
-            //            $http.get(adminurl + "userfromemail?email="+email,{}).success(callbackuserid);
-            $http.get(adminurl + "getchatbyuser?email=" + email, {}).success(callbackforgettingdata);
+        connecttouser: function (uid, email, callback, callbackforgettingdata, callbackuserorder) {
+            
+            $http({
+                url: adminurl + 'getchatbyuser',
+                method: "POST",
+                data: {
+                    'email': email
+                }
+            }).success(callbackforgettingdata);
+            
+//             return $http({
+//                url: adminurl + 'getordersbyuser',
+//                method: "POST",
+//                data: {'email': email}
+//            }).success(callbackuserorder);
+            $http.get(adminurl + "getordersbyuser?email=" + email, {}).success(callbackuserorder);
             ref.child(previousuid).off("value", previouscallback);
             previousuid = uid;
             previouscallback = callback;
@@ -60,14 +72,48 @@ var firebaseservices = angular.module('firebaseservices', [])
             currentuser = user;
         },
         getchatbyuser: function (userid) {
-            return $http.get(adminurl + "getchatbyuser?userid=" + userid, {});
+//            return $http.get(adminurl + "getchatbyuser?userid=" + userid, {});
+            return $http({
+                url: adminurl + 'getchatbyuser',
+                method: "POST",
+                data: {
+                    'userid': userid
+                }
+            });
 
         },
         getcurrentuser: function () {
             return currentuser;
         },
+        getalltranscript: function () {
+            return $http.get(adminurl + "getalltranscript", {});
+//            return $http({
+//                url: adminurl + 'getalltranscript',
+//                method: "POST",
+//                data: {
+//                    'email': email
+//                }
+//            });
+        },
+        getalltranscriptsearch: function (search) {
+            return $http.get(adminurl + "getalltranscript?search="+search, {});
+//            return $http({
+//                url: adminurl + 'getalltranscript',
+//                method: "POST",
+//                data: {
+//                    'email': email
+//                }
+//            });
+        },
         userfromemail: function (email) {
-            return $http.get(adminurl + "userfromemail?email=" + email, {});
+//            return $http.get(adminurl + "userfromemail?email=" + email, {});
+            return $http({
+                url: adminurl + 'userfromemail',
+                method: "POST",
+                data: {
+                    'email': email
+                }
+            });
         },
         sendmessage: function (text, uid) {
             timestamp = new Date();

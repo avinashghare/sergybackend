@@ -1,5 +1,6 @@
-<div class="row">
-    <div class="col-lg-4">
+
+   <div class="row">
+    <div class="col-lg-3">
         <section class="panel">
             <header class="panel-heading">
                 Users
@@ -57,5 +58,76 @@
             </div>
         </section>
     </div>
+    
+    <div class="col-lg-3">
+       <div class="row"> 
+        <section class="panel">
+            <header class="panel-heading">
+                Transcript
+            </header>
+
+            <div class="list-group">
+            
+                <button class="btn btn-default trans" ng-click="show()">Transcript</button>
+
+            </div>
+            <div class="list-group">
+            
+                <button class="btn btn-default trans">Forms</button>
+
+            </div>
+            <div class="list-group">
+            
+                <button class="btn btn-default trans">Products</button>
+
+            </div>
+        </section>
+        </div>
+       <div class="row" ng-show="currentuser.email!=''"> 
+        <section class="panel">
+            <header class="panel-heading">
+                Orders Of {{currentuser.email}} {{comment}}
+            </header>
+
+            <div class="list-group"ng-show="userorder!=''">
+            
+                <a class="list-group-item" ng-click="" ng-repeat="order in userorder">{{order.name}}</a>
+
+            </div>
+            <div class="list-group"ng-show="userorder==''">
+            
+                <a class="list-group-item">No Orders</a>
+
+            </div>
+        </section>
+        </div>
+    </div>
 
 </div>
+
+
+<!-- The actual modal template, just a bit o bootstrap -->
+     <script type="text/ng-template" id="modal.html">
+         <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Transcript</h4>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchtranscript" ng-change="search(searchtranscript)">
+              <div class="modal-body">
+                <div class="list-group-item" ng-repeat="transcript in transcripts">
+                {{transcript.name}}
+              <input type="checkbox" name="check" style="float:right;" ng-click="checktranscript(transcript)">
+            </div>
+
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+     </script>
