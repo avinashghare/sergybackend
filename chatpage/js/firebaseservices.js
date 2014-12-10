@@ -6,17 +6,14 @@ var firebaseservices = angular.module('firebaseservices', [])
     var ref = new Firebase("https://blinding-heat-5568.firebaseio.com/");
     var chats = [];
     var onchangecallback = function () {};
-
     var users = [];
     var currentuser = {
         email: "",
         uid: ""
     };
     var val = 0;
-
     var previousuid = "none";
     var previouscallback = function () {};
-
     var returnval = {
         firbasecallonchange: function () {
             ref.child(authdetails.uid).on('value', function (snapshot) {
