@@ -1,4 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -106,14 +107,14 @@ var firebaseservices = angular.module('firebaseservices', [])
 //            });
         },
         userfromemail: function (email) {
-//            return $http.get(adminurl + "userfromemail?email=" + email, {});
-            return $http({
-                url: adminurl + 'userfromemail',
-                method: "POST",
-                data: {
-                    'email': email
-                }
-            });
+            return $http.get(adminurl + "userfromemail?email=" + email, {});
+//            return $http({
+//                url: adminurl + 'userfromemail',
+//                method: "POST",
+//                data: {
+//                    'email': email
+//                }
+//            });
         },
         sendmessage: function (text, uid) {
             timestamp = new Date();
@@ -136,20 +137,20 @@ var firebaseservices = angular.module('firebaseservices', [])
             };
             json1 = JSON.stringify(json1);
 
-            return $http({
-                url: adminurl + 'addchat',
-                method: "POST",
-                data: {
-                    'json': json1,
-                    'user': uid,
-                    'type': '1',
-                    'url': '',
-                    'imageurl': '',
-                    'status': '1'
-                }
-            });
+//            return $http({
+//                url: adminurl + 'addchat',
+//                method: "POST",
+//                data: {
+//                    'json': json1,
+//                    'user': uid,
+//                    'type': '1',
+//                    'url': '',
+//                    'imageurl': '',
+//                    'status': '1'
+//                }
+//            });
 
-            //            $http.get(adminurl + "addchat?json="+json1+"&user="+uid+"&type=1&url=&imageurl=&status=1",{});
+                        return $http.get(adminurl + "addchat?json="+json1+"&user="+uid+"&type=1&url=&imageurl=&status=1",{});
         }
 
     }

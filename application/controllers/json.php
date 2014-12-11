@@ -46,8 +46,9 @@ class Json extends CI_Controller
     
 	public function userfromemail() 
 	{
-        $data = json_decode(file_get_contents('php://input'), true);
-        $email=$data['email'];
+//        $data = json_decode(file_get_contents('php://input'), true);
+//        $email=$data['email'];
+        $email=$this->input->get_post("email");
 		$data['message']=$this->chat_model->userfromemail($email);
 		$this->load->view('json',$data);
 	}
@@ -191,13 +192,20 @@ class Json extends CI_Controller
     
 	public function addchat() 
 	{
-        $data = json_decode(file_get_contents('php://input'), true);
-        $json=$data['json'];
-		$user=$data['user'];
-		$type=$data['type'];
-		$url=$data['url'];
-		$imageurl=$data['imageurl'];
-		$status=$data['status'];
+//        $data = json_decode(file_get_contents('php://input'), true);
+//        $json=$data['json'];
+//		$user=$data['user'];
+//		$type=$data['type'];
+//		$url=$data['url'];
+//		$imageurl=$data['imageurl'];
+//		$status=$data['status'];
+        
+        $json=$this->input->get_post('json');
+		$user=$this->input->get_post('user');
+		$type=$this->input->get_post('type');
+		$url=$this->input->get_post('url');
+		$imageurl=$this->input->get_post('imageurl');
+		$status=$this->input->get_post('status');
 		$data['message']=$this->chat_model->addchat($json,$user,$type,$url,$imageurl,$status);
 		$this->load->view('json',$data);
 	}

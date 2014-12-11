@@ -1,3 +1,5 @@
+var userid = 0;
+var check = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService']);
 
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
@@ -5,11 +7,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.users = [];
     $scope.comments = [];
     $scope.message = {};
-    $scope.check = 0;
+//    check = 0;
 
     $scope.currentuser = {};
     $scope.currentuser.email = '';
-    $scope.userid = 0;
 
     function ongettingusers(data) {
         $scope.users = data;
@@ -29,11 +30,11 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     function onuserload(data) {
         data = data.val();
         console.log("getchat");
-        console.log($scope.userid);
-        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
-        if ($scope.check == 1) {
+        console.log(userid);
+//        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
+//        if (check == 1) {
             $scope.comments.push(data);
-        }
+//        }
         if (data.email == $scope.currentuser.email) {
             //$scope.$apply();
         }
@@ -57,14 +58,14 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     var useremailsuccess = function (data, status) {
         console.log(data);
-        $scope.userid = data;
+        userid = data;
 
-        //        FireBaseServices.getchatbyuser($scope.userid).success(onuserloadsuccess);
+        //        FireBaseServices.getchatbyuser(userid).success(onuserloadsuccess);
     };
 
     $scope.userchange = function (user) {
         console.log(user);
-        //        $scope.userid = "";
+        //        userid = "";
         //        FireBaseServices.userfromemail(user.email).success(useremailsuccess);
         for (var i = 0; i < $scope.users.length; i++) {
             $scope.users[i].active = "";
@@ -73,14 +74,20 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         $scope.currentuser = user;
         FireBaseServices.changecurrentuser(user);
         $scope.comments = [];
+        FireBaseServices.userfromemail(user.email).success(useremailsuccess);
         FireBaseServices.connecttouser(user.uid, user.email, onuserload, gettingdata, userorder);
     }
 
-    $scope.sendmessage = function () {
-        $scope.check = 1;
+    $scope.sendmessage = function (msg) {
+        check = 1;
         console.log("now im user");
-        console.log($scope.currentuser);
-        FireBaseServices.sendmessage($scope.message.text, $scope.userid);
+        console.log(userid);
+        if(userid!=0)
+        {
+            FireBaseServices.sendmessage(msg, userid);
+        }else{
+            alert("try again later");
+        }
         $scope.message.text = "";
     };
 
@@ -106,9 +113,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     
     // Get checked transcript
     $scope.checktranscript = function (transcript){
-        console.log($scope.userid);
+        console.log(userid);
         
-//        FireBaseServices.sendmessage(transcript.text, $scope.userid);
+        $scope.sendmessage(transcript.text);
     }
     
     $scope.show = function () {
