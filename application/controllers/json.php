@@ -1112,6 +1112,98 @@ class Json extends CI_Controller
 		$this->load->view("json",$data);
 	} 
     
+    function getallproduct()
+	{
+//        $categoryid=$this->input->get_post('categoryid');
+        
+        $elements=array();
+        $elements[0]=new stdClass();
+        $elements[0]->field="`product`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`product`.`name`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Name";
+        $elements[1]->alias="name";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`product`.`type`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Type";
+        $elements[2]->alias="type";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`product`.`details`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Details";
+        $elements[3]->alias="details";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`product`.`url`";
+        $elements[4]->sort="1";
+        $elements[4]->header="url";
+        $elements[4]->alias="url";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`product`.`price`";
+        $elements[5]->sort="1";
+        $elements[5]->header="price";
+        $elements[5]->alias="price";
+        
+        $elements[6]=new stdClass();
+        $elements[6]->field="`product`.`json`";
+        $elements[6]->sort="1";
+        $elements[6]->header="json";
+        $elements[6]->alias="json";
+        
+        $elements[7]=new stdClass();
+        $elements[7]->field="`product`.`image`";
+        $elements[7]->sort="1";
+        $elements[7]->header="image";
+        $elements[7]->alias="image";
+        
+        $elements[8]=new stdClass();
+        $elements[8]->field="`product`.`usergenerated`";
+        $elements[8]->sort="1";
+        $elements[8]->header="usergenerated";
+        $elements[8]->alias="usergenerated";
+        
+        $elements[9]=new stdClass();
+        $elements[9]->field="`product`.`productattributejson`";
+        $elements[9]->sort="1";
+        $elements[9]->header="productattributejson";
+        $elements[9]->alias="productattributejson";
+        
+//        $elements[10]=new stdClass();
+//        $elements[10]->field="`category`.`name`";
+//        $elements[10]->sort="1";
+//        $elements[10]->header="categoryname";
+//        $elements[10]->alias="categoryname";
+//        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+       
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `product`");
+        
+		$this->load->view("json",$data);
+	} 
+    
     public function getproductbyid()
     {
         $id=$this->input->get_post('id');

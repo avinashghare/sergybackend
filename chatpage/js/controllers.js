@@ -1,5 +1,6 @@
 var userid = 0;
 var check = 0;
+//var order = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService']);
 
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
@@ -7,7 +8,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.users = [];
     $scope.comments = [];
     $scope.message = {};
-//    check = 0;
+    //    check = 0;
 
     $scope.currentuser = {};
     $scope.currentuser.email = '';
@@ -31,10 +32,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         data = data.val();
         console.log("getchat");
         console.log(userid);
-//        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
-//        if (check == 1) {
-            $scope.comments.push(data);
-//        }
+        //        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
+        //        if (check == 1) {
+        $scope.comments.push(data);
+        //        }
         if (data.email == $scope.currentuser.email) {
             //$scope.$apply();
         }
@@ -82,10 +83,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         check = 1;
         console.log("now im user");
         console.log(userid);
-        if(userid!=0)
-        {
+        if (userid != 0) {
             FireBaseServices.sendmessage(msg, userid);
-        }else{
+        } else {
             alert("try again later");
         }
         $scope.message.text = "";
@@ -94,34 +94,75 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     FireBaseServices.getcurrentusers(ongettingusers);
 
     // angular popup
-    
-    // get all transcript
+
+    // get all forms############################################################################################################################
+    $scope.forms = [];
+    var formssuccess = function (data, status) {
+        console.log(data.queryresult);
+        $scope.forms = data.queryresult;
+    };
+    FireBaseServices.getallforms().success(formssuccess);
+
+    //get all forms by search
+    $scope.searchforms = function (searchtr) {
+        console.log(searchtr);
+        FireBaseServices.getallformssearch(searchtr).success(formssuccess);
+    }
+
+    // Send form in chat
+    $scope.checkforms = function (form) {
+        console.log(form);
+        //        $scope.sendmessage(transcript.text);
+    }
+
+    // get all products#####################################################################################################################3
+    $scope.products = [];
+    var productssuccess = function (data, status) {
+        console.log(data.queryresult);
+        $scope.products = data.queryresult;
+    };
+    FireBaseServices.getallproduct().success(productssuccess);
+
+    //get all forms by search
+    $scope.searchproducts = function (searchpr) {
+        console.log(searchpr);
+        FireBaseServices.getallproductsearch(searchpr).success(productssuccess);
+    }
+
+    // Send form in chat
+    $scope.checkproducts = function (product) {
+        console.log(product);
+        //        $scope.sendmessage(transcript.text);
+    }
+
+    // get all transcript###########################################################################################################################
     $scope.transcripts = [];
     var transcriptsuccess = function (data, status) {
         console.log("transcriptdata");
         console.log(data.queryresult);
-        $scope.transcripts=data.queryresult;
+        $scope.transcripts = data.queryresult;
     };
-    
+
     FireBaseServices.getalltranscript().success(transcriptsuccess);
-    
+
+
     // get transcript by search
-    $scope.search = function (search) {
-        console.log(search);
-        FireBaseServices.getalltranscriptsearch(search).success(transcriptsuccess);
+    $scope.searchtranscript = function (searchfr) {
+        console.log(searchfr);
+        FireBaseServices.getalltranscriptsearch(searchfr).success(transcriptsuccess);
     }
-    
+
     // Get checked transcript
-    $scope.checktranscript = function (transcript){
+    $scope.checktranscript = function (transcript) {
         console.log(userid);
-        
+
         $scope.sendmessage(transcript.text);
     }
-    
-    $scope.show = function () {
-        
+
+    $scope.showtranscript = function () {
+
         ModalService.showModal({
-            templateUrl: 'modal.html',
+            templateUrl: 'transcript.html',
             controller: "home"
         }).then(function (modal) {
             modal.element.modal();
@@ -129,17 +170,94 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
                 $scope.message = "You said " + result;
             });
         });
-        FireBaseServices.getalltranscript().success(transcriptsuccess);
+        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
+    };
+
+    $scope.showforms = function () {
+
+        ModalService.showModal({
+            templateUrl: 'forms.html',
+            controller: "home"
+        }).then(function (modal1) {
+            modal1.element.modal();
+            modal1.close.then(function (result) {
+                $scope.message = "You said " + result;
+            });
+        });
+        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
+    };
+
+    $scope.showproducts = function () {
+
+        ModalService.showModal({
+            templateUrl: 'products.html',
+            controller: "home"
+        }).then(function (modal2) {
+            modal2.element.modal();
+            modal2.close.then(function (result) {
+                $scope.message = "You said " + result;
+            });
+        });
+        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
+    };
+
+
+    // On order click oneorder()#########################################################################################################
+
+        $scope.oneorder = [];
+        $scope.oneorderitem = [];
+    
+        $scope.oneorderfun = function (order) {
+            console.log(order);
+            FireBaseServices.getorderbyid(order).success(oneordersuccess);
+        }
+    
+        var oneordersuccess = function (data, status) {
+            $scope.ordder = data;
+            $scope.oneorder = data.order;
+            $scope.oneorderitem = data.orderitem;
+            FireBaseServices.setorderid(data);
+            $scope.showorder();
+        };
+
+
+    $scope.showorder = function (order) {
+        
+        ModalService.showModal({
+            templateUrl: 'order.html',
+            controller: "ModalController"
+        }).then(function (modal3) {
+            modal3.element.modal();
+            modal3.close.then(function (result) {
+                $scope.message = "You said " + result;
+            });
+        });
     };
 
 
 });
 
-phonecatControllers.controller('ModalController', function ($scope, close) {
+phonecatControllers.controller('ModalController', function ($scope, FireBaseServices, close) {
 
+
+    $scope.oneorder = [];
+    $scope.oneorderitem = [];
+    console.log("###########################################");
+    $scope.order=FireBaseServices.getorderid();
+    console.log($scope.order);
+//    console.log($scope.order);
+//    FireBaseServices.getorderbyid($scope.order).success(oneordersuccess);
+//
+//    var oneordersuccess = function (data, status) {
+//        $scope.ordder = data;
+//        $scope.oneorder = data.order;
+//        $scope.oneorderitem = data.orderitem;
+//        $scope.showorder();
+//    };
+    console.log($scope.oneorder);
     $scope.close = function (result) {
         close(result, 500); // close, but give 500ms for bootstrap to animate
     };
-    $scope.users="Android";
+    $scope.users = "Android";
 
 });

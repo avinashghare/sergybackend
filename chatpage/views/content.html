@@ -3,7 +3,7 @@
     <div class="col-lg-3">
         <section class="panel">
             <header class="panel-heading">
-                Users
+                Users{{searchhh}}
             </header>
 
             <div class="list-group">
@@ -16,17 +16,24 @@
         <section class="panel">
             <header class="panel-heading">
                 Chat with {{currentuser.email}} {{comment}}
+                
                 <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
                                 <a class="fa fa-times" href="javascript:;"></a>
                             </span>
             </header>
+            
             <div class="panel-body profile-activity">
 
+               
+               
                 <div class="activity {{comment.name|chatcolor}} terques" ng-repeat="comment in comments">
                     <span>
                                       <i class="fa fa-shopping-cart"></i>
                                   </span>
+                                  <chatdir></chatdir>
+<!--                    <div chatdir2="" message="transcript"></div>-->
+<!--
                     <div class="activity-desk">
                         <div class="panel">
                             <div class="panel-body">
@@ -37,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+-->
                 </div>
 
 
@@ -68,17 +76,17 @@
 
             <div class="list-group">
             
-                <button class="btn btn-default trans" ng-click="show()">Transcript</button>
+                <button class="btn btn-default trans" ng-click="showtranscript()">Transcript</button>
 
             </div>
             <div class="list-group">
             
-                <button class="btn btn-default trans">Forms</button>
+                <button class="btn btn-default trans" ng-click="showforms()">Forms</button>
 
             </div>
             <div class="list-group">
             
-                <button class="btn btn-default trans">Products</button>
+                <button class="btn btn-default trans" ng-click="showproducts()">Products</button>
 
             </div>
         </section>
@@ -91,7 +99,7 @@
 
             <div class="list-group"ng-show="userorder!=''">
             
-                <a class="list-group-item" ng-click="" ng-repeat="order in userorder">{{order.name}}</a>
+                <a class="list-group-item" ng-click="oneorderfun(order.id)" ng-repeat="order in userorder">{{order.name}}</a>
 
             </div>
             <div class="list-group"ng-show="userorder==''">
@@ -106,8 +114,8 @@
 </div>
 
 
-<!-- The actual modal template, just a bit o bootstrap -->
-     <script type="text/ng-template" id="modal.html">
+<!-- The actual modal template, just a bit o bootstrap   TRANSCRIPT -->
+     <script type="text/ng-template" id="transcript.html">
          <div class="modal fade">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -115,13 +123,261 @@
                 <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Transcript</h4>
               </div>
-              <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchtranscript" ng-change="search(searchtranscript)">
+              <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchhh">{{searchhh}}
+              <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchtr" ng-change="searchtranscript(searchtr)">
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="transcript in transcripts">
                 {{transcript.name}}
               <button type="button" name="check" style="float:right;" ng-click="checktranscript(transcript)">Send</button>
             </div>
 
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+     </script>
+     
+<!-- The actual modal template, just a bit o bootstrap    FORMS  -->
+     <script type="text/ng-template" id="forms.html">
+         <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Forms</h4>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchfr" ng-change="searchforms(searchfr)">
+              <div class="modal-body">
+                <div class="list-group-item" ng-repeat="form in forms">
+                {{form.name}}
+              <button type="button" name="check" style="float:right;" ng-click="checkforms(form)">Send</button>
+            </div>
+
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+     </script>   
+      
+<!-- The actual modal template, just a bit o bootstrap    FORMS  -->
+     <script type="text/ng-template" id="products.html">
+         <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Products</h4>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Products" ng-model="searchpr" ng-change="searchproducts(searchpr)">
+              <div class="modal-body">
+                <div class="list-group-item" ng-repeat="product in products">
+                {{product.name}}
+              <button type="button" name="check" style="float:right;" ng-click="checkproducts(product)">Send</button>
+            </div>
+
+              </div>
+              <!-- <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+     </script>      
+     
+<!-- The actual modal template, just a bit o bootstrap    ORDER  -->
+     <script type="text/ng-template" id="order.html">
+         <div class="modal fade">
+          <div class="modal-dialog" style="width:86%;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Order</h4>
+              </div>
+              <div class="modal-body">
+              <h5>Order Details</h5>
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Address
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.address1}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Address 2
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.address2}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    City
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.city}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    State
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.state}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Pincode
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.pincode}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Email
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.email}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Contact No.
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.contactno}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Country
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.country}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  
+              <h5>Shipping Details</h5>
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Address 1 
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shipaddress1}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Address 2
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shipaddress2}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    City
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shipcity}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    State
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shipstate}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Shipping Charge
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shippingcharge}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Shipping Code
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shippingcode}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row list-group-item">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    Shipping State
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.shipstate}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    State
+                    </div>
+                    <div class="col-lg-8">
+                    : {{order.order.state}}
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <h5>Items</h5>
+                  <div class="row list-group-item" ng-repeat="item in order.orderitems">
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    <img src="">
+                    </div>
+                    <div class="col-lg-8">
+                    : {{item.name}}
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="col-lg-4">
+                    {{item.price}}
+                    </div>
+                    <div class="col-lg-8">
+                    : {{item.timestamp}}
+                    </div>
+                  </div>
+                  </div>
+                  
               </div>
               <!-- <div class="modal-footer">
                 <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>

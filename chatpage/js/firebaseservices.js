@@ -1,5 +1,5 @@
-//var adminurl = "http://localhost/sergybackend/index.php/json/";
-var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+var adminurl = "http://localhost/sergybackend/index.php/json/";
+//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -8,6 +8,7 @@ var firebaseservices = angular.module('firebaseservices', [])
     var chats = [];
     var onchangecallback = function () {};
     var users = [];
+    var order = [];
     var currentuser = {
         email: "",
         uid: ""
@@ -88,23 +89,30 @@ var firebaseservices = angular.module('firebaseservices', [])
         },
         getalltranscript: function () {
             return $http.get(adminurl + "getalltranscript", {});
-//            return $http({
-//                url: adminurl + 'getalltranscript',
-//                method: "POST",
-//                data: {
-//                    'email': email
-//                }
-//            });
         },
-        getalltranscriptsearch: function (search) {
-            return $http.get(adminurl + "getalltranscript?search="+search, {});
-//            return $http({
-//                url: adminurl + 'getalltranscript',
-//                method: "POST",
-//                data: {
-//                    'email': email
-//                }
-//            });
+        getallforms: function () {
+            return $http.get(adminurl + "getallforms", {});
+        },
+        getallformssearch: function (searchfr) {
+            return $http.get(adminurl + "getallforms?search="+searchfr, {});
+        },
+        getallproduct: function () {
+            return $http.get(adminurl + "getallproduct", {});
+        },
+        getallproductsearch: function (searchpr) {
+            return $http.get(adminurl + "getallproduct?search="+searchpr, {});
+        },
+        getalltranscriptsearch: function (searchtr) {
+            return $http.get(adminurl + "getalltranscript?search="+searchtr, {});
+        },
+        getorderbyid: function (id) {
+            return $http.get(adminurl + "getorderbyid?id="+id, {});
+        },
+        setorderid: function (id) {
+            order=id;
+        },
+        getorderid: function () {
+            return order;
         },
         userfromemail: function (email) {
             return $http.get(adminurl + "userfromemail?email=" + email, {});
