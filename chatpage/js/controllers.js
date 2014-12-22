@@ -9,10 +9,46 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.comments = [];
     $scope.message = {};
     //    check = 0;
-
+//    $scope.chatdir = "chatdir";
     $scope.currentuser = {};
     $scope.currentuser.email = '';
 
+    
+//    
+//$(function () {
+//    // Create a form from some JSON
+//    $("#demo-1-form").dform({
+//        "action":"index.html",
+//        "method":"get",
+//        "html":[
+//            {
+//                "type":"p",
+//                "html":"You must login"
+//            },
+//            {
+//                "name":"username",
+//                "id":"txt-username",
+//                "caption":"Username",
+//                "type":"text",
+//                "placeholder":"E.g. u...@example.com"
+//            },
+//            {
+//                "name":"password",
+//                "caption":"Password",
+//                "type":"password"
+//            },
+//            {
+//                "type":"submit",
+//                "value":"Login"
+//            }
+//        ]
+//    });
+//});
+// 
+////$("#myform").buildForm(formdata);
+//    
+    
+    
     function ongettingusers(data) {
         $scope.users = data;
         $scope.$apply();
@@ -79,12 +115,12 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         FireBaseServices.connecttouser(user.uid, user.email, onuserload, gettingdata, userorder);
     }
 
-    $scope.sendmessage = function (msg) {
+    $scope.sendmessage = function (msg,type) {
         check = 1;
         console.log("now im user");
         console.log(userid);
         if (userid != 0) {
-            FireBaseServices.sendmessage(msg, userid);
+            FireBaseServices.sendmessage(msg, userid, type);
         } else {
             alert("try again later");
         }
@@ -110,9 +146,14 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
 
     // Send form in chat
+    $scope.form = [];
     $scope.checkforms = function (form) {
         console.log(form);
-        //        $scope.sendmessage(transcript.text);
+        $scope.form.id = form.id;
+        $scope.form.name = form.name;
+        $scope.form.json = form.json;
+        
+        $scope.sendmessage($scope.form,3);
     }
 
     // get all products#####################################################################################################################3
@@ -155,8 +196,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     // Get checked transcript
     $scope.checktranscript = function (transcript) {
         console.log(userid);
-
-        $scope.sendmessage(transcript.text);
+//        console.log(transcript);
+        $scope.sendmessage(transcript.text, 1);
     }
 
     $scope.showtranscript = function () {

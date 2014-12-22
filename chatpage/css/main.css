@@ -133,3 +133,6 @@ ul.socialicons li i:hover {
 .template.footer a{
     color:#eee;
 }
+.pointer1:hover{
+    cursor: pointer;
+}

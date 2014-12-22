@@ -12,6 +12,10 @@ firstapp.config(['$routeProvider',
             templateUrl: base_url + 'views/content.html',
             controller: 'home'
         }).
+        when('/chat1',{
+            templateUrl: base_url + 'views/chat1.html',
+            controller: 'home'
+        }).
         otherwise({
             redirectTo: '/home'
         });
@@ -46,19 +50,32 @@ firstapp.filter('chatcolor', function (FireBaseServices) {
 
     };
 });
+firstapp.filter('chatt', function (FireBaseServices) {
+    return function (input) {
+        var j=JSON.parse(input);
+        return j.form;
+    };
+});
 
-firstapp.directive("chatdir", function(){
-    return{
-        restrict: "E",
-        template: "<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p>{{comment.text}}</p></div></div></div>"
-    }
-})
-
-firstapp.directive("chatdir2", function(){
-    return function (scope, element, attrs) {
-//        element.text(attrs.message);
-        if(attrs.message=="transcript"){
-            element.template("<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p>{{comment.text}}</p></div></div></div>");
-        }
-    }
-})
+//firstapp.directive("chatdir", function(){
+//    return{
+//        restrict: "E",
+//        template: "<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p>{{comment.text}}</p></div></div></div>"
+//    }
+//})
+//firstapp.directive("chatdir1", function(){
+//    return{
+//        templateUrl: 'chat1.html'
+////        restrict: "E",
+////        template: "<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p ng-repeat='form in comment.text|chatt'><input type='{{form.type}}' placeholder='{{form.placeholder}}'></p></div></div></div>"
+//    }
+//})
+//
+//firstapp.directive("chatdir2", function(){
+//    return function (scope, element, attrs) {
+////        element.text(attrs.message);
+//        if(attrs.message=="transcript"){
+//            element.template("<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p>{{comment.text}}</p></div></div></div>");
+//        }
+//    }
+//})

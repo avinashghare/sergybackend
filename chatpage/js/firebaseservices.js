@@ -124,9 +124,43 @@ var firebaseservices = angular.module('firebaseservices', [])
 //                }
 //            });
         },
-        sendmessage: function (text, uid) {
+        sendmessage: function (text, uid, type) {
+            var id = 0;
+            var fname = "";
+            var json = "";
             timestamp = new Date();
+            if(type==3){
+                console.log(text.id);
+                console.log(text.name);
+                console.log(text.json);
+                id = text.id;
+                fname = text.name;
+                json = text.json;
+                ref.child(currentuser.uid).set({
+                id: id,
+                fname: fname,
+                json: json,
+                email: currentuser.email,
+                name: "Sergy",
+                text: json,
+                type: type,
+                timestamp: timestamp.getTime()
+            });
+                
+            var json1 = {
+                id: id,
+                fname: fname,
+                json: json,
+                email: currentuser.email,
+                name: "Sergy",
+                text: json,
+                type: type,
+                timestamp: timestamp.getTime()
+            };
+            json1 = JSON.stringify(json1);
 
+                
+            }else{
             // To database
             //            $http.get(adminurl + 'addchat?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
 
@@ -134,16 +168,21 @@ var firebaseservices = angular.module('firebaseservices', [])
                 email: currentuser.email,
                 name: "Sergy",
                 text: text,
+                type: type,
                 timestamp: timestamp.getTime()
             });
-
+                
+                
             var json1 = {
                 email: currentuser.email,
                 name: "Sergy",
                 text: text,
+                type: type,
                 timestamp: timestamp.getTime()
             };
             json1 = JSON.stringify(json1);
+                
+            }
 
 //            return $http({
 //                url: adminurl + 'addchat',

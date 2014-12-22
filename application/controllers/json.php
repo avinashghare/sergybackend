@@ -676,6 +676,12 @@ class Json extends CI_Controller
         $elements[1]->header="Name";
         $elements[1]->alias="name";
         
+        $elements[2]=new stdClass();
+        $elements[2]->field="`form`.`json`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Json";
+        $elements[2]->alias="json";
+        
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");
