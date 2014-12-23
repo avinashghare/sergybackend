@@ -12,7 +12,7 @@ firstapp.config(['$routeProvider',
             templateUrl: base_url + 'views/content.html',
             controller: 'home'
         }).
-        when('/chat1',{
+        when('/chat1', {
             templateUrl: base_url + 'views/chat1.html',
             controller: 'home'
         }).
@@ -52,17 +52,18 @@ firstapp.filter('chatcolor', function (FireBaseServices) {
 });
 firstapp.filter('chatt', function (FireBaseServices) {
     return function (input) {
-        var j=JSON.parse(input);
+        var j = JSON.parse(input);
         return j.form;
     };
 });
 
-//firstapp.directive("chatdir", function(){
-//    return{
-//        restrict: "E",
-//        template: "<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p>{{comment.text}}</p></div></div></div>"
-//    }
-//})
+firstapp.directive("chat", function () {
+    return {
+        restrict: "E",
+        replace: "true",
+        templateUrl: base_url+"views/directive/chat.html"
+    }
+})
 //firstapp.directive("chatdir1", function(){
 //    return{
 //        templateUrl: 'chat1.html'

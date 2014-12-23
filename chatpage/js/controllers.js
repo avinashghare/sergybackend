@@ -201,7 +201,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
 
     $scope.showtranscript = function () {
-
+        
+        console.log("in transcript ");
+        
         ModalService.showModal({
             templateUrl: 'transcript.html',
             controller: "home"
@@ -215,6 +217,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     };
 
     $scope.showforms = function () {
+        console.log("im in form");
 
         ModalService.showModal({
             templateUrl: 'forms.html',
@@ -229,6 +232,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     };
 
     $scope.showproducts = function () {
+        console.log("im in product");
 
         ModalService.showModal({
             templateUrl: 'products.html',
@@ -274,6 +278,12 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             });
         });
     };
+    
+    
+//    on form submit click
+    $scope.formsubmit = function(comment){
+        console.log(comment);
+    }
 
 
 });
