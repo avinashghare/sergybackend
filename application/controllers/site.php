@@ -18,7 +18,7 @@ class Site extends CI_Controller
 	{
 		$accesslevel=$this->session->userdata('accesslevel');
 		if(!in_array($accesslevel,$access))
-			redirect( base_url() . 'index.php/site?alerterror=You do not have access to this page. ', 'refresh' );
+			redirect( base_url() . 'index.php/site/blank?alerterror=You do not have access to this page. ', 'refresh' );
 	}
 	public function index()
 	{
@@ -26,6 +26,11 @@ class Site extends CI_Controller
 		$this->checkaccess($access);
 		$data[ 'page' ] = 'dashboard';
 		$data[ 'title' ] = 'Welcome';
+		$this->load->view( 'template', $data );	
+	}
+	public function blank()
+	{
+		$data[ 'title' ] = 'Error';
 		$this->load->view( 'template', $data );	
 	}
 	public function createuser()
