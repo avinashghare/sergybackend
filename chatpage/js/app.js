@@ -53,6 +53,7 @@ firstapp.filter('chatcolor', function (FireBaseServices) {
 firstapp.filter('chatt', function (FireBaseServices) {
     return function (input) {
         var j = JSON.parse(input);
+        console.log(j.form);
         return j.form;
     };
 });

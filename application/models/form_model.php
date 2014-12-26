@@ -20,6 +20,18 @@ class Form_model extends CI_Model
 		return  1;
 	}
     
+    public function adduserform($formid,$user,$json)
+    {
+        $data  = array(
+			'formid' => $formid,
+			'user' => $user,
+            'json' => $json
+		);
+		$query=$this->db->insert( 'userform', $data );
+		return  1;
+    }
+    
+    
     public function createformcategory($value,$formid)
 	{
 		$data  = array(

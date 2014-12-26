@@ -402,6 +402,15 @@ class Json extends CI_Controller
 		$this->load->view("json",$data);
 	} 
     
+    public function adduserform()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $formid=$data['formid'];
+        $user=$data['user'];
+        $json=$data['json'];
+        $data['message']=$this->form_model->adduserform($formid,$user,$json);
+		$this->load->view('json',$data);
+    }
     
 	public function addtranscript() 
 	{
