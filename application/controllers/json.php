@@ -405,10 +405,13 @@ class Json extends CI_Controller
     public function adduserform()
     {
         $data = json_decode(file_get_contents('php://input'), true);
+        print_r($data);
         $formid=$data['formid'];
         $user=$data['user'];
         $json=$data['json'];
-        $data['message']=$this->form_model->adduserform($formid,$user,$json);
+        $chatjson=$data['chatjson'];
+        $id=$data['id'];
+        $data['message']=$this->form_model->adduserform($formid,$user,$json,$chatjson,$id);
 		$this->load->view('json',$data);
     }
     
@@ -770,10 +773,16 @@ class Json extends CI_Controller
         $elements[1]->alias="name";
         
         $elements[2]=new stdClass();
-        $elements[2]->field="`category`.`name`";
+        $elements[2]->field="`form`.`json`";
         $elements[2]->sort="1";
-        $elements[2]->header="categoryname";
-        $elements[2]->alias="categoryname";
+        $elements[2]->header="Json";
+        $elements[2]->alias="json";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`category`.`name`";
+        $elements[3]->sort="1";
+        $elements[3]->header="categoryname";
+        $elements[3]->alias="categoryname";
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");

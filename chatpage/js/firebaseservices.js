@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -87,11 +87,35 @@ var firebaseservices = angular.module('firebaseservices', [])
         getcurrentuser: function () {
             return currentuser;
         },
+        getallcategoriessearch: function (searchtr) {
+            return $http.get(adminurl + "getallcategories?search="+searchtr, {});
+        },
+        getallcategories: function () {
+            return $http.get(adminurl + "getallcategories", {});
+        },
         getalltranscript: function () {
             return $http.get(adminurl + "getalltranscript", {});
         },
         getallforms: function () {
             return $http.get(adminurl + "getallforms", {});
+        },
+        getformsbycategorysearch: function (searchfr,categoryid) {
+            return $http.get(adminurl + "getformsbycategory?categoryid="+categoryid+"&search="+searchfr, {});
+        },
+        getproductbycategoryidsearch: function (searchpr,categoryid) {
+            return $http.get(adminurl + "getproductbycategoryid?categoryid="+categoryid+"&search="+searchpr, {});
+        },
+        getformsbycategory: function (categoryid) {
+            return $http.get(adminurl + "getformsbycategory?categoryid="+categoryid, {});
+        },
+        getproductbycategoryid: function (categoryid) {
+            return $http.get(adminurl + "getproductbycategoryid?categoryid="+categoryid, {});
+        },
+        getalltranscriptbycategorysearch: function (searchtr,categoryid) {
+            return $http.get(adminurl + "getalltranscriptbycategory?categoryid="+categoryid+"&search="+searchtr, {});
+        },
+        getalltranscriptbycategory: function (categoryid) {
+            return $http.get(adminurl + "getalltranscriptbycategory?categoryid="+categoryid, {});
         },
         getallformssearch: function (searchfr) {
             return $http.get(adminurl + "getallforms?search="+searchfr, {});

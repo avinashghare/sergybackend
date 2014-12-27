@@ -20,14 +20,21 @@ class Form_model extends CI_Model
 		return  1;
 	}
     
-    public function adduserform($formid,$user,$json)
+    public function adduserform($formid,$user,$json,$chatjson,$id)
     {
         $data  = array(
 			'formid' => $formid,
 			'user' => $user,
             'json' => $json
 		);
+        $data1  = array(
+            'json' => $chatjson
+		);
 		$query=$this->db->insert( 'userform', $data );
+        
+        echo $chatjson;
+		$this->db->where( 'id', $id );
+		$query=$this->db->update( 'chatmessages', $data1 );
 		return  1;
     }
     

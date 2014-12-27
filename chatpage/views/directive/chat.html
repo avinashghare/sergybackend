@@ -19,7 +19,7 @@
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
                 <h4>{{comment.timestamp|converttime}}</h4>
                 <form form-controller="home">
-                    <p ng-repeat='form in comment.text|chatt'>{{form.name}}
+                    <p ng-repeat='form in comment.text|chatt'>
                         <input type="text" class="form-control" data-ng-model='{{form.name}}' ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
                         <select ng-if="form.type=='selection'" class="form-control" >

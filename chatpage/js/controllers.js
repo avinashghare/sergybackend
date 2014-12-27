@@ -8,11 +8,25 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.users = [];
     $scope.comments = [];
     $scope.message = {};
+     $scope.forms = [];
+    $scope.products = [];
+    $scope.level = 0;
+    $scope.categoryid = 0;
     //    check = 0;
 //    $scope.chatdir = "chatdir";
     $scope.currentuser = {};
     $scope.currentuser.email = '';
 
+    var categorysuccess = function (data, status) {
+        console.log("all category");
+        console.log(data.queryresult);
+        $scope.forms = data.queryresult;
+        $scope.transcripts = data.queryresult;
+        $scope.products = data.queryresult;
+//        $scope.forms = data.queryresult;
+    };
+    FireBaseServices.getallcategories().success(categorysuccess);
+    
     
 //    
 //$(function () {
@@ -132,72 +146,146 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     // angular popup
 
     // get all forms############################################################################################################################
-    $scope.forms = [];
+   
     var formssuccess = function (data, status) {
         console.log(data.queryresult);
-        $scope.forms = data.queryresult;
+//        $scope.forms = data.queryresult;
     };
     FireBaseServices.getallforms().success(formssuccess);
 
     //get all forms by search
-    $scope.searchforms = function (searchtr) {
-        console.log(searchtr);
-        FireBaseServices.getallformssearch(searchtr).success(formssuccess);
+    $scope.searchforms = function (searchfr) {
+        console.log(searchfr);
+//        FireBaseServices.getallformssearch(searchtr).success(formssuccess);
+        if($scope.level==0)
+        {
+            FireBaseServices.getallcategoriessearch(searchfr).success(categorysuccess);
+            
+        }else{
+            FireBaseServices.getformsbycategorysearch(searchfr,$scope.categoryid).success(formcategorysuccess);
+        }
     }
 
     // Send form in chat
     $scope.form = [];
+    var formcategorysuccess = function (data, status) {
+        console.log(data);
+        $scope.forms = data.queryresult;
+        $scope.level = 1;
+    };
     $scope.checkforms = function (form) {
         console.log(form);
+        $scope.categoryid = form.id;
+        if($scope.level == 0)
+        {
+            FireBaseServices.getformsbycategory(form.id).success(formcategorysuccess);
+            
+        }else{
+            console.log("in category form");
+            console.log(form);
         $scope.form.id = form.id;
         $scope.form.name = form.name;
         $scope.form.json = form.json;
-        
+        $scope.level = 0;
         $scope.sendmessage($scope.form,3);
+        }
     }
 
     // get all products#####################################################################################################################3
-    $scope.products = [];
+    
     var productssuccess = function (data, status) {
         console.log(data.queryresult);
         $scope.products = data.queryresult;
+        $scope.level = 1;
     };
-    FireBaseServices.getallproduct().success(productssuccess);
+//    FireBaseServices.getallproduct().success(productssuccess);
 
     //get all forms by search
     $scope.searchproducts = function (searchpr) {
+//        FireBaseServices.getallproductsearch(searchpr).success(productssuccess);
+        
         console.log(searchpr);
-        FireBaseServices.getallproductsearch(searchpr).success(productssuccess);
+//        FireBaseServices.getallformssearch(searchtr).success(formssuccess);
+        if($scope.level==0)
+        {
+            FireBaseServices.getallcategoriessearch(searchpr).success(categorysuccess);
+            
+        }else{
+            FireBaseServices.getproductbycategoryidsearch(searchpr,$scope.categoryid).success(productssuccess);
+        }
+        
     }
 
     // Send form in chat
     $scope.checkproducts = function (product) {
         console.log(product);
         //        $scope.sendmessage(transcript.text);
+        $scope.categoryid = product.id;
+        if($scope.level == 0)
+        {
+            FireBaseServices.getproductbycategoryid(product.id).success(productssuccess);
+            
+        }else{
+            console.log("in category form");
+        $scope.level = 0;
+//        $scope.sendmessage($scope.form,3);
+        }
     }
 
     // get all transcript###########################################################################################################################
     $scope.transcripts = [];
-    var transcriptsuccess = function (data, status) {
-        console.log("transcriptdata");
-        console.log(data.queryresult);
-        $scope.transcripts = data.queryresult;
-    };
-
-    FireBaseServices.getalltranscript().success(transcriptsuccess);
+//    var transcriptsuccess = function (data, status) {
+//        console.log("transcriptdata");
+//        console.log(data.queryresult);
+//        $scope.transcripts = data.queryresult;
+//    };
+//
+//    FireBaseServices.getalltranscript().success(transcriptsuccess);
 
 
     // get transcript by search
-    $scope.searchtranscript = function (searchfr) {
-        console.log(searchfr);
-        FireBaseServices.getalltranscriptsearch(searchfr).success(transcriptsuccess);
+    $scope.searchtranscript = function (searchtr) {
+        console.log(searchtr);
+        if($scope.level==0)
+        {
+            FireBaseServices.getallcategoriessearch(searchtr).success(categorysuccess);
+            
+        }else{
+            FireBaseServices.getalltranscriptbycategorysearch(searchtr,$scope.categoryid).success(transcriptcategorysuccess);
+        }
+        
     }
 
     // Get checked transcript
+    var transcriptcategorysuccess = function (data, status) {
+        console.log(data);
+        $scope.transcripts = data.queryresult;
+        $scope.level = 1;
+    };
+    
     $scope.checktranscript = function (transcript) {
         console.log(userid);
 //        console.log(transcript);
-        $scope.sendmessage(transcript.text, 1);
+//        $scope.sendmessage(transcript.text, 1);
+        $scope.categoryid = transcript.id;
+        
+        console.log(transcript);
+        if($scope.level == 0)
+        {
+            FireBaseServices.getalltranscriptbycategory(transcript.id).success(transcriptcategorysuccess);
+            
+        }else{
+            console.log("in category form");
+//            console.log(form);
+//        $scope.form.id = form.id;
+//        $scope.form.name = form.name;
+//        $scope.form.json = form.json;
+//        
+//        $scope.sendmessage($scope.form,3);
+            $scope.level = 0;
+            $scope.sendmessage(transcript.text, 1);
+        }
+        
     }
 
     $scope.showtranscript = function () {
