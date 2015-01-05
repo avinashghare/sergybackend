@@ -48,16 +48,47 @@ var firebaseservices = angular.module('firebaseservices', [])
         },
         getusersonly: function () {
             return users;
-        },
+        }
+//        ,
+//        connecttouser: function (uid, email, callback, callbackforgettingdata, callbackuserorder) {
+//            
+//            $http({
+//                url: adminurl + 'getchatbyuser',
+//                method: "POST",
+//                data: {
+//                    'email': email
+//                }
+//            }).success(callbackforgettingdata);
+//            
+////             return $http({
+////                url: adminurl + 'getordersbyuser',
+////                method: "POST",
+////                data: {'email': email}
+////            }).success(callbackuserorder);
+//            $http.get(adminurl + "getordersbyuser?email=" + email, {}).success(callbackuserorder);
+//            ref.child(previousuid).off("value", previouscallback);
+//            previousuid = uid;
+//            previouscallback = callback;
+//            ref.child(uid).on("value", callback)
+//        }
+        ,
         connecttouser: function (uid, email, callback, callbackforgettingdata, callbackuserorder) {
             
+            chats=[];            
             $http({
                 url: adminurl + 'getchatbyuser',
                 method: "POST",
                 data: {
                     'email': email
                 }
-            }).success(callbackforgettingdata);
+            }).success(function(data, status){
+                for (var i = 0; i < data.queryresult.length; i++) {
+                    chats.push(JSON.parse(data.queryresult[i].json));
+                    callbackforgettingdata();
+//                chats=chats.concat(JSON.parse(data.queryresult[i].json));
+            
+        }
+            });
             
 //             return $http({
 //                url: adminurl + 'getordersbyuser',
@@ -68,8 +99,13 @@ var firebaseservices = angular.module('firebaseservices', [])
             ref.child(previousuid).off("value", previouscallback);
             previousuid = uid;
             previouscallback = callback;
-            ref.child(uid).on("value", callback)
-        },
+            ref.child(uid).on("value", function(data){
+                chats.push(data.val());
+                callback();
+            });
+            
+        }
+        ,
         changecurrentuser: function (user) {
             currentuser = user;
         },
@@ -86,6 +122,9 @@ var firebaseservices = angular.module('firebaseservices', [])
         },
         getcurrentuser: function () {
             return currentuser;
+        },
+        getchats:function() {
+            return chats;
         },
         getallcategoriessearch: function (searchtr) {
             return $http.get(adminurl + "getallcategories?search="+searchtr, {});
@@ -149,40 +188,49 @@ var firebaseservices = angular.module('firebaseservices', [])
 //            });
         },
         sendmessage: function (text, uid, type) {
-            var id = 0;
-            var fname = "";
-            var json = "";
+            console.log("text in firebase service");
+            console.log(text);
             timestamp = new Date();
             if(type==3){
-                console.log(text.id);
-                console.log(text.name);
-                console.log(text.json);
-                id = text.id;
-                fname = text.name;
-                json = text.json;
                 ref.child(currentuser.uid).set({
-                id: id,
-                fname: fname,
-                json: json,
                 email: currentuser.email,
                 name: "Sergy",
-                text: json,
+                text: JSON.stringify(text),
                 type: type,
                 timestamp: timestamp.getTime()
             });
                 
             var json1 = {
-                id: id,
-                fname: fname,
-                json: json,
                 email: currentuser.email,
                 name: "Sergy",
-                text: json,
+                text: JSON.stringify(text),
                 type: type,
                 timestamp: timestamp.getTime()
             };
             json1 = JSON.stringify(json1);
 
+                
+            }else if(type==4){
+                
+                ref.child(currentuser.uid).set({
+                    email: currentuser.email,
+                    name: "Sergy",
+                    text: JSON.stringify(text),
+                    type: type,
+                    timestamp: timestamp.getTime()
+                });
+                
+                var json1 = {
+                    
+                    email: currentuser.email,
+                    name: "Sergy",
+                    text: JSON.stringify(text),
+                    type: type,
+                    timestamp: timestamp.getTime()
+                    
+                };
+                
+                json1 = JSON.stringify(json1);
                 
             }else{
             // To database

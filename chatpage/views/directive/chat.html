@@ -3,7 +3,7 @@
                                       <i class="fa fa-shopping-cart"></i>
                                   </span>
 
-    <div class='activity-desk' ng-show="comment.type!=3">
+    <div class='activity-desk' ng-if="comment.type!=3 && comment.type!=4">
         <div class='panel'>
             <div class='panel-body'>
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
@@ -13,16 +13,18 @@
         </div>
     </div>
 
-    <div class='activity-desk' ng-show="comment.type==3">
+
+    <div class='activity-desk' ng-if="comment.type==3">
         <div class='panel'>
             <div class='panel-body'>
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
                 <h4>{{comment.timestamp|converttime}}</h4>
-                <form form-controller="home">
-                    <p ng-repeat='form in comment.text|chatt'>
-                        <input type="text" class="form-control" data-ng-model='{{form.name}}' ng-if="form.type=='text'">
+                <form class="form-horizontal tasi-form" form-controller="home" ng-init="formm = convertform(comment.text);">
+<!--                    <p ng-repeat='form in comment.text.json|chatt'>{{form}}-->
+                    <p ng-repeat="form in formm">
+                        <input type="text" class="form-control" ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
-                        <select ng-if="form.type=='selection'" class="form-control" >
+                        <select ng-if="form.type=='selection'" class="form-control">
                             <option>{{form.placeholder}}</option>
                             <option ng-repeat="frm in form.value">{{frm.title}}</option>
                         </select>
@@ -33,6 +35,46 @@
 
                     </p>
                 </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class='activity-desk' ng-if="comment.type==4">
+        <div class='panel'>
+            <div class='panel-body'>
+                <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
+                <h4>{{comment.timestamp|converttime}}</h4>
+                <p data-ng-init="form = convert(comment.text);">
+                <h5>{{form.name}}</h5>
+                <img src="{{form.image|imagepath}}" width="100"><br>
+                <table class="producttable">
+                   <tr>
+                       <th>
+                           Price : 
+                       </td>
+                       <td>
+                           {{form.price}}Rs.
+                       </td>
+                   </tr>
+                   <tr>
+                       <th>
+                           Details : 
+                       </td>
+                       <td>
+                           {{form.details}}.
+                       </td>
+                   </tr>
+                    
+                </table>
+                <button type="submit" class="btn btn-primary">Place Order</button>
+                </p>
+<!--
+                <p data-ng-init="form = convert(comment.text);">
+                    {{form.image}}
+                    </p>
+-->
+                
             </div>
         </div>
     </div>

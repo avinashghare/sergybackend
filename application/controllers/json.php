@@ -405,13 +405,22 @@ class Json extends CI_Controller
     public function adduserform()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-        print_r($data);
         $formid=$data['formid'];
         $user=$data['user'];
         $json=$data['json'];
         $chatjson=$data['chatjson'];
         $id=$data['id'];
         $data['message']=$this->form_model->adduserform($formid,$user,$json,$chatjson,$id);
+		$this->load->view('json',$data);
+    }
+    
+    public function adduserproduct()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $productid=$data['productid'];
+        $user=$data['user'];
+        $json=$data['json'];
+        $data['message']=$this->product_model->adduserproduct($productid,$user,$json);
 		$this->load->view('json',$data);
     }
     

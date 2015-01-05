@@ -7,6 +7,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     $scope.users = [];
     $scope.comments = [];
+    $scope.comments = FireBaseServices.getchats();
     $scope.message = {};
      $scope.forms = [];
     $scope.products = [];
@@ -18,8 +19,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.currentuser.email = '';
 
     var categorysuccess = function (data, status) {
-        console.log("all category");
-        console.log(data.queryresult);
+//        console.log("all category");
+//        console.log(data.queryresult);
         $scope.forms = data.queryresult;
         $scope.transcripts = data.queryresult;
         $scope.products = data.queryresult;
@@ -79,43 +80,48 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     //    };
 
     function onuserload(data) {
-        data = data.val();
-        console.log("getchat");
-        console.log(userid);
-        //        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
-        //        if (check == 1) {
-        $scope.comments.push(data);
-        //        }
-        if (data.email == $scope.currentuser.email) {
-            //$scope.$apply();
-        }
+        
+        $scope.comments = FireBaseServices.getchats();    
+        
+//        data = data.val();
+//        console.log("getchat");
+//        console.log(userid);
+//        //        FireBaseServices.userfromemail($scope.currentuser.email).success(useremailsuccess);
+//        //        if (check == 1) {
+//        $scope.comments.push(data);
+////        $scope.comments=$scope.comments.concat(data);
+//        //        }
+//        if (data.email == $scope.currentuser.email) {
+//            //$scope.$apply();
+//        }
     }
 
 
     function gettingdata(data) {
-        console.log("new data");
-        console.log(data);
-        for (var i = 0; i < data.queryresult.length; i++) {
-            //                console.log(JSON.parse(data.queryresult[i].json));
-            $scope.comments.push(JSON.parse(data.queryresult[i].json));
-
-        }
+        $scope.comments = FireBaseServices.getchats();
+//        console.log("new data");
+//        console.log(data);
+//        for (var i = 0; i < data.queryresult.length; i++) {
+//            //                console.log(JSON.parse(data.queryresult[i].json));
+////            $scope.comments.push(JSON.parse(data.queryresult[i].json));
+//
+//               // $scope.comments=$scope.comments.concat(JSON.parse(data.queryresult[i].json));
+//            
+//        }
     }
 
     function userorder(data) {
-        console.log(data);
         $scope.userorder = data.queryresult;
     }
 
     var useremailsuccess = function (data, status) {
-        console.log(data);
         userid = data;
 
         //        FireBaseServices.getchatbyuser(userid).success(onuserloadsuccess);
     };
 
     $scope.userchange = function (user) {
-        console.log(user);
+//        console.log(user);
         //        userid = "";
         //        FireBaseServices.userfromemail(user.email).success(useremailsuccess);
         for (var i = 0; i < $scope.users.length; i++) {
@@ -124,11 +130,23 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         user.active = "active";
         $scope.currentuser = user;
         FireBaseServices.changecurrentuser(user);
-        $scope.comments = [];
+//        $scope.comments = [];
         FireBaseServices.userfromemail(user.email).success(useremailsuccess);
         FireBaseServices.connecttouser(user.uid, user.email, onuserload, gettingdata, userorder);
     }
 
+    //convert function
+    $scope.convert = function (product){
+        return JSON.parse(product);
+    }
+    
+    //convert function
+    $scope.convertform = function (form){
+        console.log(form);
+        return JSON.parse(JSON.parse(form).json);
+    }
+    
+    
     $scope.sendmessage = function (msg,type) {
         check = 1;
         console.log("now im user");
@@ -147,11 +165,6 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     // get all forms############################################################################################################################
    
-    var formssuccess = function (data, status) {
-        console.log(data.queryresult);
-//        $scope.forms = data.queryresult;
-    };
-    FireBaseServices.getallforms().success(formssuccess);
 
     //get all forms by search
     $scope.searchforms = function (searchfr) {
@@ -174,7 +187,6 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         $scope.level = 1;
     };
     $scope.checkforms = function (form) {
-        console.log(form);
         $scope.categoryid = form.id;
         if($scope.level == 0)
         {
@@ -183,11 +195,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         }else{
             console.log("in category form");
             console.log(form);
-        $scope.form.id = form.id;
-        $scope.form.name = form.name;
-        $scope.form.json = form.json;
         $scope.level = 0;
-        $scope.sendmessage($scope.form,3);
+        $scope.sendmessage(form,3);
         }
     }
 
@@ -226,9 +235,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             FireBaseServices.getproductbycategoryid(product.id).success(productssuccess);
             
         }else{
-            console.log("in category form");
         $scope.level = 0;
-//        $scope.sendmessage($scope.form,3);
+        $scope.sendmessage(product,4);
         }
     }
 

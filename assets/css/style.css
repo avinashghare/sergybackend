@@ -21,7 +21,30 @@ border-radius: 0;
     width: 100%;
 margin-top: 3%;
 }
-
+.activity-desk span.Prc {
+    background: none !important;
+    color: #000 !important;
+}
+.activity-desk span.detail {
+    background: none !important;
+    color: #000 !important;
+}
+span.Prc {
+    font-size: 13px !important;
+    /* float: right !important; */
+    padding-right: 192px !important;
+    margin-top: -13px !important;
+    height: 0px !important;
+    width: 0px !important;
+}
+span.detail {
+    font-size: 13px !important;
+    /* float: right !important; */
+    padding-right: 182px !important;
+    height: 0px !important;
+    width: 0px !important;
+    margin-top: -13px !important;
+}
 body {
     color: #797979;
     background: #f1f2f7;
@@ -3938,6 +3961,10 @@ table.sliders tr td {
 }
 
 
+.producttable {
+    margin-top: 10px;
+margin-bottom: 10px;
+}
 /*custom select*/
 
 span.customSelect {

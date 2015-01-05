@@ -136,3 +136,11 @@ ul.socialicons li i:hover {
 .pointer1:hover{
     cursor: pointer;
 }
+.activity-desk span.prc {
+    background: none;
+    color: #000;
+}
+.producttable {
+    margin-top: 10px;
+margin-bottom: 10px;
+}

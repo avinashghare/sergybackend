@@ -53,11 +53,27 @@ firstapp.filter('chatcolor', function (FireBaseServices) {
 firstapp.filter('chatt', function (FireBaseServices) {
     return function (input) {
         var j = JSON.parse(input);
-        console.log(j.form);
         return j.form;
     };
 });
+firstapp.filter('chattt', function (FireBaseServices) {
+    return function (input) {
+        var j = JSON.parse(input);
+        return j;
+    };
+});
 
+firstapp.filter('imagepath', function () {
+    return function (input) {
+        if (input == "") {
+            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
+//                return "http://localhost/sergybackend/assets/img/default.jpg";
+        } else {
+            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
+//            return "http://localhost/sergybackend/uploads/" + input;
+        }
+    };
+});
 firstapp.directive("chat", function () {
     return {
         restrict: "E",

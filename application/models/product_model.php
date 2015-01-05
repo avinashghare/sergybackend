@@ -27,6 +27,19 @@ class Product_model extends CI_Model
 		return  1;
 	}
     
+     public function adduserproduct($productid,$user,$json)
+    {
+        $data  = array(
+			'productid' => $productid,
+			'user' => $user,
+            'json' => $json
+		);
+		$query=$this->db->insert( 'userproduct', $data );
+        
+		return  1;
+    }
+    
+    
     public function createproductcategory($value,$productid)
 	{
 		$data  = array(
