@@ -9,6 +9,7 @@ var firebaseservices = angular.module('firebaseservices', [])
     var onchangecallback = function () {};
     var users = [];
     var order = [];
+//    var check = 0;
     var currentuser = {
         email: "",
         uid: ""
@@ -100,13 +101,14 @@ var firebaseservices = angular.module('firebaseservices', [])
             previousuid = uid;
             previouscallback = callback;
             ref.child(uid).on("value", function(data){
-                chats.push(data.val());
+                    chats.push(data.val());
                 callback();
             });
             
         }
         ,
         changecurrentuser: function (user) {
+//            check = 0;
             currentuser = user;
         },
         getchatbyuser: function (userid) {
@@ -188,8 +190,7 @@ var firebaseservices = angular.module('firebaseservices', [])
 //            });
         },
         sendmessage: function (text, uid, type) {
-            console.log("text in firebase service");
-            console.log(text);
+//            check = 1;
             timestamp = new Date();
             if(type==3){
                 ref.child(currentuser.uid).set({
