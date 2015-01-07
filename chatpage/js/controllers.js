@@ -224,7 +224,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         }
         
     }
-
+    
     // Send form in chat
     $scope.checkproducts = function (product) {
         console.log(product);

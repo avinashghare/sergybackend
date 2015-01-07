@@ -110,7 +110,10 @@
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="transcript in transcripts">
                 {{transcript.name}}
-              <button type="button" name="check" style="float:right;" ng-click="checktranscript(transcript)">Send</button>
+                
+              <button type="button" class="btn btn-default btn-xs" name="check" style="float:right;" ng-click="checktranscript(transcript)" ng-if="level==0">Go</button>
+              
+              <button type="button" class="btn btn-default btn-xs" name="check" style="float:right;" ng-click="checktranscript(transcript)" ng-if="level!=0">Send</button>
         </div>
 
               </div>
@@ -139,7 +142,10 @@
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="form in forms">
                 {{form.name}}
-              <button type="button" name="check" style="float:right;" ng-click="checkforms(form)">Send</button >
+                
+              <button type="button" name="check" class="btn btn-default btn-xs" style="float:right;" ng-click="checkforms(form)" ng-if="level==0">Go</button>
+              
+              <button type="button" name="check" class="btn btn-default btn-xs" style="float:right;" ng-click="checkforms(form)" ng-if="level!=0">Send</button>
         </div>
 
               </div>
@@ -168,7 +174,10 @@
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="product in products">
                 {{product.name}}
-              <button type="button" name="check" style="float:right;" ng-click="checkproducts(product)">Send</button>
+                
+              <button type="button" name="check" class="btn btn-default btn-xs" style="float:right;" ng-click="checkproducts(product)" ng-if="level==0">Go</button>
+              
+              <button type="button" name="check" class="btn btn-default btn-xs" style="float:right;" ng-click="checkproducts(product)" ng-if="level!=0">Send</button>
         </div>
 
               </div>
