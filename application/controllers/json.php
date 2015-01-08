@@ -1250,5 +1250,35 @@ class Json extends CI_Controller
         $data['message']=$this->user_model->frontendlogout($userid);
 		$this->load->view('json',$data);
     }
+    
+    public function addorder() 
+	{
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        $name=$data['name'];
+        $user=$data['user'];
+        $address1=$data['address1'];
+        $address2=$data['address2'];
+        $city=$data['city'];
+        $state=$data['state'];
+        $pincode=$data['pincode'];
+        $email=$data['email'];
+        $contactno=$data['contactno'];
+        $country=$data['country'];
+        $shippingaddress1=$data['shippingaddress1'];
+        $shippingaddress2=$data['shippingaddress2'];
+        $shipcity=$data['shipcity'];
+        $shipstate=$data['shipstate'];
+        $shippingcode=$data['shippingcode'];
+        $shipcountry=$data['shipcountry'];
+        $trackingcode=$data['trackingcode'];
+        $shippingcharge=$data['shippingcharge'];
+        $shippingmethod=$data['shippingmethod'];
+        $productid=$data['productid'];
+		
+		$password=md5($password);
+		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
+		$this->load->view('json',$data);
+	}
 }
 ?>

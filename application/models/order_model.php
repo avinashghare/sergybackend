@@ -32,6 +32,7 @@ class order_model extends CI_Model
         
 		return  1;
 	}
+	
 	public function createorderitem($product,$orderid)
 	{
 //        echo $orderid;
@@ -261,5 +262,59 @@ class order_model extends CI_Model
     
         return $data;
     }
+    public function createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,productid)
+	{
+		$data  = array(
+			'name' => $name,
+			'user' => $user,
+			'address1' => $address1,
+			'address2' => $address2,
+			'city' => $city,
+			'state' => $state,
+			'pincode' => $pincode,
+			'email' => $email,
+			'contactno' => $contactno,
+			'country' => $country,
+			'shipaddress1' => $shippingaddress1,
+			'shipaddress2' => $shippingaddress2,
+			'shipcity' => $shipcity,
+			'shipstate' => $shipstate,
+			'shippingcode' => $shippingcode,
+			'shipcountry' => $shipcountry,
+			'trackingcode' => $trackingcode,
+			'shippingcharge' => $shippingcharge,
+			'shippingmethod' => $shippingmethod
+		);
+		$query=$this->db->insert( 'order', $data );
+		$orderid=$this->db->insert_id();
+        
+        $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
+//        print_r($productdetails);
+        $name=$productdetails->name;
+        $type=$productdetails->type;
+        $url=$productdetails->url;
+        $price=$productdetails->price;
+        $json=$productdetails->json;
+        $image=$productdetails->image;
+        $usergenerated=$productdetails->usergenerated;
+        $productattributejson=$productdetails->productattributejson;
+        $details=$productdetails->details;
+		$dataorderitem  = array(
+			'product' => $productid,
+			'name' => $name,
+			'type' => $type,
+			'url' => $url,
+			'price' => $price,
+			'json' => $json,
+			'image' => $image,
+			'usergenerated' => $usergenerated,
+			'productattributejson' => $productattributejson,
+			'details' => $details,
+			'orderid' => $orderid
+		);
+		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
+        
+		return  $orderid;
+	}
 }
 ?>
