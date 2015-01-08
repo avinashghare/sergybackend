@@ -21,7 +21,7 @@ var firebaseservices = angular.module('firebaseservices', [])
         firbasecallonchange: function () {
             ref.child(authdetails.uid).on('value', function (snapshot) {
                 var message = snapshot.val();
-                chats.push(message);
+//                chats.push(message);
                 //                json1=JSON.stringify(message);
                 //                console.log(json1);
                 //                $http.get(adminurl + "addchat?json="+json1+"&user=0&type=1&url=&imageurl=&status=1",{});
