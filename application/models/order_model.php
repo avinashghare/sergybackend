@@ -262,7 +262,7 @@ class order_model extends CI_Model
     
         return $data;
     }
-    public function createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,productid)
+    public function createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid)
 	{
 		$data  = array(
 			'name' => $name,
@@ -314,7 +314,7 @@ class order_model extends CI_Model
 		);
 		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
         
-		return  $orderid;
+		return  1;
 	}
 }
 ?>

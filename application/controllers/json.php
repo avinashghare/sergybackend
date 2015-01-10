@@ -996,6 +996,161 @@ class Json extends CI_Controller
 		$this->load->view("json",$data);
 	} 
     
+    function getordersbyuserid()
+	{
+//        $data = json_decode(file_get_contents('php://input'), true);
+//        $email=$data['email'];
+        $id=$this->input->get_post('id');
+        $elements=array();
+        $elements[0]=new stdClass();
+        $elements[0]->field="`order`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`order`.`name`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Name";
+        $elements[1]->alias="name";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`user`.`name`";
+        $elements[2]->sort="1";
+        $elements[2]->header="User";
+        $elements[2]->alias="username";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`order`.`user`";
+        $elements[3]->sort="1";
+        $elements[3]->header="user";
+        $elements[3]->alias="user";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`order`.`address1`";
+        $elements[4]->sort="1";
+        $elements[4]->header="address1";
+        $elements[4]->alias="address1";
+        
+        $elements[5]=new stdClass();
+        $elements[5]->field="`order`.`address2`";
+        $elements[5]->sort="1";
+        $elements[5]->header="address2";
+        $elements[5]->alias="address2";
+        
+        $elements[6]=new stdClass();
+        $elements[6]->field="`order`.`city`";
+        $elements[6]->sort="1";
+        $elements[6]->header="city";
+        $elements[6]->alias="city";
+        
+        $elements[7]=new stdClass();
+        $elements[7]->field="`order`.`state`";
+        $elements[7]->sort="1";
+        $elements[7]->header="state";
+        $elements[7]->alias="state";
+        
+        $elements[8]=new stdClass();
+        $elements[8]->field="`order`.`pincode`";
+        $elements[8]->sort="1";
+        $elements[8]->header="pincode";
+        $elements[8]->alias="pincode";
+        
+        $elements[9]=new stdClass();
+        $elements[9]->field="`order`.`email`";
+        $elements[9]->sort="1";
+        $elements[9]->header="email";
+        $elements[9]->alias="email";
+        
+        $elements[10]=new stdClass();
+        $elements[10]->field="`order`.`contactno`";
+        $elements[10]->sort="1";
+        $elements[10]->header="contactno";
+        $elements[10]->alias="contactno";
+        
+        $elements[11]=new stdClass();
+        $elements[11]->field="`order`.`country`";
+        $elements[11]->sort="1";
+        $elements[11]->header="country";
+        $elements[11]->alias="country";
+        
+        $elements[12]=new stdClass();
+        $elements[12]->field="`order`.`shipaddress1`";
+        $elements[12]->sort="1";
+        $elements[12]->header="shipaddress1";
+        $elements[12]->alias="shipaddress1";
+        
+        $elements[13]=new stdClass();
+        $elements[13]->field="`order`.`shipaddress2`";
+        $elements[13]->sort="1";
+        $elements[13]->header="shipaddress2";
+        $elements[13]->alias="shipaddress2";
+        
+        $elements[14]=new stdClass();
+        $elements[14]->field="`order`.`shipcity`";
+        $elements[14]->sort="1";
+        $elements[14]->header="shipcity";
+        $elements[14]->alias="shipcity";
+        
+        $elements[15]=new stdClass();
+        $elements[15]->field="`order`.`shipstate`";
+        $elements[15]->sort="1";
+        $elements[15]->header="shipstate";
+        $elements[15]->alias="shipstate";
+        
+        $elements[16]=new stdClass();
+        $elements[16]->field="`order`.`shippingcode`";
+        $elements[16]->sort="1";
+        $elements[16]->header="shippingcode";
+        $elements[16]->alias="shippingcode";
+        
+        $elements[17]=new stdClass();
+        $elements[17]->field="`order`.`shipcountry`";
+        $elements[17]->sort="1";
+        $elements[17]->header="shipcountry";
+        $elements[17]->alias="shipcountry";
+        
+        $elements[18]=new stdClass();
+        $elements[18]->field="`order`.`trackingcode`";
+        $elements[18]->sort="1";
+        $elements[18]->header="trackingcode";
+        $elements[18]->alias="trackingcode";
+        
+        $elements[19]=new stdClass();
+        $elements[19]->field="`order`.`shippingcharge`";
+        $elements[19]->sort="1";
+        $elements[19]->header="shippingcharge";
+        $elements[19]->alias="shippingcharge";
+        
+        $elements[20]=new stdClass();
+        $elements[20]->field="`order`.`shippingmethod`";
+        $elements[20]->sort="1";
+        $elements[20]->header="shippingmethod";
+        $elements[20]->alias="shippingmethod";
+        
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+       
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `order`
+        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id`","WHERE `user`.`id`='$id'");
+        
+		$this->load->view("json",$data);
+	} 
+    
     
     
 	public function addproduct() 
@@ -1251,7 +1406,7 @@ class Json extends CI_Controller
 		$this->load->view('json',$data);
     }
     
-    public function addorder() 
+    public function createfrontendorder() 
 	{
         
         $data = json_decode(file_get_contents('php://input'), true);
@@ -1276,7 +1431,6 @@ class Json extends CI_Controller
         $shippingmethod=$data['shippingmethod'];
         $productid=$data['productid'];
 		
-		$password=md5($password);
 		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
 		$this->load->view('json',$data);
 	}
