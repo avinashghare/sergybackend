@@ -11,6 +11,7 @@ class Site extends CI_Controller
 	{
 		$is_logged_in = $this->session->userdata( 'logged_in' );
 		if ( $is_logged_in !== 'true' || !isset( $is_logged_in ) ) {
+            $this->session->sess_destroy();
 			redirect( base_url() . 'index.php/login', 'refresh' );
 		} //$is_logged_in !== 'true' || !isset( $is_logged_in )
 	}
@@ -18,7 +19,10 @@ class Site extends CI_Controller
 	{
 		$accesslevel=$this->session->userdata('accesslevel');
 		if(!in_array($accesslevel,$access))
-			redirect( base_url() . 'index.php/site/blank?alerterror=You do not have access to this page. ', 'refresh' );
+        {
+            $this->session->sess_destroy();
+			redirect( base_url() . 'index.php/login/?alerterror=You do not have access to this page. ', 'refresh' );
+        }
 	}
 	public function index()
 	{

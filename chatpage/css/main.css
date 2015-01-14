@@ -144,3 +144,9 @@ ul.socialicons li i:hover {
     margin-top: 10px;
 margin-bottom: 10px;
 }
+.scrollhr {
+overflow-y: scroll;
+  height: 400px;
+  width: 540px;
+  overflow-x: hidden;
+}

@@ -4,7 +4,7 @@ var check = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService']);
 
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
-
+    $('#txtSendTo').focus();
     $scope.users = [];
     $scope.comments = [];
     $scope.comments = FireBaseServices.getchats();
@@ -112,6 +112,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     function userorder(data) {
         $scope.userorder = data.queryresult;
+        $('#txtSendTo').focus();
     }
 
     var useremailsuccess = function (data, status) {
@@ -132,7 +133,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         FireBaseServices.changecurrentuser(user);
 //        $scope.comments = [];
         FireBaseServices.userfromemail(user.email).success(useremailsuccess);
-        FireBaseServices.connecttouser(user.uid, user.email, onuserload, gettingdata, userorder);
+        FireBaseServices.connecttouser(user.uid, user.email, gettingdata, onuserload, userorder);
     }
 
     //convert function
@@ -146,6 +147,11 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         return JSON.parse(JSON.parse(form).json);
     }
     
+//    $scope.scroll = $($document).scroll();
+//    $scope.$watch('scroll', function (newValue) {
+//        console.log(newValue);
+//    });
+    
     
     $scope.sendmessage = function (msg,type) {
         check = 1;
@@ -157,6 +163,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             alert("try again later");
         }
         $scope.message.text = "";
+        $('#txtSendTo').focus();
     };
 
     FireBaseServices.getcurrentusers(ongettingusers);

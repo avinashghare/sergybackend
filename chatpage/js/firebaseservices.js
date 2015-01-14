@@ -9,6 +9,8 @@ var firebaseservices = angular.module('firebaseservices', [])
     var onchangecallback = function () {};
     var users = [];
     var order = [];
+    var check = true;
+    var cht = [];
 //    var check = 0;
     var currentuser = {
         email: "",
@@ -73,7 +75,7 @@ var firebaseservices = angular.module('firebaseservices', [])
 //            ref.child(uid).on("value", callback)
 //        }
         ,
-        connecttouser: function (uid, email, callback, callbackforgettingdata, callbackuserorder) {
+        connecttouser: function (uid, email, callbackforgettingdata, callback, callbackuserorder) {
             
             chats=[];            
             $http({
@@ -84,6 +86,12 @@ var firebaseservices = angular.module('firebaseservices', [])
                 }
             }).success(function(data, status){
                 for (var i = 0; i < data.queryresult.length; i++) {
+                    
+                    console.log("check check user chat");
+                    console.log(check);
+                    console.log((JSON.parse(data.queryresult[data.queryresult.length-1].json)).text);
+                    if(cht.text===JSON.parse(data.queryresult[data.queryresult.length-1].json).text)
+                        check = false;
                     chats.push(JSON.parse(data.queryresult[i].json));
                     callbackforgettingdata();
 //                chats=chats.concat(JSON.parse(data.queryresult[i].json));
@@ -101,7 +109,14 @@ var firebaseservices = angular.module('firebaseservices', [])
             previousuid = uid;
             previouscallback = callback;
             ref.child(uid).on("value", function(data){
+                cht = data.val();
+                if(check==false)
+                {
+                    check = true;
                     chats.push(data.val());
+                }
+                console.log("child on chat///////////////////////////");
+                console.log(chats);
                 callback();
             });
             
