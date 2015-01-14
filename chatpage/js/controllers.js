@@ -7,7 +7,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $('#txtSendTo').focus();
     $scope.users = [];
     $scope.comments = [];
-    $scope.comments = FireBaseServices.getchats();
+//    $scope.comments = FireBaseServices.getchats();
     $scope.message = {};
      $scope.forms = [];
     $scope.products = [];
@@ -17,6 +17,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //    $scope.chatdir = "chatdir";
     $scope.currentuser = {};
     $scope.currentuser.email = '';
+//    $(".panel-body.profile-activity").scrollTop($(this).height());
 
     var categorysuccess = function (data, status) {
 //        console.log("all category");
@@ -82,7 +83,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     function onuserload(data) {
         
         $scope.comments = FireBaseServices.getchats();    
-        
+        $(".panel-body.profile-activity").scrollTop($(this).height());
 //        data = data.val();
 //        console.log("getchat");
 //        console.log(userid);
@@ -99,6 +100,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     function gettingdata(data) {
         $scope.comments = FireBaseServices.getchats();
+        $(".panel-body.profile-activity").scrollTop($(this).height());
 //        console.log("new data");
 //        console.log(data);
 //        for (var i = 0; i < data.queryresult.length; i++) {

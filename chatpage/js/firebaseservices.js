@@ -88,15 +88,19 @@ var firebaseservices = angular.module('firebaseservices', [])
                 for (var i = 0; i < data.queryresult.length; i++) {
                     
                     console.log("check check user chat");
-                    console.log(check);
-                    console.log((JSON.parse(data.queryresult[data.queryresult.length-1].json)).text);
-                    if(cht.text===JSON.parse(data.queryresult[data.queryresult.length-1].json).text)
-                        check = false;
                     chats.push(JSON.parse(data.queryresult[i].json));
                     callbackforgettingdata();
 //                chats=chats.concat(JSON.parse(data.queryresult[i].json));
             
         }
+                
+                
+                    console.log(chats[chats.length-1]);
+                    if(cht.text===chats[chats.length-1].text && chats.length>1)
+                    {
+                        chats.splice(0,1);
+                    }
+                
             });
             
 //             return $http({
@@ -110,11 +114,7 @@ var firebaseservices = angular.module('firebaseservices', [])
             previouscallback = callback;
             ref.child(uid).on("value", function(data){
                 cht = data.val();
-                if(check==false)
-                {
-                    check = true;
                     chats.push(data.val());
-                }
                 console.log("child on chat///////////////////////////");
                 console.log(chats);
                 callback();
