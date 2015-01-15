@@ -4,6 +4,11 @@ var check = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService']);
 
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
+    
+//    firebase sergy on of off
+    FireBaseServices.sergystatus('on');
+    
+    
     $('#txtSendTo').focus();
     $scope.users = [];
     $scope.comments = [];
@@ -114,6 +119,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     function userorder(data) {
         $scope.userorder = data.queryresult;
+        FireBaseServices.sergystatus('on');
         $('#txtSendTo').focus();
     }
 
