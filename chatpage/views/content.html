@@ -17,7 +17,8 @@
   <section class="panel">
             <header class="panel-heading">
                 Chat with {{currentuser.email}} {{comment}}
-
+                <h5><span ng-class="status" ng-click="changestatus()"></span>
+<!--        <i class="ion-record small offline" ng-if="!online"></i>--></h5>
                 <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
                                 <a class="fa fa-times" href="javascript:;"></a>

@@ -6,8 +6,22 @@ var phonecatControllers = angular.module('phonecatControllers', ['firebaseservic
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
     
 //    firebase sergy on of off
-    FireBaseServices.sergystatus('on');
+//    FireBaseServices.sergystatus('on');
     
+//    online offline status
+    $scope.status = "mybadgeoffline";
+    
+//    change status function
+    $scope.changestatus = function () {
+        if($scope.status == "mybadgeoffline")
+        {
+            $scope.status = "mybadgeonline";
+            FireBaseServices.sergystatus('on');
+        }else{
+            $scope.status = "mybadgeoffline";
+            FireBaseServices.sergystatus('off');
+        }
+    }
     
     $('#txtSendTo').focus();
     $scope.users = [];

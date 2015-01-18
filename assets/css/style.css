@@ -3983,3 +3983,30 @@ span.customSelect.changed {
 .customSelectInner {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
+
+.mybadgeonline {
+  border-radius: 100%;
+background: rgb(46, 169, 61);
+width: 14px;
+
+  height: 3%;
+content: ".";
+position: absolute;
+right: 25px;
+
+  bottom: 390px;
+}
+
+.mybadgeoffline {
+  border-radius: 100%;
+
+  background: #FF7373;
+width: 14px;
+
+  height: 3%;
+content: ".";
+position: absolute;
+right: 25px;
+
+  bottom: 390px;
+}
