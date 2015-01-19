@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -131,13 +131,13 @@ var firebaseservices = angular.module('firebaseservices', [])
                 callback();
             });
             
-            ref.child("sergy").on('value', function (snapshot) {
-                console.log("on sergy change");
-                
-                callback1(snapshot.val());
-                
-            });
-            
+//            ref.child("sergy").on('value', function (snapshot) {
+//                console.log("on sergy change");
+//                
+//                callback1(snapshot.val());
+//                
+//            });
+//            
         }
         ,
         changecurrentuser: function (user) {
