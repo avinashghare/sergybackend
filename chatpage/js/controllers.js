@@ -142,6 +142,13 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
         //        FireBaseServices.getchatbyuser(userid).success(onuserloadsuccess);
     };
+    
+    
+//    on sergy change on off
+    var callback1 = function (data){
+        console.log("sergy on off");
+        console.log(data);
+    };
 
     $scope.userchange = function (user) {
 //        console.log(user);
@@ -155,7 +162,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         FireBaseServices.changecurrentuser(user);
 //        $scope.comments = [];
         FireBaseServices.userfromemail(user.email).success(useremailsuccess);
-        FireBaseServices.connecttouser(user.uid, user.email, gettingdata, onuserload, userorder);
+        FireBaseServices.connecttouser(user.uid, user.email, gettingdata, onuserload, callback1, userorder);
     }
 
     //convert function
