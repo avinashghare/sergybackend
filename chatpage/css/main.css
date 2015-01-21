@@ -6,6 +6,12 @@ body {
 a {
     color:#C44639;
 }
+
+.datetime {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
 a:hover {
     color:#9C3D34;
 }

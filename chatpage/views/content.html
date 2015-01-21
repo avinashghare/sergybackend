@@ -6,7 +6,10 @@
             </header>
 
             <div class="list-group">
-                <a class="list-group-item {{user.active}}" ng-click="userchange(user)" ng-repeat="user in users" style="cursor:pointer;">{{user.email}}</a>
+                <a class="list-group-item" ng-class="user.active" ng-click="userchange(user)" ng-repeat="user in users|orderBy:'timestamp':true" style="cursor:pointer;" >{{user.email}}          
+                    <span class="datetime" style="font-size: 11px;opacity: 0.6;">{{user.timestamp|date:"h:mma"}}</span>
+                    <span class="badge" ng-if="user.textcheck!=0">{{user.textcheck}}</span>
+</a>
 
             </div>
         </section>
@@ -128,7 +131,7 @@
                 <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button >
         < /div> -->
             </div>
-        < /div>
+        </div>
         </div>
 </script>
 

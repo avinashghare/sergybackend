@@ -37,11 +37,16 @@ var firebaseservices = angular.module('firebaseservices', [])
                 data = data.val();
                 users = [];
                 for(uid in data) {
+                    if(uid!="sergy")
+                    {
                     users.push({
                         uid: uid,
                         email: data[uid].email,
-                        name: data[uid].name
+                        name: data[uid].name,
+                        timestamp: data[uid].timestamp,
+                        textcheck: data[uid].textcheck
                     });
+                    }
                 }
 
                 callback(users);
@@ -230,6 +235,7 @@ var firebaseservices = angular.module('firebaseservices', [])
                 email: currentuser.email,
                 name: "Sergy",
                 text: JSON.stringify(text),
+                textcheck: 0,
                 type: type,
                 timestamp: timestamp.getTime()
             });
@@ -250,6 +256,7 @@ var firebaseservices = angular.module('firebaseservices', [])
                     email: currentuser.email,
                     name: "Sergy",
                     text: JSON.stringify(text),
+                    textcheck: 0,
                     type: type,
                     timestamp: timestamp.getTime()
                 });
@@ -274,6 +281,7 @@ var firebaseservices = angular.module('firebaseservices', [])
                 email: currentuser.email,
                 name: "Sergy",
                 text: text,
+                textcheck: 0,
                 type: type,
                 timestamp: timestamp.getTime()
             });

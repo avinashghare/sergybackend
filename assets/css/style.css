@@ -3996,7 +3996,15 @@ right: 25px;
 
   bottom: 390px;
 }
+.chatpend{
+     border-radius: 100%;
+      background: #FF7373;
+width: 14px;
 
+  height: 3%;
+content: ".";
+    right: 25px;
+}
 .mybadgeoffline {
   border-radius: 100%;
 
