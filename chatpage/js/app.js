@@ -81,6 +81,17 @@ firstapp.directive("chat", function () {
         templateUrl: base_url+"views/directive/chat.html"
     }
 })
+
+firstapp.directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+    //angular.element(element).css('color','blue');
+    if (scope.$last){
+        $('.profile-activity').animate({ scrollTop: $(".profile-activity div.chintan").height() }, 'slow', function () {
+                            });
+      
+    }
+  };
+})
 //firstapp.directive("chatdir1", function(){
 //    return{
 //        templateUrl: 'chat1.html'

@@ -102,7 +102,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     function onuserload(data) {
         
         $scope.comments = FireBaseServices.getchats();    
-        $(".panel-body.profile-activity").scrollTop($(this).height());
+//        $(".panel-body.profile-activity").scrollTop($(this).height());
+        $(".profile-activity").scrollTop(10000000000);
 //        data = data.val();
 //        console.log("getchat");
 //        console.log(userid);
@@ -119,7 +120,8 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     function gettingdata(data) {
         $scope.comments = FireBaseServices.getchats();
-        $(".panel-body.profile-activity").scrollTop($(this).height());
+//        $(".panel-body.profile-activity").scrollTop($(this).height());
+        $(".profile-activity").scrollTop(10000000000);
 //        console.log("new data");
 //        console.log(data);
 //        for (var i = 0; i < data.queryresult.length; i++) {

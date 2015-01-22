@@ -1,1 +1,11 @@
-<div class='activity-desk'><div class='panel'><div class='panel-body'><div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i><h4>{{comment.timestamp|converttime}}</h4><p ng-repeat='form in comment.text|chatt'><input type='{{form.type}}' placeholder='{{form.placeholder}}'></p></div></div></div>
+<div class='activity-desk'>
+    <div class='panel'>
+        <div class='panel-body'>
+            <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
+            <h4>{{comment.timestamp|converttime}}</h4>
+            <p ng-repeat='form in comment.text|chatt'>
+                <input type='{{form.type}}' placeholder='{{form.placeholder}}'>
+            </p>
+        </div>
+    </div>
+</div>
