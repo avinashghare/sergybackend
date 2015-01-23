@@ -184,6 +184,18 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //    });
     
     
+    $scope.showsend = false;
+    $scope.message.text = [];
+    $scope.checksend = function (){
+        console.log("chekc check");
+        if($scope.message.text)
+        {
+            $scope.showsend = true;
+        }else{
+            $scope.showsend = false;
+        }
+    }
+    
     $scope.sendmessage = function (msg,type) {
         check = 1;
         console.log("now im user");

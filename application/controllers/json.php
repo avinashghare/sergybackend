@@ -394,7 +394,7 @@ class Json extends CI_Controller
         if($orderby=="")
         {
             $orderby="id";
-            $orderorder="ASC";
+            $orderorder="DESC";
         }
        
         $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `chatmessages` LEFT OUTER JOIN `chatmessagetypes` ON `chatmessagetypes`.`id`=`chatmessages`.`type` LEFT OUTER JOIN `user` ON `user`.`id`=`chatmessages`.`user`","WHERE `user`.`email`='$useremailid'");

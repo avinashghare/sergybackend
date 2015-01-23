@@ -98,8 +98,8 @@ var firebaseservices = angular.module('firebaseservices', [])
                 }
 
 
-                console.log(chats[chats.length - 1]);
-                if (cht.text === chats[chats.length - 1].text && chats.length > 1) {
+                console.log(chats[0]);
+                if (cht.text === chats[0].text && chats.length > 1) {
                     chats.splice(0, 1);
                 }
 
