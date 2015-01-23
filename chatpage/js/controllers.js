@@ -10,7 +10,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     
 //    online offline status
     $scope.status = "mybadgeoffline";
-    
+    $scope.showsend = false;
 //    change status function
     $scope.changestatus = function () {
         if($scope.status == "mybadgeoffline")
@@ -134,6 +134,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
 
     function userorder(data) {
+        $scope.showsend = false;
         $scope.userorder = data.queryresult;
         FireBaseServices.sergystatus('on');
         $('#txtSendTo').focus();
@@ -153,6 +154,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     };
 
     $scope.userchange = function (user) {
+        $scope.showsend = false;
 //        console.log(user);
         //        userid = "";
         //        FireBaseServices.userfromemail(user.email).success(useremailsuccess);
@@ -184,7 +186,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //    });
     
     
-    $scope.showsend = false;
+    
     $scope.message.text = [];
     $scope.checksend = function (){
         console.log("chekc check");
@@ -197,6 +199,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
     
     $scope.sendmessage = function (msg,type) {
+        console.log("|||||||||||||||||||||||||||||||||");
+        console.log(msg);
+        if(msg!='')
+        {
         check = 1;
         console.log("now im user");
         console.log(userid);
@@ -207,6 +213,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         }
         $scope.message.text = "";
         $('#txtSendTo').focus();
+        }
     };
 
     FireBaseServices.getcurrentusers(ongettingusers);
