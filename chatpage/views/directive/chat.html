@@ -1,10 +1,10 @@
 <div class="activity {{comment.name|chatcolor}} terques clearfix" ng-repeat="comment in comments|orderBy:'timestamp':false" my-repeat-directive>
- 
+
     <span>
                                       <i class="fa fa-shopping-cart"></i>
                                   </span>
 
-    <div class='activity-desk' ng-if="comment.type!=3 && comment.type!=4">
+    <div class='activity-desk' ng-if="comment.type!=3 && comment.type!=4 && comment.type!=5">
         <div class='panel'>
             <div class='panel-body'>
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
@@ -21,7 +21,7 @@
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
                 <h4>{{comment.timestamp|converttime}}</h4>
                 <form class="form-horizontal tasi-form" form-controller="home" ng-init="formm = convertform(comment.text);">
-<!--                    <p ng-repeat='form in comment.text.json|chatt'>{{form}}-->
+                    <!--                    <p ng-repeat='form in comment.text.json|chatt'>{{form}}-->
                     <p ng-repeat="form in formm">
                         <input type="text" class="form-control" ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
@@ -30,7 +30,7 @@
                             <option ng-repeat="frm in form.value">{{frm.title}}</option>
                         </select>
                     </p>
-<!--
+                    <!--
                     <p>
                         <button type="submit" class="btn btn-default" ng-click="formsubmit(name)">Submit</button>
                         <button type="cancel" class="btn btn-default">Cancel</button>
@@ -41,43 +41,79 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class='activity-desk' ng-if="comment.type==4">
         <div class='panel'>
             <div class='panel-body'>
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
                 <h4>{{comment.timestamp|converttime}}</h4>
                 <p data-ng-init="form = convert(comment.text);">
-                <h5>{{form.name}}</h5>
-                <img src="{{form.image|imagepath}}" width="100"><br>
-                <table class="producttable">
-                   <tr>
-                       <th>
-                           Price : 
-                       </td>
-                       <td>
-                           {{form.price}}Rs.
-                       </td>
-                   </tr>
-                   <tr>
-                       <th>
-                           Details : 
-                       </td>
-                       <td>
-                           {{form.details}}.
-                       </td>
-                   </tr>
-                    
-                </table>
-<!--                <button type="submit" class="btn btn-primary">Place Order</button>-->
+                    <h5>{{form.name}}</h5>
+                    <img src="{{form.image|imagepath}}" width="100">
+                    <br>
+                    <table class="producttable">
+                        <tr>
+                            <th>
+                                Price :
+                                </td>
+                                <td>
+                                    {{form.price}}Rs.
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Details :
+                                </td>
+                                <td>
+                                    {{form.details}}.
+                                </td>
+                        </tr>
+
+                    </table>
+                    <!--                <button type="submit" class="btn btn-primary">Place Order</button>-->
                 </p>
-<!--
+                <!--
                 <p data-ng-init="form = convert(comment.text);">
                     {{form.image}}
                     </p>
 -->
-                
+
+            </div>
+        </div>
+    </div>
+    
+<!--    div for form replay-->
+   
+    <div class='activity-desk' ng-if="comment.type==5">
+        <div class='panel'>
+            <div class='panel-body'>
+                <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
+                <h4>{{comment.timestamp|converttime}}</h4>
+                <p data-ng-init="form = convert(comment.text);">
+                    <h5>{{form.name}}</h5>
+                    <table class="producttable">
+                        <tr ng-repeat="formdata in form.json">
+                            <th>
+                                {{formdata.name}} :
+                                </th>
+                                <td ng-if="formdata.val">
+                                    {{formdata.val}}
+                                </td>
+                                <td ng-if="!formdata.val">
+                                    NA
+                                </td>
+                        </tr>
+                        
+                    </table>
+                    <!--                <button type="submit" class="btn btn-primary">Place Order</button>-->
+                </p>
+                <!--
+                <p data-ng-init="form = convert(comment.text);">
+                    {{form.image}}
+                    </p>
+-->
+
             </div>
         </div>
     </div>

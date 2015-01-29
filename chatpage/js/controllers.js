@@ -1,12 +1,23 @@
 var userid = 0;
 var check = 0;
 //var order = 0;
-var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService']);
+var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog']);
 
-phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService) {
+phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService, ngDialog) {
     
 //    firebase sergy on of off
 //    FireBaseServices.sergystatus('on');
+    
+    
+//    ngdialog for add product
+    $scope.insertproduct = function () {
+            console.log("Demo is wokring");
+            ngDialog.open({
+                template:  base_url + 'views/insertproduct.html',
+                controller: 'home'
+            });
+        };
+    
     
 //    online offline status
     $scope.status = "mybadgeoffline";
@@ -239,7 +250,6 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     // Send form in chat
     $scope.form = [];
     var formcategorysuccess = function (data, status) {
-        console.log(data);
         $scope.forms = data.queryresult;
         $scope.level = 1;
     };
@@ -250,9 +260,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             FireBaseServices.getformsbycategory(form.id).success(formcategorysuccess);
             
         }else{
-            console.log("in category form");
-            console.log(form);
-        $scope.level = 0;
+//        $scope.level = 0;
         $scope.sendmessage(form,3);
         }
     }
@@ -292,7 +300,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             FireBaseServices.getproductbycategoryid(product.id).success(productssuccess);
             
         }else{
-        $scope.level = 0;
+//        $scope.level = 0;
         $scope.sendmessage(product,4);
         }
     }
@@ -347,7 +355,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //        $scope.form.json = form.json;
 //        
 //        $scope.sendmessage($scope.form,3);
-            $scope.level = 0;
+//            $scope.level = 0;
             $scope.sendmessage(transcript.text, 1);
         }
         

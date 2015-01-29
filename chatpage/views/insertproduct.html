@@ -1,0 +1,26 @@
+<div class="more-text">
+   
+    <h2 class=" text-center" style="color:#049fb3;text-transform: uppercase;">Insert Product</h2>
+    
+    <div class="signup-forms">
+       
+        <input type="text" ng-model="insertproduct.name" ng-pattern="/^(\D)+$/" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Name *" required/>
+        
+        <input type="text" ng-model="insertproduct.type" ng-pattern="/^(\D)+$/" class="form-control" ng-class="allvalidation[0].validation" placeholder="Type *" required/>
+        
+        <input type="text" ng-model="insertproduct.url" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product URL *" required/>
+        
+        <input type="text" ng-model="insertproduct.price" class="form-control" ng-class="allvalidation[0].validation" placeholder="Price *" required/>
+        
+        <textarea ng-model="insertproduct.json" class="form-control" ng-class="allvalidation[3].validation" placeholder="JSON *" required></textarea>
+        
+        <input type="text" ng-model="insertproduct.image" class="form-control" ng-class="allvalidation[0].validation" placeholder="Image *" required/>
+        
+        <textarea ng-model="insertproduct.productattributejson" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Attribute Json *" required></textarea>
+        
+        <textarea ng-model="insertproduct.details" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Details *" required></textarea>
+        
+        <!--                            <button class="btn" >Send</button>-->
+        <a class="btn btn-primary mrr" href="" ng-click="saveproduct(insertproduct)">Save</a>
+    </div>
+</div>
