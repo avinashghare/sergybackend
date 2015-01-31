@@ -1,22 +1,306 @@
 var userid = 0;
 var check = 0;
+var uploadres=[];
 //var order = 0;
-var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog']);
+var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog', 'angularFileUpload']);
+
+window.uploadUrl = '../../chatpage/upload.php';
+
+phonecatControllers.controller( 'MyCtrl', function($scope, $http, $timeout, $upload) {
+	$scope.usingFlash = FileAPI && FileAPI.upload != null;
+	$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
+	$scope.uploadRightAway = true;
+	$scope.changeAngularVersion = function() {
+		window.location.hash = $scope.angularVersion;
+		window.location.reload(true);
+	};
+	$scope.hasUploader = function(index) {
+		return $scope.upload[index] != null;
+	};
+	$scope.abort = function(index) {
+		$scope.upload[index].abort(); 
+		$scope.upload[index] = null;
+	};
+	$scope.angularVersion = window.location.hash.length > 1 ? (window.location.hash.indexOf('/') === 1 ? 
+			window.location.hash.substring(2): window.location.hash.substring(1)) : '1.2.20';
+	$scope.onFileSelect = function($files) {
+		$scope.selectedFiles = [];
+		$scope.progress = [];
+		if ($scope.upload && $scope.upload.length > 0) {
+			for (var i = 0; i < $scope.upload.length; i++) {
+				if ($scope.upload[i] != null) {
+					$scope.upload[i].abort();
+				}
+			}
+		}
+		$scope.upload = [];
+		$scope.uploadResult = uploadres;
+		$scope.selectedFiles = $files;
+		$scope.dataUrls = [];
+		for ( var i = 0; i < $files.length; i++) {
+			var $file = $files[i];
+			if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
+				var fileReader = new FileReader();
+				fileReader.readAsDataURL($files[i]);
+				var loadFile = function(fileReader, index) {
+					fileReader.onload = function(e) {
+						$timeout(function() {
+							$scope.dataUrls[index] = e.target.result;
+						});
+					}
+				}(fileReader, i);
+			}
+			$scope.progress[i] = -1;
+			if ($scope.uploadRightAway) {
+				$scope.start(i);
+			}
+		}
+	};
+	
+	$scope.start = function(index) {
+		$scope.progress[index] = 0;
+		$scope.errorMsg = null;
+		if ($scope.howToSend == 1) {
+			$scope.upload[index] = $upload.upload({
+				url: uploadUrl,
+				method: $scope.httpMethod,
+				headers: {'my-header': 'my-header-value'},
+				data : {
+					myModel : $scope.myModel
+				},
+				/* formDataAppender: function(fd, key, val) {
+					if (angular.isArray(val)) {
+                        angular.forEach(val, function(v) {
+                          fd.append(key, v);
+                        });
+                      } else {
+                        fd.append(key, val);
+                      }
+				}, */
+				/* transformRequest: [function(val, h) {
+					console.log(val, h('my-header')); return val + '-modified';
+				}], */
+				file: $scope.selectedFiles[index],
+				fileFormDataName: 'file'
+			});
+			$scope.upload[index].then(function(response) {
+				$timeout(function() {
+					$scope.uploadResult.push(response.data);
+				});
+			}, function(response) {
+				if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+			}, function(evt) {
+				// Math.min is to fix IE which reports 200% sometimes
+				$scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+			});
+			$scope.upload[index].xhr(function(xhr){
+//				xhr.upload.addEventListener('abort', function() {console.log('abort complete')}, false);
+			});
+		} else {
+			var fileReader = new FileReader();
+            fileReader.onload = function(e) {
+		        $scope.upload[index] = $upload.http({
+		        	url: uploadUrl,
+					headers: {'Content-Type': $scope.selectedFiles[index].type},
+					data: e.target.result
+		        }).then(function(response) {
+					$scope.uploadResult.push(response.data);
+				}, function(response) {
+					if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
+				}, function(evt) {
+					// Math.min is to fix IE which reports 200% sometimes
+					$scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+				});
+            }
+	        fileReader.readAsArrayBuffer($scope.selectedFiles[index]);
+		}
+	};
+	
+	$scope.dragOverClass = function($event) {
+		var items = $event.dataTransfer.items;
+		var hasFile = false;
+		if (items != null) {
+			for (var i = 0 ; i < items.length; i++) {
+				if (items[i].kind == 'file') {
+					hasFile = true;
+					break;
+				}
+			}
+		} else {
+			hasFile = true;
+		}
+		return hasFile ? "dragover" : "dragover-err";
+	};
+} );
+
+
+
+
 
 phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService, ngDialog) {
     
 //    firebase sergy on of off
 //    FireBaseServices.sergystatus('on');
     
+    $scope.sergyis = 0;
+    $scope.proddata = [];
+    $scope.allvalidation = [];
+    
+//    Authenticate get sergy
+    var whoissergy = function (data, status) {
+        console.log("user is sergy");
+        console.log(data);
+        $scope.sergyis = data;
+        
+    };
+    
+    FireBaseServices.authenticate().success(whoissergy);
+    
+    
+//    saveproduct form insertproduct.html
+    var saveproductsuccess = function (data, status) {
+        
+        console.log(data);
+        
+    };
+    
+    $scope.prod = [];
+    
+    $scope.saveproduct = function (data) {
+            
+            $scope.allvalidation = [{
+                field: $scope.prod.name,
+                validation: ""
+             }, {
+                field: $scope.prod.type,
+                validation: ""
+             }, {
+                field: $scope.prod.price,
+                validation: ""
+             }, {
+                field: $scope.prod.details,
+                validation: ""
+             }, {
+                field: $scope.prod.categories,
+                validation: ""
+             }];
+
+            var check = formvalidation($scope.allvalidation);
+
+            if ( check ) {
+                
+                data.user = $scope.sergyis;
+                data.image = uploadres[0].trim();
+                data.image = data.image.split('/');
+                data.image = data.image[data.image.length-1];
+                data.categories = data.categories.join();
+                console.log(data.categories);
+                
+                FireBaseServices.insertproduct(data).success(saveproductsuccess);
+            }
+        
+    };
+    
+    $scope.tran = [];
+    
+    $scope.savetranscript = function (data) {
+        
+            $scope.allvalidation = [{
+                field: $scope.tran.name,
+                validation: ""
+             }, {
+                field: $scope.tran.text,
+                validation: ""
+             }, {
+                field: $scope.tran.categories,
+                validation: ""
+             }];
+
+            var check = formvalidation($scope.allvalidation);
+
+            if ( check ) {
+                
+                data.categories = data.categories.join();
+                
+                FireBaseServices.inserttranscript(data).success(saveproductsuccess);
+            }
+        
+    };
+    
+    $scope.frm = [];
+    
+    $scope.saveform = function (data) {
+        
+        console.log(data);
+        
+            $scope.allvalidation = [{
+                field: $scope.frm.name,
+                validation: ""
+             }, {
+                field: $scope.frm.categories,
+                validation: ""
+             }];
+
+            var check = formvalidation($scope.allvalidation);
+
+            if ( check ) {
+                
+                data.categories = data.categories.join();
+                
+                FireBaseServices.insertform(data).success(saveproductsuccess);
+            }
+        
+    };
+    
     
 //    ngdialog for add product
     $scope.insertproduct = function () {
-            console.log("Demo is wokring");
             ngDialog.open({
                 template:  base_url + 'views/insertproduct.html',
                 controller: 'home'
             });
         };
+    
+    
+//    ngdialog for add Transcript
+    $scope.inserttranscript = function () {
+            ngDialog.open({
+                template:  base_url + 'views/inserttranscript.html',
+                controller: 'home'
+            });
+        };
+    
+    
+//    ngdialog for add Form
+    $scope.insertform = function () {
+            ngDialog.open({
+                template:  base_url + 'views/insertform.html',
+                controller: 'home'
+            });
+        };
+    
+//    add form json\
+    
+        $scope.frm.json = [];
+    
+        $scope.addjson = function (type) {
+
+            $scope.json = {
+                "type": "",
+                "value": "",
+                "title": "",
+                "placeholder": "",
+                "name": ""
+            };
+            
+            $scope.frm.json.push($scope.json);
+        };
+
+        $scope.remove = function (index) {
+            console.log("index:" + index);
+            $scope.frm.json.splice(index, 1);
+        };
+    
     
     
 //    online offline status
@@ -41,6 +325,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.message = {};
      $scope.forms = [];
     $scope.products = [];
+    $scope.cateogries = [];
     $scope.level = 0;
     $scope.categoryid = 0;
     //    check = 0;
@@ -52,6 +337,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     var categorysuccess = function (data, status) {
 //        console.log("all category");
 //        console.log(data.queryresult);
+        $scope.categories = data.queryresult;
         $scope.forms = data.queryresult;
         $scope.transcripts = data.queryresult;
         $scope.products = data.queryresult;

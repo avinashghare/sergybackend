@@ -12,6 +12,8 @@ a {
     opacity: 0.6;
 }
 
+.ng-invalid.ng-dirty { border: 1px solid red; }
+
 a:hover {
     color:#9C3D34;
 }

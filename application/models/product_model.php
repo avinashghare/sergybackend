@@ -161,7 +161,7 @@ class Product_model extends CI_Model
 	
     //frontend api functions
     
-    public function addproduct($name,$type,$url,$price,$json,$usergenerated,$productattributejson,$details,$image)
+    public function addproduct($name,$type,$url,$price,$json,$usergenerated,$productattributejson,$details,$image,$category)
     {
         $data  = array(
 			'name' => $name,
@@ -175,7 +175,12 @@ class Product_model extends CI_Model
 			'image' => $image
 		);
 		$query=$this->db->insert( 'product', $data );
-        
+        $productid=$this->db->insert_id();
+        $category= explode(",", $category);
+        foreach($category as $value)
+        {
+            $this->product_model->createproductcategory($value,$productid);
+        }
         if(!$query)
             return 0;
         else

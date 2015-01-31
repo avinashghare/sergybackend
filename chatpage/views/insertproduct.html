@@ -1,26 +1,70 @@
 <div class="more-text">
-   
+
     <h2 class=" text-center" style="color:#049fb3;text-transform: uppercase;">Insert Product</h2>
-    
+
     <div class="signup-forms">
-       
-        <input type="text" ng-model="insertproduct.name" ng-pattern="/^(\D)+$/" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Name *" required/>
+
+        <input type="text" ng-model="prod.name" class="form-control" placeholder="Product Name *"  ng-class="allvalidation[0].validation" required/>
+
+        <input type="text" ng-model="prod.type" class="form-control" placeholder="Type *" ng-class="allvalidation[1].validation" required/>
+
+        <input type="text" ng-model="prod.url" class="form-control" placeholder="Product URL *" />
+
+        <input type="text" ng-model="prod.price" class="form-control" placeholder="Price *" ng-class="allvalidation[2].validation" required/>
+
+        <textarea ng-model="prod.json" class="form-control" placeholder="JSON *" required></textarea>
+
+        <!--        <input type="text" ng-model="prod.image" class="form-control" placeholder="Image *" required/>-->
+
+        <div class="upload-div" ng-controller="MyCtrl">
+            <div ng-init="httpMethod = 'POST';howToSend = 1;"></div>
+
+            <div class="upload-buttons">
+                <input type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+            </div>
+
+            <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true" ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drop files here</div>
+            <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
+
+            <div class="err" ng-show="errorMsg != null">{{errorMsg}}</div>
+
+            <center>
+                <div ng-show="selectedFiles != null">
+                    <div class="sel-file center" ng-repeat="f in selectedFiles">
+                        <div ng-show="$last">
+                            <img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}" width="240px">
+                        </div>
+                    </div>
+                </div>
+            </center>
+            <div class="response" ng-show="uploadResult.length > 0">
+                <span ng-repeat="result in uploadResult">
+                    <div ng-init=""></div>
+<!--                                                <p ng-show="$last">{{result}}</p>-->
+<!--
+                                                <input type="text" class="form-control" value="{{result}}" ng-model="prod.image">
+                    {{uploadResult}}
+-->
+
+                                    </span>
+
+            </div>
+        </div>
+
+
+        <textarea ng-model="prod.productattributejson" class="form-control" placeholder="Product Attribute Json *"></textarea>
+
+        <textarea ng-model="prod.details" class="form-control" placeholder="Product Details *" ng-class="allvalidation[3].validation" required></textarea>
         
-        <input type="text" ng-model="insertproduct.type" ng-pattern="/^(\D)+$/" class="form-control" ng-class="allvalidation[0].validation" placeholder="Type *" required/>
+        <span>Select Product Category</span>
         
-        <input type="text" ng-model="insertproduct.url" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product URL *" required/>
-        
-        <input type="text" ng-model="insertproduct.price" class="form-control" ng-class="allvalidation[0].validation" placeholder="Price *" required/>
-        
-        <textarea ng-model="insertproduct.json" class="form-control" ng-class="allvalidation[3].validation" placeholder="JSON *" required></textarea>
-        
-        <input type="text" ng-model="insertproduct.image" class="form-control" ng-class="allvalidation[0].validation" placeholder="Image *" required/>
-        
-        <textarea ng-model="insertproduct.productattributejson" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Attribute Json *" required></textarea>
-        
-        <textarea ng-model="insertproduct.details" class="form-control" ng-class="allvalidation[0].validation" placeholder="Product Details *" required></textarea>
-        
-        <!--                            <button class="btn" >Send</button>-->
-        <a class="btn btn-primary mrr" href="" ng-click="saveproduct(insertproduct)">Save</a>
+        <select  class="form-control" ng-model="prod.categories" ng-class="allvalidation[4].validation" multiple required>
+            <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+
+        <a class="btn btn-primary mrr" href="" ng-click="saveproduct(prod)">Save</a>
+
     </div>
+
 </div>
+

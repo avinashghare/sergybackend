@@ -121,16 +121,19 @@ class Transcript_model extends CI_Model
 	
     //rest api functions
     
-	public function addtranscript($name,$text,$json,$url,$image)
+	public function addtranscript($name,$text,$category)
     {
         $data  = array(
 			'name' => $name,
-			'text' => $text,
-			'url' => $url,
-			'json' => $json,
-			'image' => $image
+			'text' => $text
 		);
 		$query=$this->db->insert( 'transcript', $data );
+        $transcriptid=$this->db->insert_id();
+        $category= explode(",", $category);
+        foreach($category as $value)
+        {
+            $this->transcript_model->createtranscriptcategory($value,$transcriptid);
+        }
         if(!$query)
 			return  0;
 		else

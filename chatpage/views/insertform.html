@@ -1,0 +1,42 @@
+<div class="more-text">
+
+    <h2 class=" text-center" style="color:#049fb3;text-transform: uppercase;">Insert Form</h2>
+
+    <div class="signup-forms">
+
+        <input type="text" ng-model="frm.name" class="form-control" placeholder="Form Name *" ng-class="allvalidation[0].validation" required/>
+
+        <span>Select Product Category</span>
+
+        <select class="form-control" ng-model="frm.categories" ng-class="allvalidation[1].validation" multiple required>
+            <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+        
+        <span>Create Form Elements</span>
+        
+        <a class="btn btn-primary mrr" href="" ng-click="addjson(1)">+</a>
+        <table class="table" ng-if="frm.json!=''">
+            <tr>
+                <th>Type *</th>
+                <th>Value</th>
+                <th>Title</th>
+                <th>Placeholder</th>
+                <th>Name</th>
+                <th colspan="2">Action</th>
+            </tr>
+            <tr ng-repeat="json in frm.json">
+                <td><input type="text" ng-model="json.type" placeholder="Type Of Form Element" class="form-control"></td>
+                <td><input type="text" ng-model="json.value" placeholder="Value" class="form-control"></td>
+                <td><input type="text" ng-model="json.title" placeholder="Title" class="form-control"></td>
+                <td><input type="text" ng-model="json.placeholder" placeholder="Placeholder" class="form-control"></td>
+                <td><input type="text" ng-model="json.name" placeholder="Name" class="form-control"></td>
+                <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
+            </tr>
+        </table>
+
+        <a class="btn btn-primary mrr" href="" ng-click="saveform(frm)">Save</a>
+
+    </div>
+
+</div>
+

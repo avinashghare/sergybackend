@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -153,6 +153,15 @@ var firebaseservices = angular.module('firebaseservices', [])
         getformsbycategorysearch: function (searchfr, categoryid) {
             return $http.get(adminurl + "getformsbycategory?categoryid=" + categoryid + "&search=" + searchfr, {});
         },
+        insertproduct: function (product) {
+            return $http.get(adminurl + "insertproduct?name=" + product.name + "&type=" + product.type + "&url=" + product.url + "&price=" + product.price + "&json=" + product.json + "&usergenerated=" + product.user + "&productattributejson=" + product.productattributejson + "&details=" + product.details + "&image=" + product.image + "&category=" + product.categories , {});
+        },
+        inserttranscript: function (trascript) {
+            return $http.get(adminurl + "addtranscript?name=" + trascript.name + "&text=" + trascript.text + "&category=" + trascript.categories , {});
+        },
+        insertform: function (form) {
+            return $http.get(adminurl + "addform?name=" + form.name + "&json=" + JSON.stringify(form.json) + "&category=" + form.categories , {});
+        },
         getproductbycategoryidsearch: function (searchpr, categoryid) {
             return $http.get(adminurl + "getproductbycategoryid?categoryid=" + categoryid + "&search=" + searchpr, {});
         },
@@ -182,6 +191,9 @@ var firebaseservices = angular.module('firebaseservices', [])
         },
         getorderbyid: function (id) {
             return $http.get(adminurl + "getorderbyid?id=" + id, {});
+        },
+        authenticate: function () {
+            return $http.get(adminurl + "authenticate" , {});
         },
         setorderid: function (id) {
             order = id;

@@ -66,11 +66,11 @@ firstapp.filter('chattt', function (FireBaseServices) {
 firstapp.filter('imagepath', function () {
     return function (input) {
         if (input == "") {
-            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
-//                return "http://localhost/sergybackend/assets/img/default.jpg";
+//            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
+                return "http://localhost/sergybackend/assets/img/default.jpg";
         } else {
-            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
-//            return "http://localhost/sergybackend/uploads/" + input;
+//            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
+            return "http://localhost/sergybackend/uploads/" + input;
         }
     };
 });
@@ -92,6 +92,23 @@ firstapp.directive('myRepeatDirective', function() {
     }
   };
 })
+
+
+var formvalidation = function(allvalidation) {
+            var isvalid2 = true;
+            for (var i = 0; i < allvalidation.length; i++) {
+                console.log("checking");
+                console.log(allvalidation[i].field);
+                if (allvalidation[i].field == "" || !allvalidation[i].field) {
+                    allvalidation[i].validation = "ng-dirty";
+                    isvalid2 = false;
+                }
+            }
+            return isvalid2;
+        };
+
+
+
 //firstapp.directive("chatdir1", function(){
 //    return{
 //        templateUrl: 'chat1.html'

@@ -1,0 +1,22 @@
+<div class="more-text">
+
+    <h2 class=" text-center" style="color:#049fb3;text-transform: uppercase;">Insert Transcript</h2>
+
+    <div class="signup-forms">
+
+        <input type="text" ng-model="tran.name" class="form-control" placeholder="Transcript Name *" ng-class="allvalidation[0].validation" required/>
+
+        <input type="text" ng-model="tran.text" class="form-control" placeholder="Transcript Text *" ng-class="allvalidation[1].validation" required/>
+
+        <span>Select Product Category</span>
+
+        <select class="form-control" ng-model="tran.categories" ng-class="allvalidation[2].validation" multiple required>
+            <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+
+        <a class="btn btn-primary mrr" href="" ng-click="savetranscript(tran)">Save</a>
+
+    </div>
+
+</div>
+

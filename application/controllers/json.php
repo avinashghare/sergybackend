@@ -428,43 +428,12 @@ class Json extends CI_Controller
 	{
         $name=$this->input->get_post('name');
         $text=$this->input->get_post('text');
-        $json=$this->input->get_post('json');
-		$url=$this->input->get_post("url");
+        $category=$this->input->get_post('category');
+//        $json=$this->input->get_post('json');
+//		$url=$this->input->get_post("url");
         
-        $config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$this->load->library('upload', $config);
-		$filename="image";
-		$image="";
-		if (  $this->upload->do_upload($filename))
-		{
-            $uploaddata = $this->upload->data();
-            $image=$uploaddata['file_name'];
-
-            $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
-            $config_r['maintain_ratio'] = TRUE;
-            $config_t['create_thumb'] = FALSE;///add this
-            $config_r['width']   = 800;
-            $config_r['height'] = 800;
-            $config_r['quality']    = 100;
-            //end of configs
-            $this->load->library('image_lib', $config_r); 
-            $this->image_lib->initialize($config_r);
-            if(!$this->image_lib->resize())
-            {
-                echo "Failed." . $this->image_lib->display_errors();
-                //return false;
-            }  
-            else
-            {
-                $image=$this->image_lib->dest_image;
-                //return false;
-            }
-                
-		}
-            
         
-		$data['message']=$this->transcript_model->addtranscript($name,$text,$json,$url,$image);
+		$data['message']=$this->transcript_model->addtranscript($name,$text,$category);
 		$this->load->view('json',$data);
 	}
     
@@ -676,7 +645,8 @@ class Json extends CI_Controller
 	{
         $name=$this->input->get_post('name');
         $json=$this->input->get_post('json');
-		$data['message']=$this->form_model->addform($name,$json);
+        $category=$this->input->get_post('category');
+		$data['message']=$this->form_model->addform($name,$json,$category);
 		$this->load->view('json',$data);
 	}
     
@@ -1170,7 +1140,7 @@ class Json extends CI_Controller
 		$this->load->library('upload', $config);
 		$filename="image";
 		$image="";
-		if (  $this->upload->do_upload($filename))
+		if ( $this->upload->do_upload($filename))
 		{
             $uploaddata = $this->upload->data();
             $image=$uploaddata['file_name'];
@@ -1199,6 +1169,23 @@ class Json extends CI_Controller
             
         
 		$data['message']=$this->product_model->addproduct($name,$type,$url,$price,$json,$usergenerated,$productattributejson,$details,$image);
+		$this->load->view('json',$data);
+	}
+    
+	public function insertproduct() 
+	{
+        $name=$this->input->get_post('name');
+		$type=$this->input->get_post('type');
+		$url=$this->input->get_post('url');
+		$price=$this->input->get_post('price');
+		$json=$this->input->get_post('json');
+		$usergenerated=$this->input->get_post('usergenerated');
+		$productattributejson=$this->input->get_post('productattributejson');
+		$details=$this->input->get_post('details');
+		$image=$this->input->get_post('image');
+		$category=$this->input->get_post('category');
+		
+		$data['message']=$this->product_model->addproduct($name,$type,$url,$price,$json,$usergenerated,$productattributejson,$details,$image,$category);
 		$this->load->view('json',$data);
 	}
     

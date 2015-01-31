@@ -130,14 +130,24 @@ class Form_model extends CI_Model
 	
     //frontend api functions
     
-	public function addform($name,$json)
+	public function addform($name,$json,$category)
     {
         $data  = array(
 			'name' => $name,
 			'json' => $json
 		);
 		$query=$this->db->insert( 'form', $data );
-    return 1;
+        $formid=$this->db->insert_id();
+        $category= explode(",", $category);
+        foreach($category as $value)
+        {
+            $this->form_model->createformcategory($value,$formid);
+        }
+    
+        if(!$query)
+			return  0;
+		else
+			return  1;
     }
     
     

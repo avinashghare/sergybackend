@@ -432,7 +432,7 @@ INNER JOIN  `accesslevel` ON  `user`.`accesslevel` =  `accesslevel`.`id` WHERE `
             return false;
         }else{
             $userid = $this->session->userdata('id');
-         return $userid;
+         return intval($userid);
         }
     }
     
