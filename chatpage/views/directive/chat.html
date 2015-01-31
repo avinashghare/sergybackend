@@ -9,7 +9,9 @@
             <div class='panel-body'>
                 <div class='{{comment.name|chatclass}}'></div><i class='fa fa-clock-o'></i>
                 <h4>{{comment.timestamp|converttime}}</h4>
-                <p>{{comment.text}}</p>
+                
+                <p ng-bind-html="comment.text | linky:'_blank'"></p>
+<!--                <p ng-bind-html="comment.text | linky">{{comment.text}}</p>-->
             </div>
         </div>
     </div>
@@ -23,7 +25,7 @@
                 <form class="form-horizontal tasi-form" form-controller="home" ng-init="formm = convertform(comment.text);">
                     <!--                    <p ng-repeat='form in comment.text.json|chatt'>{{form}}-->
                     <p ng-repeat="form in formm">
-                        <input type="text" class="form-control" ng-if="form.type=='text'">
+                        <input type="text" placeholder="{{form.placeholder}}" class="form-control" ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
                         <select ng-if="form.type=='selection'" class="form-control">
                             <option>{{form.placeholder}}</option>

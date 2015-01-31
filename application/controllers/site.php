@@ -26,11 +26,10 @@ class Site extends CI_Controller
 	}
 	public function index()
 	{
-		$access = array("1","2");
-		$this->checkaccess($access);
-		$data[ 'page' ] = 'dashboard';
-		$data[ 'title' ] = 'Welcome';
-		$this->load->view( 'template', $data );	
+		$access = array("1");
+		$data["page"]="chatpage";
+        $data["title"]="Chat Page";
+		$this->load->view("template",$data);
 	}
 	public function blank()
 	{

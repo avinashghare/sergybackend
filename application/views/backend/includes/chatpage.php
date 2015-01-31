@@ -28,7 +28,7 @@
 <!--    toster-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.css" rel="stylesheet" />
  <script src="https://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular-sanitize.min.js" ></script>-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular-sanitize.min.js" ></script>
 <!--  <link href="lib/js/ngToast.min.css" rel="stylesheet" />-->
    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.js"></script>
