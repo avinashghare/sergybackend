@@ -2,7 +2,7 @@ var userid = 0;
 var check = 0;
 var uploadres=[];
 //var order = 0;
-var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog', 'angularFileUpload']);
+var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog', 'angularFileUpload', 'toaster']);
 
 window.uploadUrl = '../../chatpage/upload.php';
 
@@ -137,7 +137,7 @@ phonecatControllers.controller( 'MyCtrl', function($scope, $http, $timeout, $upl
 
 
 
-phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService, ngDialog) {
+phonecatControllers.controller('home', function ($scope, FireBaseServices, ModalService, ngDialog, toaster) {
     
 //    firebase sergy on of off
 //    FireBaseServices.sergystatus('on');
@@ -161,6 +161,12 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     var saveproductsuccess = function (data, status) {
         
         console.log(data);
+        if(data==1)
+        {
+            toaster.pop('success', "Sergy", "Data saved Successfully", 5000);
+        }else{
+            toaster.pop('error', "Sergy", "Sorry, Your Data is not Saved", 5000)
+        }
         
     };
     
