@@ -314,6 +314,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.showsend = false;
 //    change status function
     $scope.changestatus = function () {
+        console.log("kay chalu aahe");
         if($scope.status == "mybadgeoffline")
         {
             $scope.status = "mybadgeonline";

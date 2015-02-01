@@ -20,7 +20,8 @@
   <section class="panel">
             <header class="panel-heading">
                 Chat with {{currentuser.email}} {{comment}}
-                <h5><span ng-class="status" ng-click="changestatus()"></span>
+                <h5><span ng-click="changestatus()" class="mybadgeonline" ng-if="status=='mybadgeonline'"></span>
+                <span ng-click="changestatus()" class="mybadgeoffline" ng-if="status=='mybadgeoffline'"></span>
 <!--        <i class="ion-record small offline" ng-if="!online"></i>--></h5>
                 <span class="tools pull-right">
                                 <a class="fa fa-chevron-down" href="javascript:;"></a>
