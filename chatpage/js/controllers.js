@@ -308,22 +308,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         };
     
     
-    
-//    online offline status
-    $scope.status = "mybadgeoffline";
-    $scope.showsend = false;
-//    change status function
-    $scope.changestatus = function () {
-        console.log("kay chalu aahe");
-        if($scope.status == "mybadgeoffline")
-        {
-            $scope.status = "mybadgeonline";
-            FireBaseServices.sergystatus('on');
-        }else{
-            $scope.status = "mybadgeoffline";
-            FireBaseServices.sergystatus('off');
-        }
-    }
+
     
     $('#txtSendTo').focus();
     $scope.users = [];
@@ -388,10 +373,34 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //    
     
     
-    function ongettingusers(data) {
+    $scope.status = "mybadgeoffline";
+    function ongettingusers(data,sergy) {
         $scope.users = data;
+        if(sergy[0].text=="on")
+        {
+            $scope.status = "mybadgeonline";
+        }else{
+            $scope.status = "mybadgeoffline";
+        }
         $scope.$apply();
     }
+    
+        
+//    online offline status
+    $scope.showsend = false;
+//    change status function
+    $scope.changestatus = function () {
+        console.log("kay chalu aahe");
+        if($scope.status == "mybadgeoffline")
+        {
+            $scope.status = "mybadgeonline";
+            FireBaseServices.sergystatus('on');
+        }else{
+            $scope.status = "mybadgeoffline";
+            FireBaseServices.sergystatus('off');
+        }
+    }
+    
 
     //    var onuserloadsuccess = function (data, status) {
     //        if (data.queryresult != "") {

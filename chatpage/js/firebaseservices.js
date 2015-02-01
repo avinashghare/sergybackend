@@ -8,6 +8,7 @@ var firebaseservices = angular.module('firebaseservices', [])
     var chats = [];
     var onchangecallback = function () {};
     var users = [];
+    var sergy = [];
     var order = [];
     var check = true;
     var cht = [];
@@ -34,10 +35,18 @@ var firebaseservices = angular.module('firebaseservices', [])
                             timestamp: data[uid].timestamp,
                             textcheck: data[uid].textcheck
                         });
+                    }else{
+                        sergy.push({
+                            uid: uid,
+                            email: data[uid].email,
+                            name: data[uid].name,
+                            timestamp: data[uid].timestamp,
+                            text: data[uid].text
+                        });
                     }
                 }
 
-                callback(users);
+                callback(users,sergy);
             });
 
 
