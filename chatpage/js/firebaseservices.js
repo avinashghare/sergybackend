@@ -53,7 +53,6 @@ var firebaseservices = angular.module('firebaseservices', [])
 
         },
         sergystatus: function (state) {
-            console.log("hey hye hye");
             timestamp = new Date();
             ref.child("sergy").set({
                 email: currentuser.email,

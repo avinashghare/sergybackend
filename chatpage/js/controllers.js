@@ -373,14 +373,14 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 //    
     
     
-    $scope.status = "mybadgeoffline";
+    $scope.status1 = "mybadgeoffline";
     function ongettingusers(data,sergy) {
         $scope.users = data;
         if(sergy[0].text=="on")
         {
-            $scope.status = "mybadgeonline";
+            $scope.status1 = "mybadgeonline";
         }else{
-            $scope.status = "mybadgeoffline";
+            $scope.status1 = "mybadgeoffline";
         }
         $scope.$apply();
     }
@@ -390,13 +390,12 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.showsend = false;
 //    change status function
     $scope.changestatus = function () {
-        console.log("kay chalu aahe");
-        if($scope.status == "mybadgeoffline")
+        if($scope.status1 == "mybadgeoffline")
         {
-            $scope.status = "mybadgeonline";
+            $scope.status1 = "mybadgeonline";
             FireBaseServices.sergystatus('on');
         }else{
-            $scope.status = "mybadgeoffline";
+            $scope.status1 = "mybadgeoffline";
             FireBaseServices.sergystatus('off');
         }
     }
