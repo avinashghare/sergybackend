@@ -1,34 +1,32 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-
-body {
+ body {
     font-family: 'Lato', sans-serif;
 }
 a {
-    color:#C44639;
+    color: #C44639;
 }
-
 .datetime {
     font-size: 11px;
     opacity: 0.6;
 }
-
-.ng-invalid.ng-dirty { border: 1px solid red; }
-
+.ng-invalid.ng-dirty {
+    border: 1px solid red;
+}
 a:hover {
-    color:#9C3D34;
+    color: #9C3D34;
 }
 .form-control:focus {
-border-color: #C44639;
-outline: 0;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #C44639;
-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #C44639;
+    border-color: #C44639;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #C44639;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #C44639;
 }
-
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
-color: #fff;
-background-color: #C44639;
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #C44639;
 }
-
 h1,
 h2,
 h3,
@@ -82,13 +80,13 @@ ul.socialicons li i {
     float: left;
     font-size: 25px;
     padding: 5px;
-    color:#C44639;
+    color: #C44639;
 }
 ul.socialicons li i:hover {
     float: left;
     font-size: 25px;
     padding: 5px;
-    color:#9C3D34;
+    color: #9C3D34;
 }
 .logo img {
     height: 70px;
@@ -113,7 +111,6 @@ ul.socialicons li i:hover {
     /* font-size: 12px; */
     color: #444;
 }
-
 .template.footermenu {
     background: #E9E7E7;
     padding: 10px;
@@ -122,7 +119,6 @@ ul.socialicons li i:hover {
 .template.content {
     min-height: 300px;
 }
-
 .template.footer {
     background: #5C5B5B;
     padding: 10px;
@@ -132,16 +128,16 @@ ul.socialicons li i:hover {
     height: 35px;
 }
 .template.footermenu ul {
-    list-style:none;
+    list-style: none;
     padding: 0px;
 }
-.template.footermenu ul li a{
-    color:#444;
+.template.footermenu ul li a {
+    color: #444;
 }
-.template.footer a{
-    color:#eee;
+.template.footer a {
+    color: #eee;
 }
-.pointer1:hover{
+.pointer1:hover {
     cursor: pointer;
 }
 .activity-desk span.prc {
@@ -150,11 +146,11 @@ ul.socialicons li i:hover {
 }
 .producttable {
     margin-top: 10px;
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .scrollhr {
-overflow-y: scroll;
-  height: 400px;
-  width: 540px;
-  overflow-x: hidden;
+    overflow-y: scroll;
+    height: 400px;
+    width: 540px;
+    overflow-x: hidden;
 }
