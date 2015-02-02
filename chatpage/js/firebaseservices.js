@@ -1,5 +1,5 @@
-var adminurl = "http://localhost/sergybackend/index.php/json/";
-//var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
+//var adminurl = "http://localhost/sergybackend/index.php/json/";
+var adminurl = "http://mafiawarloots.com/sergybackend/index.php/json/";
 var firebaseservices = angular.module('firebaseservices', [])
 
 .factory('FireBaseServices', function ($http, $location) {
@@ -26,6 +26,7 @@ var firebaseservices = angular.module('firebaseservices', [])
             ref.on("value", function (data) {
                 data = data.val();
                 users = [];
+                sergy = [];
                 for (uid in data) {
                     if (uid != "sergy") {
                         users.push({
@@ -60,6 +61,7 @@ var firebaseservices = angular.module('firebaseservices', [])
                 text: state,
                 timestamp: timestamp.getTime()
             });
+//            onoff(state);
         },
         getusersonly: function () {
             return users;

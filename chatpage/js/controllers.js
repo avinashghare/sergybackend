@@ -376,12 +376,13 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.status1 = "mybadgeoffline";
     function ongettingusers(data,sergy) {
         $scope.users = data;
-//        if(sergy[0].text=="on")
-//        {
-//            $scope.status1 = "mybadgeonline";
-//        }else{
-//            $scope.status1 = "mybadgeoffline";
-//        }
+        console.log(sergy);
+        if(sergy[0].text=="on")
+        {
+            $scope.status1 = "mybadgeonline";
+        }else{
+            $scope.status1 = "mybadgeoffline";
+        }
         $scope.$apply();
     }
     
@@ -392,11 +393,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.changestatus = function () {
         if($scope.status1 == "mybadgeoffline")
         {
-            console.log("ON");
             $scope.status1 = "mybadgeonline";
             FireBaseServices.sergystatus('on');
         }else{
-            console.log("OFFF");
             $scope.status1 = "mybadgeoffline";
             FireBaseServices.sergystatus('off');
         }
