@@ -30,17 +30,25 @@
                             </span>
             </header>
 
-            <div class="panel-body profile-activity" style="overflow-y: auto; height: 300px; margin-bottom: 10px;">
+            <div class="panel-body profile-activity" style="overflow-y: auto; height: 415px; margin-bottom: 10px;">
                 <div class="chintan clearfix"><chat></chat></div>
             </div>
             <div>
                 <div class="row">
                     <form ng-submit="sendmessage(message.text,0)">
-                        <div class="col-xs-10">
+                       
+                        <div class="col-xs-3 nopadright">
+                            <select class="form-control" ng-model="options" ng-change="optionchange(options)">
+                                <option value="1">Transcripts</option>
+                                <option value="2">Forms</option>
+                                <option value="3">Products</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-7 nopadright nopadleft">
                             <input type="text" class="form-control" id="txtSendTo" ng-model="message.text" ng-change="checksend()" ng-focus="checksend()">
                         </div>
-                        <div class="col-xs-2">
-                            <button type="submit" class="btn btn-default" ng-if="showsend">SEND</button>
+                        <div class="col-xs-2 nopadleft nopadright">
+                            <button type="submit" class="btn btn-default" ng-if="showsend">  SEND  </button>
                         </div>
                     </form>
                 </div>

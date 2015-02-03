@@ -3544,3 +3544,9 @@ span.customSelect.changed {
 a {
     cursor: pointer !important;
 }
+.nopadright{
+    padding-right: 0px;
+}
+.nopadleft{
+    padding-left: 0px;
+}

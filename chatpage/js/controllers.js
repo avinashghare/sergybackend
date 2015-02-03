@@ -663,6 +663,56 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         
     }
 
+    $scope.optionchange = function (option) {
+        
+        switch(option){
+                case "1":{
+                    
+                    ModalService.showModal({
+                        templateUrl: 'transcript.html',
+                        controller: "home"
+                    }).then(function (modal) {
+                        modal.element.modal();
+                        modal.close.then(function (result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
+                    
+                    break;
+                }
+                case "2":{
+                    
+                     ModalService.showModal({
+                        templateUrl: 'forms.html',
+                        controller: "home"
+                    }).then(function (modal1) {
+                        modal1.element.modal();
+                        modal1.close.then(function (result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
+                    
+                    break;
+                }
+                case "3":{
+                    
+                     ModalService.showModal({
+                        templateUrl: 'products.html',
+                        controller: "home"
+                    }).then(function (modal2) {
+                        modal2.element.modal();
+                        modal2.close.then(function (result) {
+                            $scope.message = "You said " + result;
+                        });
+                    });
+                    
+                    break;
+                }
+        }
+        
+    }
+    
+    
     $scope.showtranscript = function () {
         
         console.log("in transcript ");
