@@ -1443,7 +1443,7 @@ class Json extends CI_Controller
 //			$shippingmethod=$this->input->post('shippingmethod');
 //			$productid=$this->input->post('productid');
             
-//		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
+		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
 		$this->load->view('json',$data);
 	}
     
