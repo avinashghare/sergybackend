@@ -3550,3 +3550,18 @@ a {
 .nopadleft{
     padding-left: 0px;
 }
+.userprofile {
+    padding: 10px;
+}
+.userprofile img {
+    width: 30%;
+}
+.procontent{
+    margin-top: 10px;
+}
+.lim {
+    width: 150px;
+    white-space: nowrap;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

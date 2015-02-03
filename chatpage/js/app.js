@@ -65,12 +65,12 @@ firstapp.filter('chattt', function (FireBaseServices) {
 
 firstapp.filter('imagepath', function () {
     return function (input) {
-        if (input == "") {
-//            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
-                return "http://localhost/sergybackend/assets/img/default.jpg";
+        if (input == "" | !input) {
+            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
+//                return "http://localhost/sergybackend/assets/img/user.png";
         } else {
-//            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
-            return "http://localhost/sergybackend/uploads/" + input;
+            return "http://mafiawarloots.com/sergybackend/uploads/" + input;
+//            return "http://localhost/sergybackend/uploads/" + input;
         }
     };
 });

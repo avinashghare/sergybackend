@@ -25,6 +25,7 @@
 <script src="<?php echo base_url('chatpage'); ?>/lib/js/FileAPI.min.js"></script>
 
 
+
 <!--    toster-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.css" rel="stylesheet" />
  <script src="https://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>

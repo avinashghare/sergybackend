@@ -68,27 +68,55 @@
 -->
 
     <div class="col-lg-3">
-        <div class="row">
+        <div class="row" ng-show="currentuser.email!=''">
             <section class="panel">
                 <header class="panel-heading">
-                    Transcript
+                    User Profile
                 </header>
 
-                <div class="list-group">
-
-                    <button class="btn btn-default trans" ng-click="showtranscript()">Transcript</button>
-
+                <div class="userprofile">
+                    <div>
+                        <img src="{{userdata.image | imagepath}}"
+                    </div>
+                    <div class="row pad procontent">
+                       <div class="col-lg-6">
+                           <label>
+                               Name :
+                           </label>
+                       </div>
+                       <div class="col-lg-6">
+                           {{userdata.name}}
+                       </div>
+                       
+                        
+                    </div>
+                    <div class="row pad procontent">
+                       <div class="col-lg-6">
+                           <label>
+                               Eamil :
+                           </label>
+                       </div>
+                       <div class="col-lg-6" tooltip-html-unsafe="{{userdata.email}}" data-tooltip-placement="right">
+                           {{userdata.email | limitTo : 15}}...
+                       </div>
+                       
+                        
+                    </div>
+                    <div class="row pad procontent">
+                       <div class="col-lg-6">
+                           <label>
+                               User Name :
+                           </label>
+                       </div>
+                       <div class="col-lg-6">
+                           {{userdata.username}}
+                       </div>
+                       
+                        
+                    </div>
+                    
                 </div>
-                <div class="list-group">
-
-                    <button class="btn btn-default trans" ng-click="showforms()">Forms</button>
-
-                </div>
-                <div class="list-group">
-
-                    <button class="btn btn-default trans" ng-click="showproducts()">Products</button>
-
-                </div>
+               
             </section>
         </div>
         <div class="row" ng-show="currentuser.email!=''">

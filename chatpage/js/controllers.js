@@ -146,6 +146,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.proddata = [];
     $scope.allvalidation = [];
     $scope.options = "1";
+    $scope.userdata = [];
     
 //    Authenticate get sergy
     var whoissergy = function (data, status) {
@@ -455,7 +456,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
 
     var useremailsuccess = function (data, status) {
-        userid = data;
+        console.log("oy oooy user");
+        console.log(data);
+        $scope.userdata = data;
+        userid = data.id;
 
         //        FireBaseServices.getchatbyuser(userid).success(onuserloadsuccess);
     };

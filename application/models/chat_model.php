@@ -15,11 +15,11 @@ class Chat_model extends CI_Model
 	}
 	public function userfromemail($email)
 	{
-		$query=$this->db->query("SELECT `id` FROM `user` WHERE `email`='$email'");
+		$query=$this->db->query("SELECT * FROM `user` WHERE `email`='$email'");
         if ($query->num_rows() > 0)
         {
         	$query=$query->row();
-        	return intval($query->id);
+        	return $query;
         }
         else 
         {
