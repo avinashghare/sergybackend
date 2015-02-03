@@ -1397,6 +1397,10 @@ class Json extends CI_Controller
 	{
         
         $data = json_decode(file_get_contents('php://input'), true);
+//        echo "hhheeelll";
+//        print_r($data);
+//        echo "oooo";
+        
         $name=$data['name'];
         $user=$data['user'];
         $address1=$data['address1'];
@@ -1417,9 +1421,38 @@ class Json extends CI_Controller
         $shippingcharge=$data['shippingcharge'];
         $shippingmethod=$data['shippingmethod'];
         $productid=$data['productid'];
-		
-		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
+        
+//            $name=$this->input->post('name');
+//			$user=$this->input->post('user');
+//			$address1=$this->input->post('address1');
+//			$address2=$this->input->post('address2');
+//			$city=$this->input->post('city');
+//			$state=$this->input->post('state');
+//			$pincode=$this->input->post('pincode');
+//			$email=$this->input->post('email');
+//			$contactno=$this->input->post('contactno');
+//			$country=$this->input->post('country');
+//			$shippingaddress1=$this->input->post('shippingaddress1');
+//			$shippingaddress2=$this->input->post('shippingaddress2');
+//			$shipcity=$this->input->post('shipcity');
+//			$shipstate=$this->input->post('shipstate');
+//			$shippingcode=$this->input->post('shippingcode');
+//			$shipcountry=$this->input->post('shipcountry');
+//			$trackingcode=$this->input->post('trackingcode');
+//			$shippingcharge=$this->input->post('shippingcharge');
+//			$shippingmethod=$this->input->post('shippingmethod');
+//			$productid=$this->input->post('productid');
+            
+//		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
 		$this->load->view('json',$data);
 	}
+    
+    public function getlastorder()
+    {
+        $userid=$this->input->get_post('id');
+        $data['message']=$this->user_model->getlastorder($userid);
+		$this->load->view('json',$data);
+    }
+    
 }
 ?>

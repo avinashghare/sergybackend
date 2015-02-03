@@ -515,5 +515,13 @@ INNER JOIN  `accesslevel` ON  `user`.`accesslevel` =  `accesslevel`.`id` WHERE `
         else
             return 1;
 	}
+	public function getlastorder($user)
+	{
+        $selectlastorder=$this->db->query("SELECT * FROM `order` WHERE `user`='$user' ORDER BY `id` DESC LIMIT 1");
+        if(!$selectlastorder)
+            return 0;
+        else
+            return $selectlastorder;
+	}
 }
 ?>
