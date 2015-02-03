@@ -145,6 +145,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.sergyis = 0;
     $scope.proddata = [];
     $scope.allvalidation = [];
+    $scope.options = "1";
     
 //    Authenticate get sergy
     var whoissergy = function (data, status) {
@@ -713,53 +714,6 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     }
     
     
-    $scope.showtranscript = function () {
-        
-        console.log("in transcript ");
-        
-        ModalService.showModal({
-            templateUrl: 'transcript.html',
-            controller: "home"
-        }).then(function (modal) {
-            modal.element.modal();
-            modal.close.then(function (result) {
-                $scope.message = "You said " + result;
-            });
-        });
-        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
-    };
-
-    $scope.showforms = function () {
-        console.log("im in form");
-
-        ModalService.showModal({
-            templateUrl: 'forms.html',
-            controller: "home"
-        }).then(function (modal1) {
-            modal1.element.modal();
-            modal1.close.then(function (result) {
-                $scope.message = "You said " + result;
-            });
-        });
-        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
-    };
-
-    $scope.showproducts = function () {
-        console.log("im in product");
-
-        ModalService.showModal({
-            templateUrl: 'products.html',
-            controller: "home"
-        }).then(function (modal2) {
-            modal2.element.modal();
-            modal2.close.then(function (result) {
-                $scope.message = "You said " + result;
-            });
-        });
-        //        FireBaseServices.getalltranscript().success(transcriptsuccess);
-    };
-
-
     // On order click oneorder()#########################################################################################################
 
         $scope.oneorder = [];
