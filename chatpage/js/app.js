@@ -66,7 +66,7 @@ firstapp.filter('chattt', function (FireBaseServices) {
 firstapp.filter('imagepath', function () {
     return function (input) {
         if (input == "" | !input) {
-            return "http://mafiawarloots.com/sergybackend/assets/img/default.jpg";
+            return "http://mafiawarloots.com/sergybackend/assets/img/user.png";
 //                return "http://localhost/sergybackend/assets/img/user.png";
         } else {
             return "http://mafiawarloots.com/sergybackend/uploads/" + input;
