@@ -285,7 +285,8 @@ class order_model extends CI_Model
 			'shipcountry' => $shipcountry,
 			'trackingcode' => $trackingcode,
 			'shippingcharge' => $shippingcharge,
-			'shippingmethod' => $shippingmethod
+			'shippingmethod' => $shippingmethod,
+            'status' => 1
 		);
 		$query=$this->db->insert( 'order', $data );
 		$orderid=$this->db->insert_id();
