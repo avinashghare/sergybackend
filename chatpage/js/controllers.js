@@ -284,6 +284,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             ngDialog.open({
                 template:  base_url + 'views/insertform.html',
                 controller: 'home'
+//                className: 'width400'
             });
         };
     
@@ -293,15 +294,39 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     
         $scope.addjson = function (type) {
 
-            $scope.json = {
-                "type": "",
-                "value": "",
-                "title": "",
-                "placeholder": "",
-                "name": ""
-            };
+            if( type == 1 ) {
             
-            $scope.frm.json.push($scope.json);
+                $scope.json = {
+                    "type": "",
+                    "value": "",
+                    "title": "",
+                    "placeholder": "",
+                    "name": ""
+                };
+                $scope.frm.json.push($scope.json);
+                
+            }else{
+                
+                $scope.json = {
+                    "type": "selection",
+                    "value": [  
+                             {  
+                                "value":"0",
+                                "title":""
+                             },{
+                                 "value":"1",
+                                 "title":""
+                             }
+                          ],
+                    "title": "",
+                    "placeholder": "",
+                    "name": ""
+                };
+                $scope.frm.json.push($scope.json);
+                
+            }
+            
+            
         };
 
         $scope.remove = function (index) {

@@ -14,7 +14,74 @@
         
         <span>Create Form Elements</span>
         
-        <a class="btn btn-primary mrr" href="" ng-click="addjson(1)">+</a>
+        <p>
+        
+            <span>
+                Add Text, Password Element
+            </span>
+        
+            <a class="btn btn-primary mrr" href="" ng-click="addjson(1)">+</a>
+        
+        </p>
+        
+        <p>
+        
+            <span>
+                Add Dropdown
+            </span>
+        
+            <a class="btn btn-primary mrr" href="" ng-click="addjson(2)">+</a>
+        
+        </p>
+        
+        <table class="table" ng-if="frm.json!=''">
+            <tr>
+                <th>Type *</th>
+                <th>Value</th>
+                <th>Title</th>
+                <th>Placeholder</th>
+                <th>Name</th>
+                <th colspan="2">Action</th>
+            </tr>
+            <tr ng-repeat="json in frm.json">
+                <td ng-if="json.type!='selection'"><input type="text" ng-model="json.type" placeholder="Type Of Form Element" class="form-control"></td>
+                
+                <td ng-if="json.type!='selection'"><input type="text" ng-model="json.value" placeholder="Value" class="form-control"></td>
+                
+                <td ng-if="json.type!='selection'"><input type="text" ng-model="json.title" placeholder="Title" class="form-control"></td>
+                
+                <td ng-if="json.type!='selection'"><input type="text" ng-model="json.placeholder" placeholder="Placeholder" class="form-control"></td>
+                
+                <td colspan="5" ng-if="json.type=='selection'">
+                <table>
+                    <tr>
+                        <th>Value</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr ng-repeat="jsonoption in json.value">
+                        <td><input type="text" ng-model="jsonoption.value" placeholder="Index"></td>
+                        <td><input type="text" ng-model="jsonoption.title" placeholder="Value"></td>
+                        <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
+                    </tr>
+                </table>
+                </td>
+                
+<!--
+                <td colspan="2" ng-if="json.type=='selection'"><input type="text" ng-model="json.value" placeholder="Index No" class="form-control"></td>
+                
+                
+                <td ng-if="json.type=='selection'"><input type="text" ng-model="json.placeholder" placeholder="Placeholder" class="form-control"></td>
+-->
+                
+                <td ng-if="json.type!='selection'"><input type="text" ng-model="json.name" placeholder="Name" class="form-control"></td>
+                
+                <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
+            </tr>
+        </table>
+        
+        
+<!--
         <table class="table" ng-if="frm.json!=''">
             <tr>
                 <th>Type *</th>
@@ -26,13 +93,19 @@
             </tr>
             <tr ng-repeat="json in frm.json">
                 <td><input type="text" ng-model="json.type" placeholder="Type Of Form Element" class="form-control"></td>
+                
                 <td><input type="text" ng-model="json.value" placeholder="Value" class="form-control"></td>
+                
                 <td><input type="text" ng-model="json.title" placeholder="Title" class="form-control"></td>
+                
                 <td><input type="text" ng-model="json.placeholder" placeholder="Placeholder" class="form-control"></td>
+                
                 <td><input type="text" ng-model="json.name" placeholder="Name" class="form-control"></td>
+                
                 <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
             </tr>
         </table>
+-->
 
         <a class="btn btn-primary mrr" href="" ng-click="saveform(frm)">Save</a>
 
