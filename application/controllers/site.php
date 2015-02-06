@@ -1835,6 +1835,12 @@ class Site extends CI_Controller
         $elements[4]->header="Timestamp";
         $elements[4]->alias="timestamp";
         
+        $elements[5]=new stdClass();
+        $elements[5]->field="`orderstatus`.`name`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Status";
+        $elements[5]->alias="orderstatus";
+        
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");
@@ -1852,7 +1858,7 @@ class Site extends CI_Controller
         }
        
         $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `order`
-        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id`");
+        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id` LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id`");
         
 		$this->load->view("json",$data);
 	} 
@@ -1862,6 +1868,7 @@ class Site extends CI_Controller
 		$access = array("1");
 		$this->checkaccess($access);
         $data[ 'user' ] =$this->user_model->getuserdropdown();
+        $data[ 'status' ] =$this->order_model->getorderstatusdropdown();
 		$data[ 'page' ] = 'createorder';
 		$data[ 'title' ] = 'Create order';
 		$this->load->view( 'template', $data );	
@@ -1894,6 +1901,7 @@ class Site extends CI_Controller
 		{
 			$data['alerterror'] = validation_errors();
             $data[ 'user' ] =$this->user_model->getuserdropdown();
+            $data[ 'status' ] =$this->order_model->getorderstatusdropdown();
             $data[ 'page' ] = 'createorder';
             $data[ 'title' ] = 'Create order';
             $this->load->view( 'template', $data );
@@ -1919,7 +1927,8 @@ class Site extends CI_Controller
 			$trackingcode=$this->input->post('trackingcode');
 			$shippingcharge=$this->input->post('shippingcharge');
 			$shippingmethod=$this->input->post('shippingmethod');
-			if($this->order_model->createorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)==0)
+			$status=$this->input->post('status');
+			if($this->order_model->createorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$status)==0)
 			$data['alerterror']="New order could not be created.";
 			else
 			$data['alertsuccess']="order  created Successfully.";
@@ -1936,6 +1945,7 @@ class Site extends CI_Controller
 		$this->checkaccess($access);
 		$data['before']=$this->order_model->beforeeditorder($this->input->get('id'));
         $data[ 'user' ] =$this->user_model->getuserdropdown();
+        $data[ 'status' ] =$this->order_model->getorderstatusdropdown();
 		$data['page']='editorder';
 		$data['title']='Edit order';
 		$data['page2']='block/orderblock';
@@ -1971,6 +1981,7 @@ class Site extends CI_Controller
 			$data['alerterror'] = validation_errors();
 			$data['before']=$this->order_model->beforeeditorder($this->input->get_post('id'));
             $data[ 'user' ] =$this->user_model->getuserdropdown();
+            $data[ 'status' ] =$this->order_model->getorderstatusdropdown();
             $data['page']='editorder';
             $data['title']='Edit order';
             $data['page2']='block/orderblock';
@@ -1998,8 +2009,9 @@ class Site extends CI_Controller
 			$trackingcode=$this->input->post('trackingcode');
 			$shippingcharge=$this->input->post('shippingcharge');
 			$shippingmethod=$this->input->post('shippingmethod');
+			$status=$this->input->post('status');
 			
-			if($this->order_model->editorder($id,$name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)==0)
+			if($this->order_model->editorder($id,$name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$status)==0)
 			$data['alerterror']="order Editing was unsuccesful";
 			else
 			$data['alertsuccess']="order edited Successfully.";

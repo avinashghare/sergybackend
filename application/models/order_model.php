@@ -4,7 +4,7 @@ if ( !defined( 'BASEPATH' ) )
 class order_model extends CI_Model
 {
 	//order
-	public function createorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)
+	public function createorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$status)
 	{
 		$data  = array(
 			'name' => $name,
@@ -25,7 +25,8 @@ class order_model extends CI_Model
 			'shipcountry' => $shipcountry,
 			'trackingcode' => $trackingcode,
 			'shippingcharge' => $shippingcharge,
-			'shippingmethod' => $shippingmethod
+			'shippingmethod' => $shippingmethod,
+			'status' => $status
 		);
 		$query=$this->db->insert( 'order', $data );
 		$orderid=$this->db->insert_id();
@@ -124,7 +125,7 @@ class order_model extends CI_Model
 		return $query;
 	}
 	
-	public function editorder($id,$name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)
+	public function editorder($id,$name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$status)
 	{
 		$data = array(
 			'name' => $name,
@@ -145,7 +146,8 @@ class order_model extends CI_Model
 			'shipcountry' => $shipcountry,
 			'trackingcode' => $trackingcode,
 			'shippingcharge' => $shippingcharge,
-			'shippingmethod' => $shippingmethod
+			'shippingmethod' => $shippingmethod,
+			'status' => $status
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'order', $data );
@@ -316,5 +318,19 @@ class order_model extends CI_Model
         
 		return  1;
 	}
+    
+    public function getorderstatusdropdown()
+	{
+		$query=$this->db->query("SELECT * FROM `orderstatus`  ORDER BY `id` ASC")->result();
+		$return=array(
+		);
+		foreach($query as $row)
+		{
+			$return[$row->id]=$row->name;
+		}
+		
+		return $return;
+	}
+    
 }
 ?>

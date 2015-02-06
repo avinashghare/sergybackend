@@ -135,7 +135,17 @@
 					<input type="text" id="normal-field" class="form-control" name="shippingmethod" value="<?php echo set_value('shippingmethod',$before->shippingmethod);?>">
 				  </div>
 				</div>
+					
+				<div class=" form-group">
+				  <label class="col-sm-2 control-label">Status</label>
+				  <div class="col-sm-4">
+					<?php
 						
+						echo form_dropdown('status',$status,set_value('status',$before->status),'class="chzn-select form-control" 	data-placeholder="Choose a Status..."');
+					?>
+				  </div>
+				</div>
+					
 					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">&nbsp;</label>
