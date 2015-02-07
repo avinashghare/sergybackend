@@ -475,6 +475,7 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
 
     function userorder(data) {
         $scope.showsend = false;
+        console.log(data.queryresult);
         $scope.userorder = data.queryresult;
         FireBaseServices.sergystatus('on');
         $('#txtSendTo').focus();

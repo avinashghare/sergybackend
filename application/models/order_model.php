@@ -317,7 +317,7 @@ class order_model extends CI_Model
 		);
 		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
         
-		return  1;
+		return  $orderid;
 	}
     
     public function getorderstatusdropdown()
