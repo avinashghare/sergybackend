@@ -74,7 +74,11 @@
                     User Profile
                 </header>
 
-                <div class="userprofile">
+                <div class="userprofile" ng-if="userdata=='false'">
+                    <div style="color:red;"> ! FOR USER PROFILE CONTACT TECHNICAL TEAM.NO SUCH USER IN DATABASE.</div>    
+                </div>
+                
+                <div class="userprofile" ng-if="userdata">
                     <div>
                         <img src="{{userdata.image | imagepath}}"
                     </div>
