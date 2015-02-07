@@ -27,7 +27,7 @@
                     <p ng-repeat="form in formm">
                         <input type="text" placeholder="{{form.placeholder}}" class="form-control" ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
-                        <select ng-if="form.type=='selection'" class="form-control">
+                        <select ng-if="form.type=='select'" class="form-control">
                             <option>{{form.placeholder}}</option>
                             <option ng-repeat="frm in form.value">{{frm.title}}</option>
                         </select>

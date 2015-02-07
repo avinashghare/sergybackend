@@ -781,7 +781,22 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.formsubmit = function(comment){
         console.log(comment);
     }
-
+    $scope.formaddchangetoselect=function(json){
+        if(json.type=="select")
+        {
+            json.value=[{value:"",title:""},{value:"",title:""}];
+        }
+        else
+        {
+            json.value="";
+        }
+    };
+    $scope.addjsonselect=function(json) {
+        json.value.push({value:"",title:""});  
+    };
+    $scope.deleteselectval=function(json,index) {
+       json.splice(index, 1);
+    }
 
 });
 

@@ -16,6 +16,10 @@ firstapp.config(['$routeProvider',
             templateUrl: base_url + 'views/chat1.html',
             controller: 'home'
         }).
+        when('/insertform', {
+            templateUrl: base_url + 'views/chat1.html',
+            controller: 'home'
+        }).
         otherwise({
             redirectTo: '/home'
         });
