@@ -24,6 +24,7 @@
         
         </p>
         
+<!--
         <p>
         
             <span>
@@ -34,6 +35,8 @@
         
         </p>
         
+-->
+<!--
         <table class="table" ng-if="frm.json!=''">
             <tr>
                 <th>Type *</th>
@@ -67,21 +70,19 @@
                 </table>
                 </td>
                 
-<!--
                 <td colspan="2" ng-if="json.type=='selection'"><input type="text" ng-model="json.value" placeholder="Index No" class="form-control"></td>
                 
                 
                 <td ng-if="json.type=='selection'"><input type="text" ng-model="json.placeholder" placeholder="Placeholder" class="form-control"></td>
--->
                 
                 <td ng-if="json.type!='selection'"><input type="text" ng-model="json.name" placeholder="Name" class="form-control"></td>
                 
                 <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
             </tr>
         </table>
+-->
         
         
-<!--
         <table class="table" ng-if="frm.json!=''">
             <tr>
                 <th>Type *</th>
@@ -105,7 +106,6 @@
                 <td><a class="btn btn-success" ng-click="remove($index)">Delete</a></td>
             </tr>
         </table>
--->
 
         <a class="btn btn-primary mrr" href="" ng-click="saveform(frm)">Save</a>
 
