@@ -24,7 +24,9 @@
                 <h4>{{comment.timestamp|converttime}}</h4>
                 <form class="form-horizontal tasi-form" form-controller="home" ng-init="formm = convertform(comment.text);">
                     <!--                    <p ng-repeat='form in comment.text.json|chatt'>{{form}}-->
-                    <p ng-repeat="form in formm">
+                    <p ng-repeat="form in formm" style="color: rgb(161, 145, 145);text-transform: capitalize;">
+                       
+                        {{form.name}}
                         <input type="text" placeholder="{{form.placeholder}}" class="form-control" ng-if="form.type=='text'">
                         <input type="password" placeholder='{{form.placeholder}}' class="form-control" ng-if="form.type=='password'">
                         <select ng-if="form.type=='select'" class="form-control">
