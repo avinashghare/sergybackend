@@ -165,8 +165,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         console.log(data);
         if(data==1)
         {
+            console.log("Saved");
             toaster.pop('success', "Sergy", "Data saved Successfully", 5000);
         }else{
+            console.log("not saved");
             toaster.pop('error', "Sergy", "Sorry, Your Data is not Saved", 5000);
         }
         
