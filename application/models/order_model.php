@@ -333,5 +333,18 @@ class order_model extends CI_Model
 		return $return;
 	}
     
+    
+     function getorderbyorderid($id)
+	{
+        $query=$this->db->query("SELECT  `order`.`id`  AS `id` ,  `order`.`name`  AS `name` ,  `user`.`name`  AS `username` ,  `order`.`user`  AS `user` ,  `order`.`address1`  AS `address1` ,  `order`.`address2`  AS `address2` ,  `order`.`city`  AS `city` ,  `order`.`state`  AS `state` ,  `order`.`pincode`  AS `pincode` ,  `order`.`email`  AS `email` ,  `order`.`contactno`  AS `contactno` ,  `order`.`country`  AS `country` ,  `order`.`shipaddress1`  AS `shipaddress1` ,  `order`.`shipaddress2`  AS `shipaddress2` ,  `order`.`shipcity`  AS `shipcity` ,  `order`.`shipstate`  AS `shipstate` ,  `order`.`shippingcode`  AS `shippingcode` ,  `order`.`shipcountry`  AS `shipcountry` ,  `order`.`trackingcode`  AS `trackingcode` ,  `order`.`shippingcharge`  AS `shippingcharge` ,  `order`.`shippingmethod`  AS `shippingmethod` ,`orderitem`.`product` as  `productid`,`orderitem`.`name` AS `productname`,`order`.`status` as `orderstatusid`,`orderstatus`.`name` AS `orderstatusname` ,`orderitem`.`url`,`orderitem`.`price`,`orderitem`.`details`
+FROM `order`    
+LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id` 
+LEFT OUTER JOIN `orderitem` ON `order`.`id`=`orderitem`.`orderid`  
+LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id` 
+WHERE `order`.`id`='$id'")->row();
+        
+		return $query;
+	}
+    
 }
 ?>

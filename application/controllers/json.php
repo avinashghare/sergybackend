@@ -973,7 +973,7 @@ class Json extends CI_Controller
 	} 
     
     function getordersbyuserid()
-	{
+	{ 
 //        $data = json_decode(file_get_contents('php://input'), true);
 //        $email=$data['email'];
         $id=$this->input->get_post('id');
@@ -1104,6 +1104,53 @@ class Json extends CI_Controller
         $elements[20]->header="shippingmethod";
         $elements[20]->alias="shippingmethod";
         
+        $elements[21]=new stdClass();
+        $elements[21]->field="`orderitem`.`product`";
+        $elements[21]->sort="1";
+        $elements[21]->header="productid";
+        $elements[21]->alias="productid";
+        
+        $elements[22]=new stdClass();
+        $elements[22]->field="`orderitem`.`name`";
+        $elements[22]->sort="1";
+        $elements[22]->header="productname";
+        $elements[22]->alias="productname";
+        
+        $elements[23]=new stdClass();
+        $elements[23]->field="`orderitem`.`url`";
+        $elements[23]->sort="1";
+        $elements[23]->header="url";
+        $elements[23]->alias="url";
+        
+        $elements[24]=new stdClass();
+        $elements[24]->field="`orderitem`.`price`";
+        $elements[24]->sort="1";
+        $elements[24]->header="price";
+        $elements[24]->alias="price";
+        
+        $elements[25]=new stdClass();
+        $elements[25]->field="`orderitem`.`details`";
+        $elements[25]->sort="1";
+        $elements[25]->header="productdetails";
+        $elements[25]->alias="productdetails";
+        
+        $elements[26]=new stdClass();
+        $elements[26]->field="`orderitem`.`image`";
+        $elements[26]->sort="1";
+        $elements[26]->header="productimage";
+        $elements[26]->alias="productimage";
+        
+        $elements[27]=new stdClass();
+        $elements[27]->field="`order`.`status`";
+        $elements[27]->sort="1";
+        $elements[27]->header="orderstatusid";
+        $elements[27]->alias="orderstatusid";
+        
+        $elements[28]=new stdClass();
+        $elements[28]->field="`orderstatus`.`name`";
+        $elements[28]->sort="1";
+        $elements[28]->header="orderstatusname";
+        $elements[28]->alias="orderstatusname";
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
@@ -1122,7 +1169,7 @@ class Json extends CI_Controller
         }
        
         $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `order`
-        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id`","WHERE `user`.`id`='$id'");
+        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id` LEFT OUTER JOIN `orderitem` ON `order`.`id`=`orderitem`.`orderid` LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id` ","WHERE `user`.`id`='$id'","GROUP BY `order`.`id`");
         
 		$this->load->view("json",$data);
 	} 
@@ -1201,6 +1248,15 @@ class Json extends CI_Controller
         $data['message']=$this->order_model->getorderbyid($id);
 		$this->load->view('json',$data);
     }
+    
+     public function getorderbyorderid() 
+	{
+        $orderid=$this->input->get_post('orderid');
+		$data['message']=$this->order_model->getorderbyorderid($orderid);
+		$this->load->view('json',$data);
+	}
+    
+    
     function getproductbycategoryid()
 	{
         $categoryid=$this->input->get_post('categoryid');
