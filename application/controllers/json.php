@@ -1159,7 +1159,7 @@ class Json extends CI_Controller
         $maxrow=$this->input->get_post("maxrow");
         if($maxrow=="")
         {
-            $maxrow=20;
+            $maxrow=5;
         }
         
         if($orderby=="")
