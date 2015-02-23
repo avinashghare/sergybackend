@@ -4,7 +4,7 @@ var uploadres=[];
 //var order = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog', 'angularFileUpload', 'toaster', 'ngSanitize']);
 
-window.uploadUrl = '../../chatpage/upload.php';
+window.uploadUrl = '../chatpage/upload.php';
 
 phonecatControllers.controller( 'MyCtrl', function($scope, $http, $timeout, $upload) {
 	$scope.usingFlash = FileAPI && FileAPI.upload != null;
