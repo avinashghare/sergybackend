@@ -4,7 +4,9 @@ var uploadres=[];
 //var order = 0;
 var phonecatControllers = angular.module('phonecatControllers', ['firebaseservices', 'angularModalService', 'ngDialog', 'angularFileUpload', 'toaster', 'ngSanitize']);
 
-window.uploadUrl = '../chatpage/upload.php';
+
+
+window.uploadUrl = 'http://mafiawarloots.com/sergybackend/chatpage/upload.php';
 
 phonecatControllers.controller( 'MyCtrl', function($scope, $http, $timeout, $upload) {
 	$scope.usingFlash = FileAPI && FileAPI.upload != null;
@@ -200,11 +202,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
             if ( check ) {
                 
                 data.user = $scope.sergyis;
-                data.image = uploadres[0].trim();
+                data.image = uploadres[uploadres.length-1].trim();
                 data.image = data.image.split('/');
                 data.image = data.image[data.image.length-1];
                 data.categories = data.categories.join();
-                console.log(data.categories);
                 
                 FireBaseServices.insertproduct(data).success(saveproductsuccess);
             }
