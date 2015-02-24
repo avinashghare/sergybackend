@@ -977,6 +977,19 @@ class Json extends CI_Controller
 //        $data = json_decode(file_get_contents('php://input'), true);
 //        $email=$data['email'];
         $id=$this->input->get_post('id');
+        
+        $status=$this->input->get_post('status');
+		$where="WHERE `user`.`id`='$id'";
+		if($status=="")
+		{
+			
+		}
+		else
+		{
+			$where.=" AND `order`.`status`='$status'";
+		}
+        
+        
         $elements=array();
         $elements[0]=new stdClass();
         $elements[0]->field="`order`.`id`";
@@ -1169,7 +1182,7 @@ class Json extends CI_Controller
         }
        
         $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `order`
-        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id` LEFT OUTER JOIN `orderitem` ON `order`.`id`=`orderitem`.`orderid` LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id` ","WHERE `user`.`id`='$id'","GROUP BY `order`.`id`");
+        LEFT OUTER JOIN `user` ON `order`.`user`=`user`.`id` LEFT OUTER JOIN `orderitem` ON `order`.`id`=`orderitem`.`orderid` LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id` ",$where,"GROUP BY `order`.`id`");
         
 		$this->load->view("json",$data);
 	} 
@@ -1513,6 +1526,14 @@ class Json extends CI_Controller
     {
         $userid=$this->input->get_post('id');
         $data['message']=$this->user_model->getlastorder($userid);
+		$this->load->view('json',$data);
+    }
+    
+    public function placeorder()
+    {
+        $userid=$this->input->get_post('userid');
+        $productid=$this->input->get_post('productid');
+        $data['message']=$this->order_model->placeorder($userid,$productid);
 		$this->load->view('json',$data);
     }
     

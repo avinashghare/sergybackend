@@ -291,6 +291,8 @@ class order_model extends CI_Model
 		$query=$this->db->insert( 'order', $data );
 		$orderid=$this->db->insert_id();
         
+        $this->db->query("UPDATE `user` SET `billingemail`='$email',`city`='$city',`state`='$state',`pincode`='$pincode',`contactno`='$contactno',`country`='$country',`address1`='$address1',`address2`='$address2',`shipaddress1`='$shippingaddress1',`shipaddress2`='$shippingaddress2',`shipcity`='$shipcity',`shipstate`='$shipstate',`shippingcode`='$shippingcode',`shipcountry`='$shipcountry',`trackingcode`='$trackingcode',`shippingcharge`='$shippingcharge',`shippingmethod`='$shippingmethod' WHERE `id`='$user'");
+        
         $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
 //        print_r($productdetails);
         $name=$productdetails->name;
@@ -316,6 +318,7 @@ class order_model extends CI_Model
 			'orderid' => $orderid
 		);
 		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
+        
         
 		return  $orderid;
 	}
@@ -344,6 +347,46 @@ LEFT OUTER JOIN `orderstatus` ON `order`.`status`=`orderstatus`.`id`
 WHERE `order`.`id`='$id'")->row();
         
 		return $query;
+	}
+    public function placeorder($userid,$productid)
+	{
+        
+        $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
+//        print_r($productdetails);
+        $name=$productdetails->name;
+        $type=$productdetails->type;
+        $url=$productdetails->url;
+        $price=$productdetails->price;
+        $json=$productdetails->json;
+        $image=$productdetails->image;
+        $usergenerated=$productdetails->usergenerated;
+        $productattributejson=$productdetails->productattributejson;
+        $details=$productdetails->details;
+        
+		$data  = array(
+			'name' => $name,
+			'user' => $userid,
+            'status' => 1
+		);
+		$query=$this->db->insert( 'order', $data );
+		$orderid=$this->db->insert_id();
+        
+		$dataorderitem  = array(
+			'product' => $productid,
+			'name' => $name,
+			'type' => $type,
+			'url' => $url,
+			'price' => $price,
+			'json' => $json,
+			'image' => $image,
+			'usergenerated' => $usergenerated,
+			'productattributejson' => $productattributejson,
+			'details' => $details,
+			'orderid' => $orderid
+		);
+		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
+        
+		return  $orderid;
 	}
     
 }
