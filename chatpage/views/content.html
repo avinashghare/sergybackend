@@ -16,32 +16,6 @@
         </section>
     </div>
     <div class="col-lg-6">
-<!--        <section class="panel scrollhr" style="overflow-y: scroll; height: 400px; width: 540px; overflow-x: hidden;">-->
-  
-  
-  
-  
- 
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <section class="panel">
             <header class="panel-heading">
                 Chat with {{currentuser.email}} {{comment}}
@@ -187,6 +161,7 @@
               
               
               <button type="button" class="btn btn-default btn-xs" ng-click="inserttranscript()">Insert Transcript</button>
+              <button type="button" class="btn btn-default btn-xs" ng-click="backtocategories()" ng-if="level!=0">Back</button>
               
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="transcript in transcripts">
@@ -222,6 +197,7 @@
               <input type="text" class="form-control" placeholder="Search Transcript" ng-model="searchfr" ng-change="searchforms(searchfr)">
               
               <button type="button" class="btn btn-default btn-xs" ng-click="insertform()">Insert Form</button>
+              <button type="button" class="btn btn-default btn-xs" ng-click="backtocategories()" ng-if="level!=0">Back</button>
               
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="form in forms">
@@ -258,6 +234,7 @@
               
               
               <button type="button" class="btn btn-default btn-xs" ng-click="insertproduct()">Insert Product</button>
+              <button type="button" class="btn btn-default btn-xs" ng-click="backtocategories()" ng-if="level!=0">Back</button>
               
               <div class="modal-body">
                 <div class="list-group-item" ng-repeat="product in products">

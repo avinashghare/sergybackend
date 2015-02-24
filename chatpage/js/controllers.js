@@ -178,6 +178,18 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     
     $scope.prod = [];
     
+    $scope.addnewproduct = function () {
+        $scope.prod = [];
+    }
+    
+    $scope.addnewform = function () {
+        $scope.frm = [];
+    }
+    
+    $scope.addnewtranscript = function () {
+        $scope.tran = [];
+    }
+    
     $scope.saveproduct = function (data) {
             
             $scope.allvalidation = [{
@@ -268,7 +280,10 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.insertproduct = function () {
             ngDialog.open({
                 template:  base_url + 'views/insertproduct.html',
-                controller: 'home'
+                controller: 'home',
+                closeByEscape: false,
+                closeByDocument: false
+
             });
         };
     
@@ -277,7 +292,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.inserttranscript = function () {
             ngDialog.open({
                 template:  base_url + 'views/inserttranscript.html',
-                controller: 'home'
+                closeByEscape: false,
+                controller: 'home',
+                closeByDocument: false
             });
         };
     
@@ -286,7 +303,9 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
     $scope.insertform = function () {
             ngDialog.open({
                 template:  base_url + 'views/insertform.html',
-                controller: 'home'
+                closeByEscape: false,
+                controller: 'home',
+                closeByDocument: false
 //                className: 'width400'
             });
         };
@@ -671,6 +690,12 @@ phonecatControllers.controller('home', function ($scope, FireBaseServices, Modal
         $scope.transcripts = data.queryresult;
         $scope.level = 1;
     };
+    
+    //TRANSCRIPT BACK
+    $scope.backtocategories = function (){
+        FireBaseServices.getallcategories().success(categorysuccess);
+        $scope.level = 0;
+    }
     
     $scope.checktranscript = function (transcript) {
         console.log(userid);
