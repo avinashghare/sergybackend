@@ -167,6 +167,108 @@ class Json extends CI_Controller
         $elements[11]->header="statusName";
         $elements[11]->alias="statusname";
        
+        $elements[12]=new stdClass();
+        $elements[12]->field="`user`.`address1`";
+        $elements[12]->sort="1";
+        $elements[12]->header="address1";
+        $elements[12]->alias="address1";
+       
+        $elements[14]=new stdClass();
+        $elements[14]->field="`user`.`address2`";
+        $elements[14]->sort="1";
+        $elements[14]->header="address2";
+        $elements[14]->alias="address2";
+       
+        $elements[15]=new stdClass();
+        $elements[15]->field="`user`.`shipaddress1`";
+        $elements[15]->sort="1";
+        $elements[15]->header="shipaddress1";
+        $elements[15]->alias="shipaddress1";
+       
+        $elements[16]=new stdClass();
+        $elements[16]->field="`user`.`shipaddress2`";
+        $elements[16]->sort="1";
+        $elements[16]->header="shipaddress2";
+        $elements[16]->alias="shipaddress2";
+       
+        $elements[17]=new stdClass();
+        $elements[17]->field="`user`.`shipcity`";
+        $elements[17]->sort="1";
+        $elements[17]->header="shipcity";
+        $elements[17]->alias="shipcity";
+       
+        $elements[18]=new stdClass();
+        $elements[18]->field="`user`.`shipstate`";
+        $elements[18]->sort="1";
+        $elements[18]->header="shipstate";
+        $elements[18]->alias="shipstate";
+       
+        $elements[19]=new stdClass();
+        $elements[19]->field="`user`.`shippingcode`";
+        $elements[19]->sort="1";
+        $elements[19]->header="shippingcode";
+        $elements[19]->alias="shippingcode";
+       
+        $elements[20]=new stdClass();
+        $elements[20]->field="`user`.`shipcountry`";
+        $elements[20]->sort="1";
+        $elements[20]->header="shipcountry";
+        $elements[20]->alias="shipcountry";
+       
+        $elements[21]=new stdClass();
+        $elements[21]->field="`user`.`trackingcode`";
+        $elements[21]->sort="1";
+        $elements[21]->header="trackingcode";
+        $elements[21]->alias="trackingcode";
+       
+        $elements[22]=new stdClass();
+        $elements[22]->field="`user`.`shippingcharge`";
+        $elements[22]->sort="1";
+        $elements[22]->header="shippingcharge";
+        $elements[22]->alias="shippingcharge";
+       
+        $elements[23]=new stdClass();
+        $elements[23]->field="`user`.`shippingmethod`";
+        $elements[23]->sort="1";
+        $elements[23]->header="shippingmethod";
+        $elements[23]->alias="shippingmethod";
+       
+        $elements[24]=new stdClass();
+        $elements[24]->field="`user`.`billingemail`";
+        $elements[24]->sort="1";
+        $elements[24]->header="billingemail";
+        $elements[24]->alias="billingemail";
+       
+        $elements[25]=new stdClass();
+        $elements[25]->field="`user`.`city`";
+        $elements[25]->sort="1";
+        $elements[25]->header="city";
+        $elements[25]->alias="city";
+       
+        $elements[26]=new stdClass();
+        $elements[26]->field="`user`.`state`";
+        $elements[26]->sort="1";
+        $elements[26]->header="state";
+        $elements[26]->alias="state";
+       
+        $elements[27]=new stdClass();
+        $elements[27]->field="`user`.`pincode`";
+        $elements[27]->sort="1";
+        $elements[27]->header="pincode";
+        $elements[27]->alias="pincode";
+       
+        $elements[28]=new stdClass();
+        $elements[28]->field="`user`.`contactno`";
+        $elements[28]->sort="1";
+        $elements[28]->header="contactno";
+        $elements[28]->alias="contactno";
+       
+        $elements[29]=new stdClass();
+        $elements[29]->field="`user`.`country`";
+        $elements[29]->sort="1";
+        $elements[29]->header="country";
+        $elements[29]->alias="country";
+       
         
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
@@ -280,6 +382,115 @@ class Json extends CI_Controller
         $elements[10]->header="json";
         $elements[10]->alias="json";
         
+         
+        $elements[11]=new stdClass();
+        $elements[11]->field="`user`.`image`";
+        $elements[11]->sort="1";
+        $elements[11]->header="image";
+        $elements[11]->alias="image";
+       
+        $elements[12]=new stdClass();
+        $elements[12]->field="`user`.`address1`";
+        $elements[12]->sort="1";
+        $elements[12]->header="address1";
+        $elements[12]->alias="address1";
+       
+        $elements[14]=new stdClass();
+        $elements[14]->field="`user`.`address2`";
+        $elements[14]->sort="1";
+        $elements[14]->header="address2";
+        $elements[14]->alias="address2";
+       
+        $elements[15]=new stdClass();
+        $elements[15]->field="`user`.`shipaddress1`";
+        $elements[15]->sort="1";
+        $elements[15]->header="shipaddress1";
+        $elements[15]->alias="shipaddress1";
+       
+        $elements[16]=new stdClass();
+        $elements[16]->field="`user`.`shipaddress2`";
+        $elements[16]->sort="1";
+        $elements[16]->header="shipaddress2";
+        $elements[16]->alias="shipaddress2";
+       
+        $elements[17]=new stdClass();
+        $elements[17]->field="`user`.`shipcity`";
+        $elements[17]->sort="1";
+        $elements[17]->header="shipcity";
+        $elements[17]->alias="shipcity";
+       
+        $elements[18]=new stdClass();
+        $elements[18]->field="`user`.`shipstate`";
+        $elements[18]->sort="1";
+        $elements[18]->header="shipstate";
+        $elements[18]->alias="shipstate";
+       
+        $elements[19]=new stdClass();
+        $elements[19]->field="`user`.`shippingcode`";
+        $elements[19]->sort="1";
+        $elements[19]->header="shippingcode";
+        $elements[19]->alias="shippingcode";
+       
+        $elements[20]=new stdClass();
+        $elements[20]->field="`user`.`shipcountry`";
+        $elements[20]->sort="1";
+        $elements[20]->header="shipcountry";
+        $elements[20]->alias="shipcountry";
+       
+        $elements[21]=new stdClass();
+        $elements[21]->field="`user`.`trackingcode`";
+        $elements[21]->sort="1";
+        $elements[21]->header="trackingcode";
+        $elements[21]->alias="trackingcode";
+       
+        $elements[22]=new stdClass();
+        $elements[22]->field="`user`.`shippingcharge`";
+        $elements[22]->sort="1";
+        $elements[22]->header="shippingcharge";
+        $elements[22]->alias="shippingcharge";
+       
+        $elements[23]=new stdClass();
+        $elements[23]->field="`user`.`shippingmethod`";
+        $elements[23]->sort="1";
+        $elements[23]->header="shippingmethod";
+        $elements[23]->alias="shippingmethod";
+       
+        $elements[24]=new stdClass();
+        $elements[24]->field="`user`.`billingemail`";
+        $elements[24]->sort="1";
+        $elements[24]->header="billingemail";
+        $elements[24]->alias="billingemail";
+       
+        $elements[25]=new stdClass();
+        $elements[25]->field="`user`.`city`";
+        $elements[25]->sort="1";
+        $elements[25]->header="city";
+        $elements[25]->alias="city";
+       
+        $elements[26]=new stdClass();
+        $elements[26]->field="`user`.`state`";
+        $elements[26]->sort="1";
+        $elements[26]->header="state";
+        $elements[26]->alias="state";
+       
+        $elements[27]=new stdClass();
+        $elements[27]->field="`user`.`pincode`";
+        $elements[27]->sort="1";
+        $elements[27]->header="pincode";
+        $elements[27]->alias="pincode";
+       
+        $elements[28]=new stdClass();
+        $elements[28]->field="`user`.`contactno`";
+        $elements[28]->sort="1";
+        $elements[28]->header="contactno";
+        $elements[28]->alias="contactno";
+       
+        $elements[29]=new stdClass();
+        $elements[29]->field="`user`.`country`";
+        $elements[29]->sort="1";
+        $elements[29]->header="country";
+        $elements[29]->alias="country";
+       
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");
@@ -381,6 +592,108 @@ class Json extends CI_Controller
         $elements[11]->header="userid";
         $elements[11]->alias="userid";
         
+        $elements[12]=new stdClass();
+        $elements[12]->field="`user`.`address1`";
+        $elements[12]->sort="1";
+        $elements[12]->header="address1";
+        $elements[12]->alias="address1";
+       
+        $elements[14]=new stdClass();
+        $elements[14]->field="`user`.`address2`";
+        $elements[14]->sort="1";
+        $elements[14]->header="address2";
+        $elements[14]->alias="address2";
+       
+        $elements[15]=new stdClass();
+        $elements[15]->field="`user`.`shipaddress1`";
+        $elements[15]->sort="1";
+        $elements[15]->header="shipaddress1";
+        $elements[15]->alias="shipaddress1";
+       
+        $elements[16]=new stdClass();
+        $elements[16]->field="`user`.`shipaddress2`";
+        $elements[16]->sort="1";
+        $elements[16]->header="shipaddress2";
+        $elements[16]->alias="shipaddress2";
+       
+        $elements[17]=new stdClass();
+        $elements[17]->field="`user`.`shipcity`";
+        $elements[17]->sort="1";
+        $elements[17]->header="shipcity";
+        $elements[17]->alias="shipcity";
+       
+        $elements[18]=new stdClass();
+        $elements[18]->field="`user`.`shipstate`";
+        $elements[18]->sort="1";
+        $elements[18]->header="shipstate";
+        $elements[18]->alias="shipstate";
+       
+        $elements[19]=new stdClass();
+        $elements[19]->field="`user`.`shippingcode`";
+        $elements[19]->sort="1";
+        $elements[19]->header="shippingcode";
+        $elements[19]->alias="shippingcode";
+       
+        $elements[20]=new stdClass();
+        $elements[20]->field="`user`.`shipcountry`";
+        $elements[20]->sort="1";
+        $elements[20]->header="shipcountry";
+        $elements[20]->alias="shipcountry";
+       
+        $elements[21]=new stdClass();
+        $elements[21]->field="`user`.`trackingcode`";
+        $elements[21]->sort="1";
+        $elements[21]->header="trackingcode";
+        $elements[21]->alias="trackingcode";
+       
+        $elements[22]=new stdClass();
+        $elements[22]->field="`user`.`shippingcharge`";
+        $elements[22]->sort="1";
+        $elements[22]->header="shippingcharge";
+        $elements[22]->alias="shippingcharge";
+       
+        $elements[23]=new stdClass();
+        $elements[23]->field="`user`.`shippingmethod`";
+        $elements[23]->sort="1";
+        $elements[23]->header="shippingmethod";
+        $elements[23]->alias="shippingmethod";
+       
+        $elements[24]=new stdClass();
+        $elements[24]->field="`user`.`billingemail`";
+        $elements[24]->sort="1";
+        $elements[24]->header="billingemail";
+        $elements[24]->alias="billingemail";
+       
+        $elements[25]=new stdClass();
+        $elements[25]->field="`user`.`city`";
+        $elements[25]->sort="1";
+        $elements[25]->header="city";
+        $elements[25]->alias="city";
+       
+        $elements[26]=new stdClass();
+        $elements[26]->field="`user`.`state`";
+        $elements[26]->sort="1";
+        $elements[26]->header="state";
+        $elements[26]->alias="state";
+       
+        $elements[27]=new stdClass();
+        $elements[27]->field="`user`.`pincode`";
+        $elements[27]->sort="1";
+        $elements[27]->header="pincode";
+        $elements[27]->alias="pincode";
+       
+        $elements[28]=new stdClass();
+        $elements[28]->field="`user`.`contactno`";
+        $elements[28]->sort="1";
+        $elements[28]->header="contactno";
+        $elements[28]->alias="contactno";
+       
+        $elements[29]=new stdClass();
+        $elements[29]->field="`user`.`country`";
+        $elements[29]->sort="1";
+        $elements[29]->header="country";
+        $elements[29]->alias="country";
+       
         $search=$this->input->get_post("search");
         $pageno=$this->input->get_post("pageno");
         $orderby=$this->input->get_post("orderby");
