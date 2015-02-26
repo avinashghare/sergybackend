@@ -199,6 +199,9 @@ var firebaseservices = angular.module('firebaseservices', [])
         getalltranscriptsearch: function (searchtr) {
             return $http.get(adminurl + "getalltranscript?search=" + searchtr, {});
         },
+        placeorder: function (user, product) {
+            return $http.get(adminurl + "placeorder?userid=" + user + "&productid=" + product, {});
+        },
         getorderbyid: function (id) {
             return $http.get(adminurl + "getorderbyid?id=" + id, {});
         },

@@ -1835,6 +1835,283 @@ class Json extends CI_Controller
 		$this->load->view('json',$data);
 	}
     
+    
+     function getuserbyuserid()
+	{
+        $id=$this->input->get('id');
+        $elements=array();
+        $elements[0]=new stdClass();
+        $elements[0]->field="`user`.`id`";
+        $elements[0]->sort="1";
+        $elements[0]->header="ID";
+        $elements[0]->alias="id";
+        
+        
+        $elements[1]=new stdClass();
+        $elements[1]->field="`user`.`name`";
+        $elements[1]->sort="1";
+        $elements[1]->header="Name";
+        $elements[1]->alias="name";
+        
+        $elements[2]=new stdClass();
+        $elements[2]->field="`user`.`email`";
+        $elements[2]->sort="1";
+        $elements[2]->header="Email";
+        $elements[2]->alias="email";
+        
+        $elements[3]=new stdClass();
+        $elements[3]->field="`user`.`accesslevel`";
+        $elements[3]->sort="1";
+        $elements[3]->header="Accesslevel";
+        $elements[3]->alias="accesslevel";
+        
+        $elements[4]=new stdClass();
+        $elements[4]->field="`accesslevel`.`name`";
+        $elements[4]->sort="1";
+        $elements[4]->header="Accesslevel";
+        $elements[4]->alias="accesslevelname";
+       
+        $elements[5]=new stdClass();
+        $elements[5]->field="`user`.`timestamp`";
+        $elements[5]->sort="1";
+        $elements[5]->header="Timestamp";
+        $elements[5]->alias="timestamp";
+        
+        $elements[6]=new stdClass();
+        $elements[6]->field="`user`.`status`";
+        $elements[6]->sort="1";
+        $elements[6]->header="status";
+        $elements[6]->alias="status";
+       
+        $elements[7]=new stdClass();
+        $elements[7]->field="`user`.`image`";
+        $elements[7]->sort="1";
+        $elements[7]->header="image";
+        $elements[7]->alias="image";
+       
+        $elements[8]=new stdClass();
+        $elements[8]->field="`user`.`socialid`";
+        $elements[8]->sort="1";
+        $elements[8]->header="socialid";
+        $elements[8]->alias="socialid";
+       
+        $elements[9]=new stdClass();
+        $elements[9]->field="`user`.`logintype`";
+        $elements[9]->sort="1";
+        $elements[9]->header="logintype";
+        $elements[9]->alias="logintype";
+       
+        $elements[10]=new stdClass();
+        $elements[10]->field="`logintype`.`name`";
+        $elements[10]->sort="1";
+        $elements[10]->header="logintypeName";
+        $elements[10]->alias="logintypename";
+       
+        $elements[11]=new stdClass();
+        $elements[11]->field="`statuses`.`name`";
+        $elements[11]->sort="1";
+        $elements[11]->header="statusName";
+        $elements[11]->alias="statusname";
+       
+        $elements[12]=new stdClass();
+        $elements[12]->field="`user`.`address1`";
+        $elements[12]->sort="1";
+        $elements[12]->header="address1";
+        $elements[12]->alias="address1";
+       
+        $elements[14]=new stdClass();
+        $elements[14]->field="`user`.`address2`";
+        $elements[14]->sort="1";
+        $elements[14]->header="address2";
+        $elements[14]->alias="address2";
+       
+        $elements[15]=new stdClass();
+        $elements[15]->field="`user`.`shipaddress1`";
+        $elements[15]->sort="1";
+        $elements[15]->header="shipaddress1";
+        $elements[15]->alias="shipaddress1";
+       
+        $elements[16]=new stdClass();
+        $elements[16]->field="`user`.`shipaddress2`";
+        $elements[16]->sort="1";
+        $elements[16]->header="shipaddress2";
+        $elements[16]->alias="shipaddress2";
+       
+        $elements[17]=new stdClass();
+        $elements[17]->field="`user`.`shipcity`";
+        $elements[17]->sort="1";
+        $elements[17]->header="shipcity";
+        $elements[17]->alias="shipcity";
+       
+        $elements[18]=new stdClass();
+        $elements[18]->field="`user`.`shipstate`";
+        $elements[18]->sort="1";
+        $elements[18]->header="shipstate";
+        $elements[18]->alias="shipstate";
+       
+        $elements[19]=new stdClass();
+        $elements[19]->field="`user`.`shippingcode`";
+        $elements[19]->sort="1";
+        $elements[19]->header="shippingcode";
+        $elements[19]->alias="shippingcode";
+       
+        $elements[20]=new stdClass();
+        $elements[20]->field="`user`.`shipcountry`";
+        $elements[20]->sort="1";
+        $elements[20]->header="shipcountry";
+        $elements[20]->alias="shipcountry";
+       
+        $elements[21]=new stdClass();
+        $elements[21]->field="`user`.`trackingcode`";
+        $elements[21]->sort="1";
+        $elements[21]->header="trackingcode";
+        $elements[21]->alias="trackingcode";
+       
+        $elements[22]=new stdClass();
+        $elements[22]->field="`user`.`shippingcharge`";
+        $elements[22]->sort="1";
+        $elements[22]->header="shippingcharge";
+        $elements[22]->alias="shippingcharge";
+       
+        $elements[23]=new stdClass();
+        $elements[23]->field="`user`.`shippingmethod`";
+        $elements[23]->sort="1";
+        $elements[23]->header="shippingmethod";
+        $elements[23]->alias="shippingmethod";
+       
+        $elements[24]=new stdClass();
+        $elements[24]->field="`user`.`billingemail`";
+        $elements[24]->sort="1";
+        $elements[24]->header="billingemail";
+        $elements[24]->alias="billingemail";
+       
+        $elements[25]=new stdClass();
+        $elements[25]->field="`user`.`city`";
+        $elements[25]->sort="1";
+        $elements[25]->header="city";
+        $elements[25]->alias="city";
+       
+        $elements[26]=new stdClass();
+        $elements[26]->field="`user`.`state`";
+        $elements[26]->sort="1";
+        $elements[26]->header="state";
+        $elements[26]->alias="state";
+       
+        $elements[27]=new stdClass();
+        $elements[27]->field="`user`.`pincode`";
+        $elements[27]->sort="1";
+        $elements[27]->header="pincode";
+        $elements[27]->alias="pincode";
+       
+        $elements[28]=new stdClass();
+        $elements[28]->field="`user`.`contactno`";
+        $elements[28]->sort="1";
+        $elements[28]->header="contactno";
+        $elements[28]->alias="contactno";
+       
+        $elements[29]=new stdClass();
+        $elements[29]->field="`user`.`country`";
+        $elements[29]->sort="1";
+        $elements[29]->header="country";
+        $elements[29]->alias="country";
+       
+        
+        $search=$this->input->get_post("search");
+        $pageno=$this->input->get_post("pageno");
+        $orderby=$this->input->get_post("orderby");
+        $orderorder=$this->input->get_post("orderorder");
+        $maxrow=$this->input->get_post("maxrow");
+        if($maxrow=="")
+        {
+            $maxrow=20;
+        }
+        
+        if($orderby=="")
+        {
+            $orderby="id";
+            $orderorder="ASC";
+        }
+       
+        $data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `logintype` ON `logintype`.`id`=`user`.`logintype` LEFT OUTER JOIN `accesslevel` ON `accesslevel`.`id`=`user`.`accesslevel` LEFT OUTER JOIN `statuses` ON `statuses`.`id`=`user`.`status`","WHERE `user`.`id`='$id'");
+        
+		$this->load->view("json",$data);
+	} 
+    
+    
+    
+    public function updatebillingdetails() 
+	{
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        $user=$data['user'];
+        $address1=$data['address1'];
+        $address2=$data['address2'];
+        $city=$data['city'];
+        $state=$data['state'];
+        $pincode=$data['pincode'];
+        $email=$data['email'];
+        $contactno=$data['contactno'];
+        $country=$data['country'];
+        $trackingcode=$data['trackingcode'];
+        
+//			$user=$this->input->post('user');
+//			$address1=$this->input->post('address1');
+//			$address2=$this->input->post('address2');
+//			$city=$this->input->post('city');
+//			$state=$this->input->post('state');
+//			$pincode=$this->input->post('pincode');
+//			$email=$this->input->post('email');
+//			$contactno=$this->input->post('contactno');
+//			$country=$this->input->post('country');
+            
+		$data['message']=$this->order_model->updatebillingdetails($user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$trackingcode);
+		$this->load->view('json',$data);
+	}
+    
+    public function updateshippingdetails() 
+	{
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        $user=$data['user'];
+        
+        $shippingaddress1=$data['shippingaddress1'];
+        $shippingaddress2=$data['shippingaddress2'];
+        $shipcity=$data['shipcity'];
+        $shipstate=$data['shipstate'];
+        $shippingcode=$data['shippingcode'];
+        $shipcountry=$data['shipcountry'];
+        $trackingcode=$data['trackingcode'];
+        $shippingcharge=$data['shippingcharge'];
+        $shippingmethod=$data['shippingmethod'];
+        
+//            $name=$this->input->post('name');
+//			$user=$this->input->post('user');
+//			$address1=$this->input->post('address1');
+//			$address2=$this->input->post('address2');
+//			$city=$this->input->post('city');
+//			$state=$this->input->post('state');
+//			$pincode=$this->input->post('pincode');
+//			$email=$this->input->post('email');
+//			$contactno=$this->input->post('contactno');
+//			$country=$this->input->post('country');
+//			$shippingaddress1=$this->input->post('shippingaddress1');
+//			$shippingaddress2=$this->input->post('shippingaddress2');
+//			$shipcity=$this->input->post('shipcity');
+//			$shipstate=$this->input->post('shipstate');
+//			$shippingcode=$this->input->post('shippingcode');
+//			$shipcountry=$this->input->post('shipcountry');
+//			$trackingcode=$this->input->post('trackingcode');
+//			$shippingcharge=$this->input->post('shippingcharge');
+//			$shippingmethod=$this->input->post('shippingmethod');
+//			$productid=$this->input->post('productid');
+            
+		$data['message']=$this->order_model->updateshippingdetails($user,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod);
+		$this->load->view('json',$data);
+	}
+    
+    
     public function getlastorder()
     {
         $userid=$this->input->get_post('id');

@@ -286,7 +286,7 @@ class order_model extends CI_Model
 			'trackingcode' => $trackingcode,
 			'shippingcharge' => $shippingcharge,
 			'shippingmethod' => $shippingmethod,
-            'status' => 1
+            'status' => 2
 		);
 		$query=$this->db->insert( 'order', $data );
 		$orderid=$this->db->insert_id();
@@ -387,6 +387,19 @@ WHERE `order`.`id`='$id'")->row();
 		$queryorderitem=$this->db->insert( 'orderitem', $dataorderitem );
         
 		return  $orderid;
+	}
+    
+    
+    public function updatebillingdetails($user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$trackingcode)
+	{
+        $this->db->query("UPDATE `user` SET `billingemail`='$email',`city`='$city',`state`='$state',`pincode`='$pincode',`contactno`='$contactno',`country`='$country',`address1`='$address1',`address2`='$address2',`trackingcode`='$trackingcode' WHERE `id`='$user'");
+        return  $user;
+	}
+    
+    public function updateshippingdetails($user,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)
+	{
+        $this->db->query("UPDATE `user` SET `shipaddress1`='$shippingaddress1',`shipaddress2`='$shippingaddress2',`shipcity`='$shipcity',`shipstate`='$shipstate',`shippingcode`='$shippingcode',`shipcountry`='$shipcountry',`trackingcode`='$trackingcode',`shippingcharge`='$shippingcharge',`shippingmethod`='$shippingmethod' WHERE `id`='$user'");
+        return  $user;
 	}
     
 }
