@@ -1789,7 +1789,7 @@ class Json extends CI_Controller
 //        print_r($data);
 //        echo "oooo";
         
-        $name=$data['name'];
+//        $name=$data['name'];
         $user=$data['user'];
         $address1=$data['address1'];
         $address2=$data['address2'];
@@ -1831,7 +1831,7 @@ class Json extends CI_Controller
 //			$shippingmethod=$this->input->post('shippingmethod');
 //			$productid=$this->input->post('productid');
             
-		$data['message']=$this->order_model->createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
+		$data['message']=$this->order_model->createfrontendorder($user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid);
 		$this->load->view('json',$data);
 	}
     
@@ -2126,6 +2126,54 @@ class Json extends CI_Controller
         $data['message']=$this->order_model->placeorder($userid,$productid);
 		$this->load->view('json',$data);
     }
+    
+    public function updateorderbyorderid() 
+	{
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        $order=$data['order'];
+        $address1=$data['address1'];
+        $address2=$data['address2'];
+        $city=$data['city'];
+        $state=$data['state'];
+        $pincode=$data['pincode'];
+        $email=$data['email'];
+        $contactno=$data['contactno'];
+        $country=$data['country'];
+        $shippingaddress1=$data['shippingaddress1'];
+        $shippingaddress2=$data['shippingaddress2'];
+        $shipcity=$data['shipcity'];
+        $shipstate=$data['shipstate'];
+        $shippingcode=$data['shippingcode'];
+        $shipcountry=$data['shipcountry'];
+        $trackingcode=$data['trackingcode'];
+        $shippingcharge=$data['shippingcharge'];
+        $shippingmethod=$data['shippingmethod'];
+//        $productid=$data['productid'];
+
+//			$order=$this->input->post('order');
+//			$address1=$this->input->post('address1');
+//			$address2=$this->input->post('address2');
+//			$city=$this->input->post('city');
+//			$state=$this->input->post('state');
+//			$pincode=$this->input->post('pincode');
+//			$email=$this->input->post('email');
+//			$contactno=$this->input->post('contactno');
+//			$country=$this->input->post('country');
+//			$shippingaddress1=$this->input->post('shippingaddress1');
+//			$shippingaddress2=$this->input->post('shippingaddress2');
+//			$shipcity=$this->input->post('shipcity');
+//			$shipstate=$this->input->post('shipstate');
+//			$shippingcode=$this->input->post('shippingcode');
+//			$shipcountry=$this->input->post('shipcountry');
+//			$trackingcode=$this->input->post('trackingcode');
+//			$shippingcharge=$this->input->post('shippingcharge');
+//			$shippingmethod=$this->input->post('shippingmethod');
+            
+		$data['message']=$this->order_model->updateorderbyorderid($order,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod);
+		$this->load->view('json',$data);
+	}
     
 }
 ?>

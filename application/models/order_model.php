@@ -264,8 +264,12 @@ class order_model extends CI_Model
     
         return $data;
     }
-    public function createfrontendorder($name,$user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid)
+    public function createfrontendorder($user,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod,$productid)
 	{
+        
+        $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
+//        print_r($productdetails);
+        $name=$productdetails->name;
 		$data  = array(
 			'name' => $name,
 			'user' => $user,
@@ -293,9 +297,9 @@ class order_model extends CI_Model
         
         $this->db->query("UPDATE `user` SET `billingemail`='$email',`city`='$city',`state`='$state',`pincode`='$pincode',`contactno`='$contactno',`country`='$country',`address1`='$address1',`address2`='$address2',`shipaddress1`='$shippingaddress1',`shipaddress2`='$shippingaddress2',`shipcity`='$shipcity',`shipstate`='$shipstate',`shippingcode`='$shippingcode',`shipcountry`='$shipcountry',`trackingcode`='$trackingcode',`shippingcharge`='$shippingcharge',`shippingmethod`='$shippingmethod' WHERE `id`='$user'");
         
-        $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
-//        print_r($productdetails);
-        $name=$productdetails->name;
+//        $productdetails=$this->db->query("SELECT * FROM `product` WHERE `id`='$productid'")->row();
+////        print_r($productdetails);
+//        $name=$productdetails->name;
         $type=$productdetails->type;
         $url=$productdetails->url;
         $price=$productdetails->price;
@@ -400,6 +404,40 @@ WHERE `order`.`id`='$id'")->row();
 	{
         $this->db->query("UPDATE `user` SET `shipaddress1`='$shippingaddress1',`shipaddress2`='$shippingaddress2',`shipcity`='$shipcity',`shipstate`='$shipstate',`shippingcode`='$shippingcode',`shipcountry`='$shipcountry',`trackingcode`='$trackingcode',`shippingcharge`='$shippingcharge',`shippingmethod`='$shippingmethod' WHERE `id`='$user'");
         return  $user;
+	}
+    
+    public function updateorderbyorderid($order,$address1,$address2,$city,$state,$pincode,$email,$contactno,$country,$shippingaddress1,$shippingaddress2,$shipcity,$shipstate,$shippingcode,$shipcountry,$trackingcode,$shippingcharge,$shippingmethod)
+	{
+        
+		$data  = array(
+			'address1' => $address1,
+			'address2' => $address2,
+			'city' => $city,
+			'state' => $state,
+			'pincode' => $pincode,
+			'email' => $email,
+			'contactno' => $contactno,
+			'country' => $country,
+			'shipaddress1' => $shippingaddress1,
+			'shipaddress2' => $shippingaddress2,
+			'shipcity' => $shipcity,
+			'shipstate' => $shipstate,
+			'shippingcode' => $shippingcode,
+			'shipcountry' => $shipcountry,
+			'trackingcode' => $trackingcode,
+			'shippingcharge' => $shippingcharge,
+			'shippingmethod' => $shippingmethod,
+            'status' => 2
+		);
+        
+        
+		$this->db->where( 'id', $order );
+		$query=$this->db->update( 'order', $data );
+        
+		if(!$query)
+			return  0;
+		else
+			return  1;
 	}
     
 }
