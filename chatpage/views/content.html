@@ -130,7 +130,7 @@
 
                 <div class="list-group" ng-show="userorder!=''">
 
-                    <a class="list-group-item" ng-click="oneorderfun(order.id)" ng-repeat="order in userorder" style="cursor:pointer;">Order ID : {{order.id}}
+                    <a class="list-group-item" ng-click="oneorderfun(order.id)" ng-repeat="order in userorder" style="cursor:pointer;"> {{order.id}} : {{order.name}}
                         <span class="pull-right" style="font-size: 11px;opacity: 0.6;">{{order.orderstatusname}}</span>
                     </a>
                     
