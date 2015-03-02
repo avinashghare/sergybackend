@@ -94,9 +94,10 @@ class Chintantable {
         $return=new stdClass();
         $return->query=$selectquery.$fromquery.$wherequery.$groupquery.$havingquery.$orderquery.$limitquery;
         $return->queryresult=$this->CI->db->query($return->query)->result();
-        $return->totalvalues=$this->CI->db->query("SELECT count(".$elements[0]->field.") as `totalcount` ".$fromquery.$wherequery.$groupquery.$havingquery)->row();
+        //echo "SELECT count(".$elements[0]->field.") as `totalcount` ".$fromquery.$wherequery.$groupquery.$havingquery;
+        $return->totalvalues=$this->CI->db->query("SELECT ".$elements[0]->field.$fromquery.$wherequery.$groupquery.$havingquery);
         
-        $return->totalvalues=intval($return->totalvalues->totalcount);
+        $return->totalvalues=intval($return->totalvalues->num_rows());
         
         $return->pageno=$pageno;
         $return->lastpage=ceil($return->totalvalues/$maxlength);
@@ -119,14 +120,14 @@ class Chintantable {
     {
         echo '<nav class="chintantablepagination"><ul class="pagination"></ul></nav>';
     }
-    public function createsearch($title="",$description="")
+    public function createsearch($title="",$description="",$firstclass="col-md-9",$secondclass="col-md-3")
     {
         echo '<div class="row">
-                <div class="col-md-9">
+                <div class="'.$firstclass.'">
                     <h4>'.$title.'</h4>
                     <h6 >'.$description.'</h6>
                 </div>
-                <div class="col-md-3">
+                <div class="'.$secondclass.'">
                 <select class="maxrow form-control" style="
     float: left;  width: 76px;
 "><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option></select>
@@ -142,7 +143,12 @@ class Chintantable {
     width: 100%;  
     position: fixed;  background: rgba(255, 31, 31, 0.431373);  
     z-index: 1;  height: 100%;  top: 0px;  left: 0px;  padding: 10%;  font-size: 51px;  color: white;  text-align: center;
-"> Loading </div>';
+"> <div class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div> 
+</div>';
     }
 	
 	public function gethighstockjson($element1,$element2,$from,$where="", $group="", $having="", $order="",$limit="",$otherselect="")
